@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "declaration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
+    "module": "ES2022",
+    "outDir": "./lib",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@util/*": ["src/util/*"]
+    },
+    "rootDir": "./src",
+    "skipLibCheck": true,
+    "strict": false,
+    "target": "ES5"
+  },
+  "tsc-alias": {
+    "resolveFullPaths": true,
+    "verbose": true
+  }
+}

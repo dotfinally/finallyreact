@@ -1,0 +1,311 @@
+// For headers: 'Montserrat', sans-serif;
+@import './fonts/montserrat/montserrat.scss';
+
+// For normal test: 'Noto Sans', sans-serif;
+@import './fonts/notosans/notosans.scss';
+
+html,
+button,
+input {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+html {
+  font-size: 100%;
+}
+
+p {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ------------------- */
+/* ---- HEADERS ------ */
+/* ------------------- */
+h1 {
+  font-size: 2.5rem; // 40px at 16px browser font size
+  font-family: 'Montserrat', sans-serif;
+}
+
+h2 {
+  font-size: 2rem; // 32px at 16px browser font size
+  font-family: 'Montserrat', sans-serif;
+}
+
+h3 {
+  font-size: 1.75rem; // 28px at 16px browser font size
+  font-family: 'Montserrat', sans-serif;
+}
+
+h4 {
+  font-size: 1.5rem; // 24px at 16px browser font size
+  font-family: 'Montserrat', sans-serif;
+}
+
+h5 {
+  font-size: 1.25rem; // 20px at 16px browser font size
+  font-family: 'Montserrat', sans-serif;
+}
+
+h6 {
+  font-size: 1rem; // 16px at 16px browser font size
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ------------------- */
+/* ---- TEXT --------- */
+/* ------------------- */
+.text-xxl,
+.text-extra-extra-large {
+  font-size: 2.25rem; // 36px at 16px browser font size
+}
+
+.text-xl,
+.text-extra-large {
+  font-size: 1.8rem; // 28.8px at 16px browser font size
+}
+
+.text-lg,
+.text-large {
+  font-size: 1.5rem; // 24px at 16px browser font size
+}
+
+.text-md,
+.text-medium {
+  font-size: 1.25rem; // 20px at 16px browser font size
+}
+
+.text,
+.text-regular,
+.text-normal,
+.text-base {
+  font-size: 1rem; // 16px at 16px browser font size
+}
+
+.text-sm,
+.text-small {
+  font-size: 0.8rem; // 12.8px at 16px browser font size
+}
+
+.text-xs,
+.text-extra-small {
+  font-size: 0.6rem; // 9.6px at 16px browser font size
+}
+
+/* --------------------- */
+/* -- TEXT TRANSFORM --- */
+/* --------------------- */
+.text-uppercase,
+.uppercase {
+  text-transform: uppercase;
+}
+
+.text-lowercase,
+.lowercase {
+  text-transform: lowercase;
+}
+
+.text-capitalize,
+.capitalize {
+  text-transform: capitalize;
+}
+
+.text-normal {
+  text-transform: none;
+}
+
+/* --------------------- */
+/* -- FONT WEIGHTS ----- */
+/* --------------------- */
+
+.font-thin,
+.text-thin,
+.thin {
+  font-weight: 100;
+}
+
+// extralight
+.font-extralight,
+.text-extralight,
+.extralight {
+  font-weight: 200;
+}
+
+// light
+.font-light,
+.text-light,
+.light {
+  font-weight: 300;
+}
+
+// regular
+.font-regular,
+.text-regular,
+.regular {
+  font-weight: 400;
+}
+
+// medium
+.font-medium,
+.text-medium,
+.medium {
+  font-weight: 500;
+}
+
+// semibold
+.font-semibold,
+.text-semibold,
+.semibold {
+  font-weight: 600;
+}
+
+// bold
+.font-bold,
+.text-bold,
+.bold {
+  font-weight: 700;
+}
+
+// extrabold
+.font-extrabold,
+.text-extrabold,
+.extrabold {
+  font-weight: 800;
+}
+
+// black
+.font-black,
+.text-black {
+  font-weight: 900;
+}
+
+.active\:bold {
+  &:hover {
+    font-weight: 700;
+  }
+}
+
+/* --------------------- */
+/* -- FONT STYLE ------- */
+/* --------------------- */
+
+.font-normal,
+.normal {
+  font-style: normal;
+}
+
+.hover\:font-normal,
+.hover\:normal {
+  &:hover {
+    font-style: normal;
+  }
+}
+
+.font-italic,
+.italic {
+  font-style: italic;
+}
+
+.hover\:font-italic,
+.hover\:italic {
+  &:hover {
+    font-style: italic;
+  }
+}
+
+/* --------------------- */
+/* -- TEXT DECORATION -- */
+/* --------------------- */
+
+.text-underline,
+.underline {
+  text-decoration: underline;
+}
+
+.hover\:text-underline,
+.hover\:underline {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.text-line-through,
+.line-through,
+.text-strikethrough,
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.hover\:text-line-through,
+.hover\:line-through,
+.hover\:text-strikethrough,
+.hover\:strikethrough {
+  &:hover {
+    text-decoration: line-through;
+  }
+}
+
+.text-overline,
+.overline {
+  text-decoration: overline;
+}
+
+.hover\:text-overline,
+.hover\:overline {
+  &:hover {
+    text-decoration: overline;
+  }
+}
+
+.text-none {
+  text-decoration: none;
+}
+
+.text-unset {
+  text-decoration: unset;
+}
+
+/* --------------------- */
+/* -- TEXT WRAP -------- */
+/* --------------------- */
+
+.text-nowrap,
+.nowrap {
+  white-space: nowrap;
+}
+
+.text-truncate,
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-wrap,
+.wrap {
+  white-space: normal;
+}
+
+.text-pre,
+.pre {
+  white-space: pre;
+}
+
+/* --------------------- */
+/* -- TEXT ALIGNMENT --- */
+/* --------------------- */
+.text-left {
+  text-align: left;
+}
+
+.text-center,
+.center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
+}

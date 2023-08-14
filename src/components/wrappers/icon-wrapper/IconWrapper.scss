@@ -1,0 +1,17 @@
+.finallyreact-icon-wrapper {
+  &:hover {
+    > * > .finallyreact-icon-wrapper__icon:first-child {
+      &:not(.hide) {
+        opacity: 1;
+      }
+    }
+  }
+
+  .finallyreact-icon-wrapper__icon {
+    opacity: 0;
+
+    &.show {
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,1589 @@
+@use "sass:math";
+
+/**
+ * Read more about EM vs. REM vs. PX here: https://engageinteractive.co.uk/blog/em-vs-rem-vs-px
+ * And for media queries: https://zellwk.com/blog/media-query-units/
+ * Use REMs for font sizes and spacing
+ *
+ * Example conversions for 16px browser font size (16px = 1rem):
+ * 1/10 = 0.1rem = 1.6px
+ * 1/2 = 0.5rem = 8px
+ * 1 = 1rem = 16px
+ * 1-1/4 = 1.25rem = 20px
+ * 1-1/2 = 1.5rem = 24px
+ * 2rem = 32px
+ * 3rem = 48px
+ * 4rem = 64px
+ * 5rem = 80px
+ */
+
+// Browsers add a random default padding to the body tag... e.e
+body {
+  padding: 0;
+  margin: 0;
+}
+
+/* ------------------------------------------------ */
+/* ---- MARGINS, PADDINGS, HEIGHTS, AND WIDTHS ---- */
+/* ------------------------------------------------ */
+.m-auto {
+  margin: auto;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.min-w-screen {
+  min-width: 100vw;
+}
+
+.max-h-screen {
+  max-height: 100vh;
+}
+
+.max-w-screen {
+  max-width: 100vw;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.w-screen {
+  width: 100vw;
+}
+
+.w-max-content {
+  width: max-content;
+}
+
+.w-min-content {
+  width: min-content;
+}
+
+.h-max-content {
+  height: max-content;
+}
+
+.h-min-content {
+  height: min-content;
+}
+
+// Create different spacings for possible REM values between 0 and 100
+@for $i from 1 to 102 {
+  .m-#{$i - 1} {
+    margin: #{$i - 1}rem;
+  }
+
+  .-m-#{$i - 1} {
+    margin: -#{$i - 1}rem;
+  }
+
+  .mt-#{$i - 1} {
+    margin-top: #{$i - 1}rem;
+  }
+
+  .-mt-#{$i - 1} {
+    margin-top: -#{$i - 1}rem;
+  }
+
+  .mr-#{$i - 1} {
+    margin-right: #{$i - 1}rem;
+  }
+
+  .-mr-#{$i - 1} {
+    margin-right: -#{$i - 1}rem;
+  }
+
+  .mb-#{$i - 1} {
+    margin-bottom: #{$i - 1}rem;
+  }
+
+  .-mb-#{$i - 1} {
+    margin-bottom: -#{$i - 1}rem;
+  }
+
+  .ml-#{$i - 1} {
+    margin-left: #{$i - 1}rem;
+  }
+
+  .-ml-#{$i - 1} {
+    margin-left: -#{$i - 1}rem;
+  }
+
+  .mx-#{$i - 1} {
+    margin-left: #{$i - 1}rem;
+    margin-right: #{$i - 1}rem;
+  }
+
+  .-mx-#{$i - 1} {
+    margin-left: -#{$i - 1}rem;
+    margin-right: -#{$i - 1}rem;
+  }
+
+  .my-#{$i - 1} {
+    margin-top: #{$i - 1}rem;
+    margin-bottom: #{$i - 1}rem;
+  }
+
+  .-my-#{$i - 1} {
+    margin-top: -#{$i - 1}rem;
+    margin-bottom: -#{$i - 1}rem;
+  }
+
+  .p-#{$i - 1} {
+    padding: #{$i - 1}rem;
+  }
+
+  .pt-#{$i - 1} {
+    padding-top: #{$i - 1}rem;
+  }
+
+  .pr-#{$i - 1} {
+    padding-right: #{$i - 1}rem;
+  }
+
+  .pb-#{$i - 1} {
+    padding-bottom: #{$i - 1}rem;
+  }
+
+  .pl-#{$i - 1} {
+    padding-left: #{$i - 1}rem;
+  }
+
+  .px-#{$i - 1} {
+    padding-left: #{$i - 1}rem;
+    padding-right: #{$i - 1}rem;
+  }
+
+  .py-#{$i - 1} {
+    padding-top: #{$i - 1}rem;
+    padding-bottom: #{$i - 1}rem;
+  }
+
+  .h-#{$i - 1} {
+    height: #{$i - 1}rem;
+  }
+
+  .h-#{$i - 1}p {
+    height: #{$i - 1}#{'%'};
+  }
+
+  .w-#{$i - 1} {
+    width: #{$i - 1}rem;
+  }
+
+  .w-#{$i - 1}p {
+    width: #{$i - 1}#{'%'};
+  }
+
+  .min-h-#{$i - 1} {
+    min-height: #{$i - 1}rem;
+  }
+
+  .min-h-#{$i - 1}p {
+    min-height: #{$i - 1}#{'%'};
+  }
+
+  .min-w-#{$i - 1} {
+    min-width: #{$i - 1}rem;
+  }
+
+  .min-w-#{$i - 1}p {
+    min-width: #{$i - 1}#{'%'};
+  }
+
+  .max-h-#{$i - 1} {
+    max-height: #{$i - 1}rem;
+  }
+
+  .max-h-#{$i - 1}p {
+    max-height: #{$i - 1}#{'%'};
+  }
+
+  .max-w-#{$i - 1} {
+    max-width: #{$i - 1}rem;
+  }
+
+  .max-w-#{$i - 1}p {
+    max-width: #{$i - 1}#{'%'};
+  }
+
+  .left-#{$i - 1} {
+    left: #{$i - 1}rem;
+  }
+
+  .left-#{$i - 0}p {
+    left: #{$i - 0}#{'%'};
+  }
+
+  .-left-#{$i - 1} {
+    left: -#{$i - 1}rem;
+  }
+
+  .-left-#{$i - 0}p {
+    left: -#{$i - 0}#{'%'};
+  }
+
+  .right-#{$i - 1} {
+    right: #{$i - 1}rem;
+  }
+
+  .right-#{$i - 0}p {
+    right: #{$i - 0}#{'%'};
+  }
+
+  .-right-#{$i - 1} {
+    right: -#{$i - 1}rem;
+  }
+
+  .-right-#{$i - 0}p {
+    right: -#{$i - 0}#{'%'};
+  }
+
+  .top-#{$i - 1} {
+    top: #{$i - 1}rem;
+  }
+
+  .top-#{$i - 0}p {
+    top: #{$i - 0}#{'%'};
+  }
+
+  .-top-#{$i - 1} {
+    top: -#{$i - 1}rem;
+  }
+
+  .-top-#{$i - 0}p {
+    top: -#{$i - 0}#{'%'};
+  }
+
+  .bottom-#{$i - 1} {
+    bottom: #{$i - 1}rem;
+  }
+
+  .bottom-#{$i - 0}p {
+    bottom: #{$i - 0}#{'%'};
+  }
+
+  .-bottom-#{$i - 1} {
+    bottom: -#{$i - 1}rem;
+  }
+
+  .-bottom-#{$i - 0}p {
+    bottom: -#{$i - 0}#{'%'};
+  }
+
+  // Fractional REM values
+  @for $j from 2 to 11 {
+    // if $i - 1 is zero
+    @if $i == 1 {
+      // margin
+      .m-#{'1\\/'}#{$j} {
+        margin: #{math.div(1, $j)}rem;
+      }
+
+      .m-#{'2\\/'}#{$j} {
+        margin: #{math.div(2, $j)}rem;
+      }
+
+      .m-#{'3\\/'}#{$j} {
+        margin: #{math.div(3, $j)}rem;
+      }
+
+      .m-#{'4\\/'}#{$j} {
+        margin: #{math.div(4, $j)}rem;
+      }
+
+      // negative margin
+
+      .-m-#{'1\\/'}#{$j} {
+        margin: -#{math.div(1, $j)}rem;
+      }
+
+      .-m-#{'2\\/'}#{$j} {
+        margin: -#{math.div(2, $j)}rem;
+      }
+
+      .-m-#{'3\\/'}#{$j} {
+        margin: -#{math.div(3, $j)}rem;
+      }
+
+      .-m-#{'4\\/'}#{$j} {
+        margin: -#{math.div(4, $j)}rem;
+      }
+
+      // margin top
+
+      .mt-#{'1\\/'}#{$j} {
+        margin-top: #{math.div(1, $j)}rem;
+      }
+
+      .mt-#{'2\\/'}#{$j} {
+        margin-top: #{math.div(2, $j)}rem;
+      }
+
+      .mt-#{'3\\/'}#{$j} {
+        margin-top: #{math.div(3, $j)}rem;
+      }
+
+      .mt-#{'4\\/'}#{$j} {
+        margin-top: #{math.div(4, $j)}rem;
+      }
+
+      // negative margin top
+
+      .-mt-#{'1\\/'}#{$j} {
+        margin-top: -#{math.div(1, $j)}rem;
+      }
+
+      .-mt-#{'2\\/'}#{$j} {
+        margin-top: -#{math.div(2, $j)}rem;
+      }
+
+      .-mt-#{'3\\/'}#{$j} {
+        margin-top: -#{math.div(3, $j)}rem;
+      }
+
+      .-mt-#{'4\\/'}#{$j} {
+        margin-top: -#{math.div(4, $j)}rem;
+      }
+
+      // margin right
+
+      .mr-#{'1\\/'}#{$j} {
+        margin-right: #{math.div(1, $j)}rem;
+      }
+
+      .mr-#{'2\\/'}#{$j} {
+        margin-right: #{math.div(2, $j)}rem;
+      }
+
+      .mr-#{'3\\/'}#{$j} {
+        margin-right: #{math.div(3, $j)}rem;
+      }
+
+      .mr-#{'4\\/'}#{$j} {
+        margin-right: #{math.div(4, $j)}rem;
+      }
+
+      // negative margin right
+
+      .-mr-#{'1\\/'}#{$j} {
+        margin-right: -#{math.div(1, $j)}rem;
+      }
+
+      .-mr-#{'2\\/'}#{$j} {
+        margin-right: -#{math.div(2, $j)}rem;
+      }
+
+      .-mr-#{'3\\/'}#{$j} {
+        margin-right: -#{math.div(3, $j)}rem;
+      }
+
+      .-mr-#{'4\\/'}#{$j} {
+        margin-right: -#{math.div(4, $j)}rem;
+      }
+
+      // margin bottom
+
+      .mb-#{'1\\/'}#{$j} {
+        margin-bottom: #{math.div(1, $j)}rem;
+      }
+
+      .mb-#{'2\\/'}#{$j} {
+        margin-bottom: #{math.div(2, $j)}rem;
+      }
+
+      .mb-#{'3\\/'}#{$j} {
+        margin-bottom: #{math.div(3, $j)}rem;
+      }
+
+      .mb-#{'4\\/'}#{$j} {
+        margin-bottom: #{math.div(4, $j)}rem;
+      }
+
+      // negative margin bottom
+
+      .-mb-#{'1\\/'}#{$j} {
+        margin-bottom: -#{math.div(1, $j)}rem;
+      }
+
+      .-mb-#{'2\\/'}#{$j} {
+        margin-bottom: -#{math.div(2, $j)}rem;
+      }
+
+      .-mb-#{'3\\/'}#{$j} {
+        margin-bottom: -#{math.div(3, $j)}rem;
+      }
+
+      .-mb-#{'4\\/'}#{$j} {
+        margin-bottom: -#{math.div(4, $j)}rem;
+      }
+
+      // margin left
+
+      .ml-#{'1\\/'}#{$j} {
+        margin-left: #{math.div(1, $j)}rem;
+      }
+
+      .ml-#{'2\\/'}#{$j} {
+        margin-left: #{math.div(2, $j)}rem;
+      }
+
+      .ml-#{'3\\/'}#{$j} {
+        margin-left: #{math.div(3, $j)}rem;
+      }
+
+      .ml-#{'4\\/'}#{$j} {
+        margin-left: #{math.div(4, $j)}rem;
+      }
+
+      // negative margin left
+
+      .-ml-#{'1\\/'}#{$j} {
+        margin-left: -#{math.div(1, $j)}rem;
+      }
+
+      .-ml-#{'2\\/'}#{$j} {
+        margin-left: -#{math.div(2, $j)}rem;
+      }
+
+      .-ml-#{'3\\/'}#{$j} {
+        margin-left: -#{math.div(3, $j)}rem;
+      }
+
+      .-ml-#{'4\\/'}#{$j} {
+        margin-left: -#{math.div(4, $j)}rem;
+      }
+
+      // margin x
+
+      .mx-#{'1\\/'}#{$j} {
+        margin-left: #{math.div(1, $j)}rem;
+        margin-right: #{math.div(1, $j)}rem;
+      }
+
+      .mx-#{'2\\/'}#{$j} {
+        margin-left: #{math.div(2, $j)}rem;
+        margin-right: #{math.div(2, $j)}rem;
+      }
+
+      .mx-#{'3\\/'}#{$j} {
+        margin-left: #{math.div(3, $j)}rem;
+        margin-right: #{math.div(3, $j)}rem;
+      }
+
+      .mx-#{'4\\/'}#{$j} {
+        margin-left: #{math.div(4, $j)}rem;
+        margin-right: #{math.div(4, $j)}rem;
+      }
+
+      // negative margin x
+
+      .-mx-#{'1\\/'}#{$j} {
+        margin-left: -#{math.div(1, $j)}rem;
+        margin-right: -#{math.div(1, $j)}rem;
+      }
+
+      .-mx-#{'2\\/'}#{$j} {
+        margin-left: -#{math.div(2, $j)}rem;
+        margin-right: -#{math.div(2, $j)}rem;
+      }
+
+      .-mx-#{'3\\/'}#{$j} {
+        margin-left: -#{math.div(3, $j)}rem;
+        margin-right: -#{math.div(3, $j)}rem;
+      }
+
+      .-mx-#{'4\\/'}#{$j} {
+        margin-left: -#{math.div(4, $j)}rem;
+        margin-right: -#{math.div(4, $j)}rem;
+      }
+
+      // margin y
+
+      .my-#{'1\\/'}#{$j} {
+        margin-top: #{math.div(1, $j)}rem;
+        margin-bottom: #{math.div(1, $j)}rem;
+      }
+
+      .my-#{'2\\/'}#{$j} {
+        margin-top: #{math.div(2, $j)}rem;
+        margin-bottom: #{math.div(2, $j)}rem;
+      }
+
+      .my-#{'3\\/'}#{$j} {
+        margin-top: #{math.div(3, $j)}rem;
+        margin-bottom: #{math.div(3, $j)}rem;
+      }
+
+      .my-#{'4\\/'}#{$j} {
+        margin-top: #{math.div(4, $j)}rem;
+        margin-bottom: #{math.div(4, $j)}rem;
+      }
+
+      // negative margin y
+
+      .-my-#{'1\\/'}#{$j} {
+        margin-top: -#{math.div(1, $j)}rem;
+        margin-bottom: -#{math.div(1, $j)}rem;
+      }
+
+      .-my-#{'2\\/'}#{$j} {
+        margin-top: -#{math.div(2, $j)}rem;
+        margin-bottom: -#{math.div(2, $j)}rem;
+      }
+
+      .-my-#{'3\\/'}#{$j} {
+        margin-top: -#{math.div(3, $j)}rem;
+        margin-bottom: -#{math.div(3, $j)}rem;
+      }
+
+      .-my-#{'4\\/'}#{$j} {
+        margin-top: -#{math.div(4, $j)}rem;
+        margin-bottom: -#{math.div(4, $j)}rem;
+      }
+
+      // padding
+
+      .p-#{'1\\/'}#{$j} {
+        padding: #{math.div(1, $j)}rem;
+      }
+
+      .p-#{'2\\/'}#{$j} {
+        padding: #{math.div(2, $j)}rem;
+      }
+
+      .p-#{'3\\/'}#{$j} {
+        padding: #{math.div(3, $j)}rem;
+      }
+
+      .p-#{'4\\/'}#{$j} {
+        padding: #{math.div(4, $j)}rem;
+      }
+
+      // padding top
+
+      .pt-#{'1\\/'}#{$j} {
+        padding-top: #{math.div(1, $j)}rem;
+      }
+
+      .pt-#{'2\\/'}#{$j} {
+        padding-top: #{math.div(2, $j)}rem;
+      }
+
+      .pt-#{'3\\/'}#{$j} {
+        padding-top: #{math.div(3, $j)}rem;
+      }
+
+      .pt-#{'4\\/'}#{$j} {
+        padding-top: #{math.div(4, $j)}rem;
+      }
+
+      // padding right
+
+      .pr-#{'1\\/'}#{$j} {
+        padding-right: #{math.div(1, $j)}rem;
+      }
+
+      .pr-#{'2\\/'}#{$j} {
+        padding-right: #{math.div(2, $j)}rem;
+      }
+
+      .pr-#{'3\\/'}#{$j} {
+        padding-right: #{math.div(3, $j)}rem;
+      }
+
+      .pr-#{'4\\/'}#{$j} {
+        padding-right: #{math.div(4, $j)}rem;
+      }
+
+      // padding bottom
+
+      .pb-#{'1\\/'}#{$j} {
+        padding-bottom: #{math.div(1, $j)}rem;
+      }
+
+      .pb-#{'2\\/'}#{$j} {
+        padding-bottom: #{math.div(2, $j)}rem;
+      }
+
+      .pb-#{'3\\/'}#{$j} {
+        padding-bottom: #{math.div(3, $j)}rem;
+      }
+
+      .pb-#{'4\\/'}#{$j} {
+        padding-bottom: #{math.div(4, $j)}rem;
+      }
+
+      // padding left
+
+      .pl-#{'1\\/'}#{$j} {
+        padding-left: #{math.div(1, $j)}rem;
+      }
+
+      .pl-#{'2\\/'}#{$j} {
+        padding-left: #{math.div(2, $j)}rem;
+      }
+
+      .pl-#{'3\\/'}#{$j} {
+        padding-left: #{math.div(3, $j)}rem;
+      }
+
+      .pl-#{'4\\/'}#{$j} {
+        padding-left: #{math.div(4, $j)}rem;
+      }
+
+      // padding x
+
+      .px-#{'1\\/'}#{$j} {
+        padding-left: #{math.div(1, $j)}rem;
+        padding-right: #{math.div(1, $j)}rem;
+      }
+
+      .px-#{'2\\/'}#{$j} {
+        padding-left: #{math.div(2, $j)}rem;
+        padding-right: #{math.div(2, $j)}rem;
+      }
+
+      .px-#{'3\\/'}#{$j} {
+        padding-left: #{math.div(3, $j)}rem;
+        padding-right: #{math.div(3, $j)}rem;
+      }
+
+      .px-#{'4\\/'}#{$j} {
+        padding-left: #{math.div(4, $j)}rem;
+        padding-right: #{math.div(4, $j)}rem;
+      }
+
+      // padding y
+
+      .py-#{'1\\/'}#{$j} {
+        padding-top: #{math.div(1, $j)}rem;
+        padding-bottom: #{math.div(1, $j)}rem;
+      }
+
+      .py-#{'2\\/'}#{$j} {
+        padding-top: #{math.div(2, $j)}rem;
+        padding-bottom: #{math.div(2, $j)}rem;
+      }
+
+      .py-#{'3\\/'}#{$j} {
+        padding-top: #{math.div(3, $j)}rem;
+        padding-bottom: #{math.div(3, $j)}rem;
+      }
+
+      .py-#{'4\\/'}#{$j} {
+        padding-top: #{math.div(4, $j)}rem;
+        padding-bottom: #{math.div(4, $j)}rem;
+      }
+
+      // height
+
+      .h-#{'1\\/'}#{$j} {
+        height: #{math.div(1, $j)}rem;
+      }
+
+      .h-#{'2\\/'}#{$j} {
+        height: #{math.div(2, $j)}rem;
+      }
+
+      .h-#{'3\\/'}#{$j} {
+        height: #{math.div(3, $j)}rem;
+      }
+
+      .h-#{'4\\/'}#{$j} {
+        height: #{math.div(4, $j)}rem;
+      }
+
+      // width
+
+      .w-#{'1\\/'}#{$j} {
+        width: #{math.div(1, $j)}rem;
+      }
+
+      .w-#{'2\\/'}#{$j} {
+        width: #{math.div(2, $j)}rem;
+      }
+
+      .w-#{'3\\/'}#{$j} {
+        width: #{math.div(3, $j)}rem;
+      }
+
+      .w-#{'4\\/'}#{$j} {
+        width: #{math.div(4, $j)}rem;
+      }
+
+      // min-height
+
+      .min-h-#{'1\\/'}#{$j} {
+        min-height: #{math.div(1, $j)}rem;
+      }
+
+      .min-h-#{'2\\/'}#{$j} {
+        min-height: #{math.div(2, $j)}rem;
+      }
+
+      .min-h-#{'3\\/'}#{$j} {
+        min-height: #{math.div(3, $j)}rem;
+      }
+
+      .min-h-#{'4\\/'}#{$j} {
+        min-height: #{math.div(4, $j)}rem;
+      }
+
+      // min-width
+
+      .min-w-#{'1\\/'}#{$j} {
+        min-width: #{math.div(1, $j)}rem;
+      }
+
+      .min-w-#{'2\\/'}#{$j} {
+        min-width: #{math.div(2, $j)}rem;
+      }
+
+      .min-w-#{'3\\/'}#{$j} {
+        min-width: #{math.div(3, $j)}rem;
+      }
+
+      .min-w-#{'4\\/'}#{$j} {
+        min-width: #{math.div(4, $j)}rem;
+      }
+
+      // max-height
+
+      .max-h-#{'1\\/'}#{$j} {
+        max-height: #{math.div(1, $j)}rem;
+      }
+
+      .max-h-#{'2\\/'}#{$j} {
+        max-height: #{math.div(2, $j)}rem;
+      }
+
+      .max-h-#{'3\\/'}#{$j} {
+        max-height: #{math.div(3, $j)}rem;
+      }
+
+      .max-h-#{'4\\/'}#{$j} {
+        max-height: #{math.div(4, $j)}rem;
+      }
+
+      // max-width
+
+      .max-w-#{'1\\/'}#{$j} {
+        max-width: #{math.div(1, $j)}rem;
+      }
+
+      .max-w-#{'2\\/'}#{$j} {
+        max-width: #{math.div(2, $j)}rem;
+      }
+
+      .max-w-#{'3\\/'}#{$j} {
+        max-width: #{math.div(3, $j)}rem;
+      }
+
+      .max-w-#{'4\\/'}#{$j} {
+        max-width: #{math.div(4, $j)}rem;
+      }
+
+      // left position
+
+      .left-#{'1\\/'}#{$j} {
+        left: #{math.div(1, $j)}rem;
+      }
+
+      .left-#{'2\\/'}#{$j} {
+        left: #{math.div(2, $j)}rem;
+      }
+
+      .left-#{'3\\/'}#{$j} {
+        left: #{math.div(3, $j)}rem;
+      }
+
+      .left-#{'4\\/'}#{$j} {
+        left: #{math.div(4, $j)}rem;
+      }
+
+      // negative left position
+
+      .-left-#{'1\\/'}#{$j} {
+        left: -#{math.div(1, $j)}rem;
+      }
+
+      .-left-#{'2\\/'}#{$j} {
+        left: -#{math.div(2, $j)}rem;
+      }
+
+      .-left-#{'3\\/'}#{$j} {
+        left: -#{math.div(3, $j)}rem;
+      }
+
+      .-left-#{'4\\/'}#{$j} {
+        left: -#{math.div(4, $j)}rem;
+      }
+
+      // right position
+
+      .right-#{'1\\/'}#{$j} {
+        right: #{math.div(1, $j)}rem;
+      }
+
+      .right-#{'2\\/'}#{$j} {
+        right: #{math.div(2, $j)}rem;
+      }
+
+      .right-#{'3\\/'}#{$j} {
+        right: #{math.div(3, $j)}rem;
+      }
+
+      .right-#{'4\\/'}#{$j} {
+        right: #{math.div(4, $j)}rem;
+      }
+
+      // negative right position
+
+      .-right-#{'1\\/'}#{$j} {
+        right: -#{math.div(1, $j)}rem;
+      }
+
+      .-right-#{'2\\/'}#{$j} {
+        right: -#{math.div(2, $j)}rem;
+      }
+
+      .-right-#{'3\\/'}#{$j} {
+        right: -#{math.div(3, $j)}rem;
+      }
+
+      .-right-#{'4\\/'}#{$j} {
+        right: -#{math.div(4, $j)}rem;
+      }
+
+      // top position
+
+      .top-#{'1\\/'}#{$j} {
+        top: #{math.div(1, $j)}rem;
+      }
+
+      .top-#{'2\\/'}#{$j} {
+        top: #{math.div(2, $j)}rem;
+      }
+
+      .top-#{'3\\/'}#{$j} {
+        top: #{math.div(3, $j)}rem;
+      }
+
+      .top-#{'4\\/'}#{$j} {
+        top: #{math.div(4, $j)}rem;
+      }
+
+      // negative top position
+
+      .-top-#{'1\\/'}#{$j} {
+        top: -#{math.div(1, $j)}rem;
+      }
+
+      .-top-#{'2\\/'}#{$j} {
+        top: -#{math.div(2, $j)}rem;
+      }
+
+      .-top-#{'3\\/'}#{$j} {
+        top: -#{math.div(3, $j)}rem;
+      }
+
+      .-top-#{'4\\/'}#{$j} {
+        top: -#{math.div(4, $j)}rem;
+      }
+
+      // bottom position
+
+      .bottom-#{'1\\/'}#{$j} {
+        bottom: #{math.div(1, $j)}rem;
+      }
+
+      .bottom-#{'2\\/'}#{$j} {
+        bottom: #{math.div(2, $j)}rem;
+      }
+
+      .bottom-#{'3\\/'}#{$j} {
+        bottom: #{math.div(3, $j)}rem;
+      }
+
+      .bottom-#{'4\\/'}#{$j} {
+        bottom: #{math.div(4, $j)}rem;
+      }
+
+      // negative bottom position
+
+      .-bottom-#{'1\\/'}#{$j} {
+        bottom: -#{math.div(1, $j)}rem;
+      }
+
+      .-bottom-#{'2\\/'}#{$j} {
+        bottom: -#{math.div(2, $j)}rem;
+      }
+
+      .-bottom-#{'3\\/'}#{$j} {
+        bottom: -#{math.div(3, $j)}rem;
+      }
+
+      .-bottom-#{'4\\/'}#{$j} {
+        bottom: -#{math.div(4, $j)}rem;
+      }
+    } @else {
+      // margin
+
+      .m-#{$i - 1}-#{'1\\/'}#{$j} {
+        margin: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .m-#{$i - 1}-#{'2\\/'}#{$j} {
+        margin: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .m-#{$i - 1}-#{'3\\/'}#{$j} {
+        margin: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .m-#{$i - 1}-#{'4\\/'}#{$j} {
+        margin: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // negative margin
+
+      .-m-#{$i - 1}-#{'1\\/'}#{$j} {
+        margin: -#{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .-m-#{$i - 1}-#{'2\\/'}#{$j} {
+        margin: -#{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .-m-#{$i - 1}-#{'3\\/'}#{$j} {
+        margin: -#{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .m-#{$i - 1}-#{'4\\/'}#{$j} {
+        margin: -#{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // margin top
+
+      .mt-#{$i - 1}-#{'1\\/'}#{$j} {
+        margin-top: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .mt-#{$i - 1}-#{'2\\/'}#{$j} {
+        margin-top: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .mt-#{$i - 1}-#{'3\\/'}#{$j} {
+        margin-top: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .mt-#{$i - 1}-#{'4\\/'}#{$j} {
+        margin-top: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // negative margin top
+
+      .-mt-#{$i - 1}-#{'1\\/'}#{$j} {
+        margin-top: -#{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .-mt-#{$i - 1}-#{'2\\/'}#{$j} {
+        margin-top: -#{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .-mt-#{$i - 1}-#{'3\\/'}#{$j} {
+        margin-top: -#{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .-mt-#{$i - 1}-#{'4\\/'}#{$j} {
+        margin-top: -#{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // margin right
+
+      .mr-#{$i - 1}-#{'1\\/'}#{$j} {
+        margin-right: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .mr-#{$i - 1}-#{'2\\/'}#{$j} {
+        margin-right: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .mr-#{$i - 1}-#{'3\\/'}#{$j} {
+        margin-right: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .mr-#{$i - 1}-#{'4\\/'}#{$j} {
+        margin-right: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // negative margin right
+
+      .-mr-#{$i - 1}-#{'1\\/'}#{$j} {
+        margin-right: -#{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .-mr-#{$i - 1}-#{'2\\/'}#{$j} {
+        margin-right: -#{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .-mr-#{$i - 1}-#{'3\\/'}#{$j} {
+        margin-right: -#{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .-mr-#{$i - 1}-#{'4\\/'}#{$j} {
+        margin-right: -#{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // margin bottom
+
+      .mb-#{$i - 1}-#{'1\\/'}#{$j} {
+        margin-bottom: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .mb-#{$i - 1}-#{'2\\/'}#{$j} {
+        margin-bottom: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .mb-#{$i - 1}-#{'3\\/'}#{$j} {
+        margin-bottom: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .mb-#{$i - 1}-#{'4\\/'}#{$j} {
+        margin-bottom: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // negative margin bottom
+
+      .-mb-#{$i - 1}-#{'1\\/'}#{$j} {
+        margin-bottom: -#{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .-mb-#{$i - 1}-#{'2\\/'}#{$j} {
+        margin-bottom: -#{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .-mb-#{$i - 1}-#{'3\\/'}#{$j} {
+        margin-bottom: -#{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .-mb-#{$i - 1}-#{'4\\/'}#{$j} {
+        margin-bottom: -#{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // margin left
+
+      .ml-#{$i - 1}-#{'1\\/'}#{$j} {
+        margin-left: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .ml-#{$i - 1}-#{'2\\/'}#{$j} {
+        margin-left: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .ml-#{$i - 1}-#{'3\\/'}#{$j} {
+        margin-left: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .ml-#{$i - 1}-#{'4\\/'}#{$j} {
+        margin-left: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // negative margin left
+
+      .-ml-#{$i - 1}-#{'1\\/'}#{$j} {
+        margin-left: -#{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .-ml-#{$i - 1}-#{'2\\/'}#{$j} {
+        margin-left: -#{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .-ml-#{$i - 1}-#{'3\\/'}#{$j} {
+        margin-left: -#{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .-ml-#{$i - 1}-#{'4\\/'}#{$j} {
+        margin-left: -#{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // margin x
+
+      .mx-#{$i - 1}-#{'1\\/'}#{$j} {
+        margin-left: #{($i - 1) + math.div(1, $j)}rem;
+        margin-right: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .mx-#{$i - 1}-#{'2\\/'}#{$j} {
+        margin-left: #{($i - 1) + math.div(2, $j)}rem;
+        margin-right: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .mx-#{$i - 1}-#{'3\\/'}#{$j} {
+        margin-left: #{($i - 1) + math.div(3, $j)}rem;
+        margin-right: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .mx-#{$i - 1}-#{'4\\/'}#{$j} {
+        margin-left: #{($i - 1) + math.div(4, $j)}rem;
+        margin-right: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // negative margin x
+
+      .-mx-#{$i - 1}-#{'1\\/'}#{$j} {
+        margin-left: -#{($i - 1) + math.div(1, $j)}rem;
+        margin-right: -#{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .-mx-#{$i - 1}-#{'2\\/'}#{$j} {
+        margin-left: -#{($i - 1) + math.div(2, $j)}rem;
+        margin-right: -#{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .-mx-#{$i - 1}-#{'3\\/'}#{$j} {
+        margin-left: -#{($i - 1) + math.div(3, $j)}rem;
+        margin-right: -#{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .-mx-#{$i - 1}-#{'4\\/'}#{$j} {
+        margin-left: -#{($i - 1) + math.div(4, $j)}rem;
+        margin-right: -#{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // margin y
+
+      .my-#{$i - 1}-#{'1\\/'}#{$j} {
+        margin-top: #{($i - 1) + math.div(1, $j)}rem;
+        margin-bottom: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .my-#{$i - 1}-#{'2\\/'}#{$j} {
+        margin-top: #{($i - 1) + math.div(2, $j)}rem;
+        margin-bottom: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .my-#{$i - 1}-#{'3\\/'}#{$j} {
+        margin-top: #{($i - 1) + math.div(3, $j)}rem;
+        margin-bottom: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .my-#{$i - 1}-#{'4\\/'}#{$j} {
+        margin-top: #{($i - 1) + math.div(4, $j)}rem;
+        margin-bottom: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // negative margin y
+
+      .-my-#{$i - 1}-#{'1\\/'}#{$j} {
+        margin-top: -#{($i - 1) + math.div(1, $j)}rem;
+        margin-bottom: -#{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .-my-#{$i - 1}-#{'2\\/'}#{$j} {
+        margin-top: -#{($i - 1) + math.div(2, $j)}rem;
+        margin-bottom: -#{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .-my-#{$i - 1}-#{'3\\/'}#{$j} {
+        margin-top: -#{($i - 1) + math.div(3, $j)}rem;
+        margin-bottom: -#{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .-my-#{$i - 1}-#{'4\\/'}#{$j} {
+        margin-top: -#{($i - 1) + math.div(4, $j)}rem;
+        margin-bottom: -#{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // padding
+
+      .p-#{$i - 1}-#{'1\\/'}#{$j} {
+        padding: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .p-#{$i - 1}-#{'2\\/'}#{$j} {
+        padding: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .p-#{$i - 1}-#{'3\\/'}#{$j} {
+        padding: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .p-#{$i - 1}-#{'4\\/'}#{$j} {
+        padding: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // padding top
+
+      .pt-#{$i - 1}-#{'1\\/'}#{$j} {
+        padding-top: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .pt-#{$i - 1}-#{'2\\/'}#{$j} {
+        padding-top: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .pt-#{$i - 1}-#{'3\\/'}#{$j} {
+        padding-top: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .pt-#{$i - 1}-#{'4\\/'}#{$j} {
+        padding-top: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // padding right
+
+      .pr-#{$i - 1}-#{'1\\/'}#{$j} {
+        padding-right: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .pr-#{$i - 1}-#{'2\\/'}#{$j} {
+        padding-right: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .pr-#{$i - 1}-#{'3\\/'}#{$j} {
+        padding-right: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .pr-#{$i - 1}-#{'4\\/'}#{$j} {
+        padding-right: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // padding bottom
+
+      .pb-#{$i - 1}-#{'1\\/'}#{$j} {
+        padding-bottom: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .pb-#{$i - 1}-#{'2\\/'}#{$j} {
+        padding-bottom: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .pb-#{$i - 1}-#{'3\\/'}#{$j} {
+        padding-bottom: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .pb-#{$i - 1}-#{'4\\/'}#{$j} {
+        padding-bottom: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // padding left
+
+      .pl-#{$i - 1}-#{'1\\/'}#{$j} {
+        padding-left: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .pl-#{$i - 1}-#{'2\\/'}#{$j} {
+        padding-left: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .pl-#{$i - 1}-#{'3\\/'}#{$j} {
+        padding-left: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .pl-#{$i - 1}-#{'4\\/'}#{$j} {
+        padding-left: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // padding x
+
+      .px-#{$i - 1}-#{'1\\/'}#{$j} {
+        padding-left: #{($i - 1) + math.div(1, $j)}rem;
+        padding-right: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .px-#{$i - 1}-#{'2\\/'}#{$j} {
+        padding-left: #{($i - 1) + math.div(2, $j)}rem;
+        padding-right: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .px-#{$i - 1}-#{'3\\/'}#{$j} {
+        padding-left: #{($i - 1) + math.div(3, $j)}rem;
+        padding-right: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .px-#{$i - 1}-#{'4\\/'}#{$j} {
+        padding-left: #{($i - 1) + math.div(4, $j)}rem;
+        padding-right: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // padding y
+
+      .py-#{$i - 1}-#{'1\\/'}#{$j} {
+        padding-top: #{($i - 1) + math.div(1, $j)}rem;
+        padding-bottom: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .py-#{$i - 1}-#{'2\\/'}#{$j} {
+        padding-top: #{($i - 1) + math.div(2, $j)}rem;
+        padding-bottom: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .py-#{$i - 1}-#{'3\\/'}#{$j} {
+        padding-top: #{($i - 1) + math.div(3, $j)}rem;
+        padding-bottom: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .py-#{$i - 1}-#{'4\\/'}#{$j} {
+        padding-top: #{($i - 1) + math.div(4, $j)}rem;
+        padding-bottom: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // height
+
+      .h-#{$i - 1}-#{'1\\/'}#{$j} {
+        height: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .h-#{$i - 1}-#{'2\\/'}#{$j} {
+        height: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .h-#{$i - 1}-#{'3\\/'}#{$j} {
+        height: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .h-#{$i - 1}-#{'4\\/'}#{$j} {
+        height: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // width
+
+      .w-#{$i - 1}-#{'1\\/'}#{$j} {
+        width: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .w-#{$i - 1}-#{'2\\/'}#{$j} {
+        width: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .w-#{$i - 1}-#{'3\\/'}#{$j} {
+        width: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .w-#{$i - 1}-#{'4\\/'}#{$j} {
+        width: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // min-height
+
+      .min-h-#{$i - 1}-#{'1\\/'}#{$j} {
+        min-height: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .min-h-#{$i - 1}-#{'2\\/'}#{$j} {
+        min-height: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .min-h-#{$i - 1}-#{'3\\/'}#{$j} {
+        min-height: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .min-h-#{$i - 1}-#{'4\\/'}#{$j} {
+        min-height: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // min-width
+
+      .min-w-#{$i - 1}-#{'1\\/'}#{$j} {
+        min-width: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .min-w-#{$i - 1}-#{'2\\/'}#{$j} {
+        min-width: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .min-w-#{$i - 1}-#{'3\\/'}#{$j} {
+        min-width: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .min-w-#{$i - 1}-#{'4\\/'}#{$j} {
+        min-width: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // max-height
+
+      .max-h-#{$i - 1}-#{'1\\/'}#{$j} {
+        max-height: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .max-h-#{$i - 1}-#{'2\\/'}#{$j} {
+        max-height: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .max-h-#{$i - 1}-#{'3\\/'}#{$j} {
+        max-height: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .max-h-#{$i - 1}-#{'4\\/'}#{$j} {
+        max-height: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // max-width
+
+      .max-w-#{$i - 1}-#{'1\\/'}#{$j} {
+        max-width: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .max-w-#{$i - 1}-#{'2\\/'}#{$j} {
+        max-width: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .max-w-#{$i - 1}-#{'3\\/'}#{$j} {
+        max-width: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .max-w-#{$i - 1}-#{'4\\/'}#{$j} {
+        max-width: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // position left
+
+      .left-#{$i - 1}-#{'1\\/'}#{$j} {
+        left: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .left-#{$i - 1}-#{'2\\/'}#{$j} {
+        left: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .left-#{$i - 1}-#{'3\\/'}#{$j} {
+        left: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .left-#{$i - 1}-#{'4\\/'}#{$j} {
+        left: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // negative position left
+
+      .-left-#{$i - 1}-#{'1\\/'}#{$j} {
+        left: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .-left-#{$i - 1}-#{'2\\/'}#{$j} {
+        left: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .-left-#{$i - 1}-#{'3\\/'}#{$j} {
+        left: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .-left-#{$i - 1}-#{'4\\/'}#{$j} {
+        left: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // position right
+
+      .right-#{$i - 1}-#{'1\\/'}#{$j} {
+        right: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .right-#{$i - 1}-#{'2\\/'}#{$j} {
+        right: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .right-#{$i - 1}-#{'3\\/'}#{$j} {
+        right: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .right-#{$i - 1}-#{'4\\/'}#{$j} {
+        right: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // negative position right
+
+      .-right-#{$i - 1}-#{'1\\/'}#{$j} {
+        right: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .-right-#{$i - 1}-#{'2\\/'}#{$j} {
+        right: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .-right-#{$i - 1}-#{'3\\/'}#{$j} {
+        right: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .-right-#{$i - 1}-#{'4\\/'}#{$j} {
+        right: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // position top
+
+      .top-#{$i - 1}-#{'1\\/'}#{$j} {
+        top: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .top-#{$i - 1}-#{'2\\/'}#{$j} {
+        top: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .top-#{$i - 1}-#{'3\\/'}#{$j} {
+        top: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .top-#{$i - 1}-#{'4\\/'}#{$j} {
+        top: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // negative position top
+
+      .-top-#{$i - 1}-#{'1\\/'}#{$j} {
+        top: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .-top-#{$i - 1}-#{'2\\/'}#{$j} {
+        top: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .-top-#{$i - 1}-#{'3\\/'}#{$j} {
+        top: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .-top-#{$i - 1}-#{'4\\/'}#{$j} {
+        top: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // position bottom
+
+      .bottom-#{$i - 1}-#{'1\\/'}#{$j} {
+        bottom: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .bottom-#{$i - 1}-#{'2\\/'}#{$j} {
+        bottom: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .bottom-#{$i - 1}-#{'3\\/'}#{$j} {
+        bottom: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .bottom-#{$i - 1}-#{'4\\/'}#{$j} {
+        bottom: #{($i - 1) + math.div(4, $j)}rem;
+      }
+
+      // negative position bottom
+
+      .-bottom-#{$i - 1}-#{'1\\/'}#{$j} {
+        bottom: #{($i - 1) + math.div(1, $j)}rem;
+      }
+
+      .-bottom-#{$i - 1}-#{'2\\/'}#{$j} {
+        bottom: #{($i - 1) + math.div(2, $j)}rem;
+      }
+
+      .-bottom-#{$i - 1}-#{'3\\/'}#{$j} {
+        bottom: #{($i - 1) + math.div(3, $j)}rem;
+      }
+
+      .-bottom-#{$i - 1}-#{'4\\/'}#{$j} {
+        bottom: #{($i - 1) + math.div(4, $j)}rem;
+      }
+    }
+  }
+}

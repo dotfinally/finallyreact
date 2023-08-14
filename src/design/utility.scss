@@ -1,0 +1,314 @@
+/* ------------------------------ */
+/* -- MORE HEIGHTS AND WIDTHS --- */
+/* ------------------------------ */
+.h-full {
+  height: 100%;
+}
+
+.h-fit {
+  height: fit-content;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.w-fit,
+.w-fit-content {
+  width: fit-content;
+}
+
+.w-screen {
+  width: 100vw;
+}
+
+.w-inherit {
+  width: inherit;
+}
+
+.h-inherit {
+  height: inherit;
+}
+
+/* ----------------- */
+/* -- VISIBILITY --- */
+/* ----------------- */
+.visible {
+  visibility: visible;
+}
+
+.hover\:visible {
+  &:hover {
+    visibility: visible;
+  }
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.hover\:invisible {
+  &:hover {
+    visibility: hidden;
+  }
+}
+
+/* ----------------- */
+/* -- BORDERS ------ */
+/* ----------------- */
+@for $i from 0 to 26 {
+  .border-#{$i} {
+    border-width: #{$i}px;
+    border-style: solid;
+  }
+
+  .hover\:border-#{$i} {
+    &:hover {
+      border-width: #{$i}px;
+      border-style: solid;
+    }
+  }
+
+  .border-t-#{$i} {
+    border-top-width: #{$i}px;
+    border-top-style: solid;
+  }
+
+  .hover\:border-t-#{$i} {
+    &:hover {
+      border-top-width: #{$i}px;
+      border-top-style: solid;
+    }
+  }
+
+  .border-r-#{$i} {
+    border-right-width: #{$i}px;
+    border-right-style: solid;
+  }
+
+  .hover\:border-r-#{$i} {
+    &:hover {
+      border-right-width: #{$i}px;
+      border-right-style: solid;
+    }
+  }
+
+  .border-b-#{$i} {
+    border-bottom-width: #{$i}px;
+    border-bottom-style: solid;
+  }
+
+  .hover\:border-b-#{$i} {
+    &:hover {
+      border-bottom-width: #{$i}px;
+      border-bottom-style: solid;
+    }
+  }
+
+  .border-l-#{$i} {
+    border-left-width: #{$i}px;
+    border-left-style: solid;
+  }
+
+  .hover\:border-l-#{$i} {
+    &:hover {
+      border-left-width: #{$i}px;
+      border-left-style: solid;
+    }
+  }
+}
+
+.border-solid {
+  border-style: solid;
+}
+
+.hover\:border-solid {
+  &:hover {
+    border-style: solid;
+  }
+}
+
+.border-t-solid {
+  border-top-style: solid;
+}
+
+.hover\:border-t-solid {
+  &:hover {
+    border-top-style: solid;
+  }
+}
+
+.border-r-solid {
+  border-right-style: solid;
+}
+
+.hover\:border-r-solid {
+  &:hover {
+    border-right-style: solid;
+  }
+}
+
+.border-b-solid {
+  border-bottom-style: solid;
+}
+
+.hover\:border-b-solid {
+  &:hover {
+    border-bottom-style: solid;
+  }
+}
+
+.border-l-solid {
+  border-left-style: solid;
+}
+
+.hover\:border-l-solid {
+  &:hover {
+    border-left-style: solid;
+  }
+}
+
+/* --------------------- */
+/* -- BORDERS RADIUS --- */
+/* --------------------- */
+@for $i from 0 to 26 {
+  .rounded-#{$i} {
+    border-radius: #{$i}rem;
+  }
+
+  .hover\:rounded-#{$i} {
+    &:hover {
+      border-radius: #{$i}rem;
+    }
+  }
+
+  .rounded-t-#{$i} {
+    border-top-left-radius: #{$i}rem;
+    border-top-right-radius: #{$i}rem;
+  }
+
+  .hover\:rounded-t-#{$i} {
+    &:hover {
+      border-top-left-radius: #{$i}rem;
+      border-top-right-radius: #{$i}rem;
+    }
+  }
+
+  .rounded-r-#{$i} {
+    border-top-right-radius: #{$i}rem;
+    border-bottom-right-radius: #{$i}rem;
+  }
+
+  .hover\:rounded-r-#{$i} {
+    &:hover {
+      border-top-right-radius: #{$i}rem;
+      border-bottom-right-radius: #{$i}rem;
+    }
+  }
+
+  .rounded-b-#{$i} {
+    border-bottom-left-radius: #{$i}rem;
+    border-bottom-right-radius: #{$i}rem;
+  }
+
+  .hover\:rounded-b-#{$i} {
+    &:hover {
+      border-bottom-left-radius: #{$i}rem;
+      border-bottom-right-radius: #{$i}rem;
+    }
+  }
+
+  .rounded-l-#{$i} {
+    border-top-left-radius: #{$i}rem;
+    border-bottom-left-radius: #{$i}rem;
+  }
+
+  .hover\:rounded-l-#{$i} {
+    &:hover {
+      border-top-left-radius: #{$i}rem;
+      border-bottom-left-radius: #{$i}rem;
+    }
+  }
+}
+
+// border radius 50%
+.rounded-#{'1\\/2'} {
+  border-radius: 50%;
+}
+
+.rounded-#{'1\\/5'} {
+  border-radius: 0.2rem;
+}
+
+.content-empty {
+  content: '';
+}
+
+/* ----------------- */
+/* -- CURSORS ------ */
+/* ----------------- */
+.cursor-auto {
+  cursor: auto;
+}
+
+.cursor-default {
+  cursor: default;
+}
+
+.cursor-pointer,
+.pointer {
+  cursor: pointer;
+}
+
+.cursor-move {
+  cursor: move;
+}
+
+.cursor-not-allowed,
+.not-allowed {
+  cursor: not-allowed;
+}
+
+.cursor-none {
+  cursor: none;
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+/* ----------------- */
+/* -- SCROLL ------- */
+/* ----------------- */
+.scroll {
+  overflow: scroll;
+}
+
+.scroll-x {
+  overflow-x: scroll;
+}
+
+.scroll-y {
+  overflow-y: scroll;
+}
+
+.scroll-x-hidden {
+  overflow-x: hidden;
+}
+
+.scroll-y-hidden {
+  overflow-y: hidden;
+}
+
+/* ----------------- */
+/* -- Z-INDEX ------ */
+/* ----------------- */
+@for $i from 0 to 1001 {
+  .z-#{$i} {
+    z-index: #{$i};
+  }
+}

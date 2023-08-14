@@ -1,0 +1,178 @@
+/* ----------------- */
+/* -- POSITION ----- */
+/* ----------------- */
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.fixed {
+  position: fixed;
+}
+
+/* ----------------- */
+/* -- FLOAT -------- */
+/* ----------------- */
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+/* ----------------- */
+/* -- JUSTIFY ------ */
+/* ----------------- */
+.justify-start,
+.justify-content-start {
+  justify-content: flex-start;
+}
+
+.justify-center,
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-end,
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+.justify-between,
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-around,
+.justify-content-around {
+  justify-content: space-around;
+}
+
+/* ----------------- */
+/* -- ALIGN ITEMS -- */
+/* ----------------- */
+.align-items-start,
+.align-start {
+  align-items: flex-start;
+}
+
+.align-items-center,
+.align-center {
+  align-items: center;
+}
+
+.align-items-end,
+.align-end {
+  align-items: flex-end;
+}
+
+.align-items-baseline,
+.align-baseline {
+  align-items: baseline;
+}
+
+/* -------------------- */
+/* -- ALIGN CONTENTS -- */
+/* -------------------- */
+.align-content-start {
+  align-content: flex-start;
+}
+
+.align-content-center {
+  align-content: center;
+}
+
+.align-content-end {
+  align-content: flex-end;
+}
+
+.align-content-between {
+  align-content: space-between;
+}
+
+.align-content-around {
+  align-content: space-around;
+}
+
+/* -------------------- */
+/* -- ALIGN SELF ------ */
+/* -------------------- */
+.align-self-start {
+  align-self: flex-start;
+}
+
+.align-self-center {
+  align-self: center;
+}
+
+.align-self-end {
+  align-self: flex-end;
+}
+
+.align-self-baseline {
+  align-self: baseline;
+}
+
+/* -------------------- */
+/* -- FLEX DIRECTIONS --*/
+/* -------------------- */
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-column-reverse {
+  flex-direction: column-reverse;
+}
+
+/* -------------------- */
+/* -- FLEX WRAP --------*/
+/* -------------------- */
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.flex-wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+/* -------------------- */
+/* -- FLEX CONVENIENCE -*/
+/* -------------------- */
+.flex-multi {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+/* -------------------- */
+/* -- VERTICAL ALIGN----*/
+/* -------------------- */
+
+.vertical-align-top {
+  vertical-align: top;
+}
+
+.vertical-align-middle {
+  vertical-align: middle;
+}
+
+.vertical-align-bottom {
+  vertical-align: bottom;
+}
