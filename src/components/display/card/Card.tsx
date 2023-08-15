@@ -22,10 +22,10 @@ const omitValues = [
   'headerProps',
   'rounded',
   'shadow',
+  'showHoverShadow',
   'simple',
   'title',
-  'well',
-  'showHoverShadow'
+  'well'
 ];
 
 /**
