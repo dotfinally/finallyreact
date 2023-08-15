@@ -31,6 +31,7 @@ export function Row(props: RowProps) {
         custom: props.className
       })}
       tabIndex={props.tabIndex ?? -1}
+      role={props.role ?? 'row'}
     >
       {props.children}
     </div>

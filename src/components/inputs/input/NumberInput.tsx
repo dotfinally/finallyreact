@@ -265,7 +265,7 @@ export function NumberInput(props: NumberInputProps) {
           custom: props.className,
           active: !!formattedValue
         })}
-        role="input"
+        role={props.role ?? 'input'}
         aria-labelledby={props['aria-labelledby'] ?? props.leftLabelProps?.id ?? props.rightLabelProps?.id ?? undefined}
         aria-disabled={props['aria-disabled'] ?? props.disabled ?? props.readOnly}
         aria-valuemin={props['aria-valuemin'] ?? props.min}

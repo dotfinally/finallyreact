@@ -603,7 +603,7 @@ export function Datepicker(props: DatepickerProps) {
           props.inputProps?.onKeyDown?.(e);
         }
       }}
-      role="application"
+      role={props.role ?? 'application'}
       aria-expanded={isOpen}
       aria-disabled={props.disabled}
       name={props.name}

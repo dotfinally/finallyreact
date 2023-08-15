@@ -185,6 +185,7 @@ export function Form(props: FormProps) {
       ref={formRef}
       onChange={onChange}
       onSubmit={onSubmit}
+      role={props.role ?? 'form'}
     >
       {props.children}
     </form>

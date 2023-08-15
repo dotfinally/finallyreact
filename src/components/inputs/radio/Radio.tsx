@@ -177,7 +177,7 @@ export function Radio(props: RadioProps) {
         props.simple && 'simple',
         props.className
       )}
-      role="radio"
+      role={props.role ?? 'radio'}
     >
       {getOptions()}
     </div>

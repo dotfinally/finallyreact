@@ -261,7 +261,7 @@ export function Sidenav(props: SidenavProps) {
         isMobile,
         open
       })}
-      role="navigation"
+      role={props.role ?? 'navigation'}
       aria-label={props['aria-label'] ?? 'side navigation'}
     >
       {!isMobile && !props.sticky && (

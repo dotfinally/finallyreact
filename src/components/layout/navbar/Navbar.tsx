@@ -194,7 +194,7 @@ export function Navbar(props: NavbarProps) {
         isDefault: !props.customContent,
         custom: props.className
       })}
-      role="navigation"
+      role={props.role ?? 'navigation'}
       aria-label={props['aria-label'] ?? 'top navigation'}
     >
       {props.customContent ? (
