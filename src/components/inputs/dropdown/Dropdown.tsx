@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect, useMemo, useState } from 'react';
-import { classnames, dispatchChangeValue, getFinallyConfig, omit, usePopover } from '@util/index';
+import { dispatchChangeValue, getFinallyConfig, omit, usePopover } from '@util/index';
 
 import TextInput, { TextInputProps } from '../input/TextInput';
 import { getClassName } from './DropdownStyles';

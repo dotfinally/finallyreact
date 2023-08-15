@@ -6,7 +6,7 @@ import Sidenav, { SidenavProps } from '../sidenav/Sidenav';
 import { getClassName } from './LayoutStyles';
 
 export interface LayoutProps extends HTMLAttributes<any> {
-  contentClassName?: string;
+  contentProps?: HTMLAttributes<any>;
   fullHeight?: boolean;
   navbarProps?: NavbarProps;
   showNavbar?: boolean;
@@ -16,7 +16,7 @@ export interface LayoutProps extends HTMLAttributes<any> {
   footer?: any;
 }
 
-const omitValues = ['contentClassName', 'fullHeight', 'navbarProps', 'showNavbar', 'showSidenav', 'sidenavProps'];
+const omitValues = ['contentProps', 'fullHeight', 'navbarProps', 'showNavbar', 'showSidenav', 'sidenavProps'];
 
 /**
  * Layout component for easily creating an app layout with navbar, sidenav and footer.
@@ -25,12 +25,13 @@ const omitValues = ['contentClassName', 'fullHeight', 'navbarProps', 'showNavbar
 export function Layout(props: LayoutProps) {
   const content = (
     <div
+      {...(props.contentProps || {})}
       className={getClassName({
         name: 'finallyreact-layout__layout-content',
         props,
         withNavbar: !!(props.showNavbar && props.navbarProps?.sticky),
         withNavbarFull: props.fullHeight,
-        custom: props.contentClassName
+        custom: props.contentProps?.className
       })}
     >
       {props.children}
@@ -52,11 +53,12 @@ export function Layout(props: LayoutProps) {
 
       {props.showSidenav ? (
         <div
+          {...(props.contentProps || {})}
           className={getClassName({
             name: 'finallyreact-layout__content-with-sidenav',
             props,
             sideNavFull: props.fullHeight,
-            custom: props.contentClassName
+            custom: props.contentProps?.className
           })}
         >
           <Sidenav {...props.sidenavProps} withNavbar={props.showNavbar && props.navbarProps?.sticky} />
