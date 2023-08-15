@@ -7,7 +7,8 @@ export function getClassName({
   custom,
   simple,
   show,
-  location
+  location,
+  additionalClassName
 }: {
   name: string;
   props: CopyWrapperProps;
@@ -15,6 +16,7 @@ export function getClassName({
   simple?: boolean;
   show?: boolean;
   location?: string;
+  additionalClassName?: string;
 }) {
   let value = name;
 
@@ -33,11 +35,11 @@ export function getClassName({
       }
 
       if (location === 'top-left') {
-        value += ' left-1';
+        value += ' right-1/10';
       }
 
       if (location === 'bottom-right') {
-        value += ' left-1 finallyreact-copy-wrapper-top-margin';
+        value += ' finallyreact-copy-wrapper-top-margin';
       }
 
       if (location === 'bottom-left') {
@@ -50,5 +52,11 @@ export function getClassName({
     value += ` ${props.color || 'black'}`;
   }
 
-  return filterClassName(value, custom);
+  let filtered = filterClassName(value, custom);
+
+  if (additionalClassName) {
+    filtered += ` ${additionalClassName}`;
+  }
+
+  return filtered;
 }

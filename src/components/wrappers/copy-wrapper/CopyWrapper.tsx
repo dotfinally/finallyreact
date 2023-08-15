@@ -76,7 +76,7 @@ export function CopyWrapper(props: CopyWrapperProps) {
         ...props.popProps?.tooltipProps,
         className:
           props.popProps?.tooltipProps?.className ||
-          (!props.simple &&
+          (!simple &&
             getClassName({
               name: 'finallyreact-copy-pop__default-tooltip',
               props
@@ -87,7 +87,7 @@ export function CopyWrapper(props: CopyWrapperProps) {
       show={showPop}
       text={props.popProps?.text || 'Copied to Clipboard!'}
       location={props.popProps?.location || triggerLocation}
-      simple={props.simple}
+      simple={simple}
     >
       {props.popProps?.children || (
         <div
@@ -97,14 +97,15 @@ export function CopyWrapper(props: CopyWrapperProps) {
             show: props.showIcon || (focused && props.showIcon !== false),
             props,
             simple,
-            custom: props.iconProps?.className
+            custom: props.iconProps?.className,
+            additionalClassName: simple ? 'simple' : ''
           })}
           onClick={onClickCopy}
           tabIndex={props.iconProps?.tabIndex ?? 0}
           onKeyDown={onKeyDown}
           aria-label="Click to copy to clipboard"
         >
-          {props.simple ? 'Copy' : ''}
+          {simple ? 'Copy' : ''}
         </div>
       )}
     </Pop>
