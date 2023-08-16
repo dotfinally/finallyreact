@@ -231,7 +231,6 @@ export function Navbar(props: NavbarProps) {
                   name: 'finallyreact-navbar__left',
                   props
                 })}
-                aria-label="navbar left"
               >
                 {props.leftContent}
               </div>
@@ -243,7 +242,6 @@ export function Navbar(props: NavbarProps) {
                   name: 'finallyreact-navbar__center',
                   props
                 })}
-                aria-label="navbar center"
               >
                 {props.centerContent}
               </div>

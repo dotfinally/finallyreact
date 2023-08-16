@@ -213,7 +213,6 @@ export function TextInput(props: TextInputProps) {
           custom: props.className,
           active: !!value
         })}
-        role={props.role ?? 'input'}
         aria-labelledby={props['aria-labelledby'] ?? props.leftLabelProps?.id ?? props.rightLabelProps?.id ?? undefined}
         aria-disabled={props['aria-disabled'] ?? props.disabled ?? props.readOnly}
         tabIndex={props.tabIndex ?? (props.disabled || props.readOnly) ? 0 : undefined}

@@ -330,6 +330,7 @@ export function Sidenav(props: SidenavProps) {
             props
           })}
           onClick={() => setOpen(!open)}
+          aria-label="toggle side navigation"
         >
           <span
             className={getClassName({

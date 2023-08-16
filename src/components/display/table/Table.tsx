@@ -108,7 +108,6 @@ export function Table(props: TableProps) {
           custom: props.headerRowProps?.className
         })}
         tabIndex={props.headerRowProps?.tabIndex || 0}
-        role="row"
       >
         {headers}
       </tr>
@@ -171,7 +170,6 @@ export function Table(props: TableProps) {
           key={`finallyreact-table-row-${index}`}
           aria-rowindex={index + 1}
           aria-label={props.rowProps?.['aria-label'] || `Row ${index + 1}`}
-          role="row"
           tabIndex={props.rowProps?.tabIndex || 0}
         >
           {rowData}
