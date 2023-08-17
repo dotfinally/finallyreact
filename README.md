@@ -125,3 +125,9 @@ Technical requirements:
 ```
 
 - Any pull requests that do not follow the above guidelines and description template will be closed.
+
+## FAQ
+
+- Importing `finallyreact/main.css` in my NextJS _app.js file isn't working
+  - Try importing it in the app.scss file instead, with `@import '~finallyreact/main.css';`
+
