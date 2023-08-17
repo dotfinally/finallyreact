@@ -117,9 +117,11 @@ Technical requirements:
 ```
 ## Description and purpose of change
 
-## Related issue(s)
+## Related Issue(s) in GitHub
 
-## Screenshots, GIFs, or videos (required)
+## Does this PR introduce any breaking changes to previous versions?
+
+## Screenshots, GIFs, or videos of changes (required)
 ```
 
 - Any pull requests that do not follow the above guidelines and description template will be closed.

@@ -81,7 +81,6 @@ export function TextInput(props: TextInputProps) {
 
   const [value, setValue] = useState<string>(props.value ?? '');
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const floatingPlaceholder = props.floatingPlaceholder == null ? true : props.floatingPlaceholder;
 
   useEffect(() => {
     if (props.value == null && props.initialValue != null) {
@@ -185,6 +184,9 @@ export function TextInput(props: TextInputProps) {
     }
   }
 
+  const ariaLabelledBy = props['aria-labelledby'] ?? props.leftLabelProps?.id ?? props.rightLabelProps?.id ?? undefined;
+  const ariaLabel = ariaLabelledBy ? undefined : props['aria-label'] ?? 'Text Input';
+
   return (
     <>
       {props.leftIcon && props.leftIcon}
@@ -213,7 +215,6 @@ export function TextInput(props: TextInputProps) {
           custom: props.className,
           active: !!value
         })}
-        aria-labelledby={props['aria-labelledby'] ?? props.leftLabelProps?.id ?? props.rightLabelProps?.id ?? undefined}
         aria-disabled={props['aria-disabled'] ?? props.disabled ?? props.readOnly}
         tabIndex={props.tabIndex ?? (props.disabled || props.readOnly) ? 0 : undefined}
       >
@@ -247,6 +248,8 @@ export function TextInput(props: TextInputProps) {
             placeholder={props.simple ? props.placeholder : undefined}
             type={props.type === 'password' && !showPassword ? 'password' : 'text'}
             value={value}
+            aria-labelledby={ariaLabelledBy}
+            aria-label={ariaLabel}
           />
         )}
 

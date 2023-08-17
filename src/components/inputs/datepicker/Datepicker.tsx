@@ -662,7 +662,7 @@ export function Datepicker(props: DatepickerProps) {
         }}
         value={props.value || convertDateWithMask(selectedYear, selectedMonth, selectedDay)}
         aria-label={
-          props['aria-label'] ??
+          props.inputProps?.['aria-label'] ??
           `Datepicker, year: ${selectedYear}, month: ${selectedMonth}, day: ${selectedDay}, click escape to close or tab to select a different date`
         }
       />
