@@ -63,17 +63,19 @@ export default {
 
 ## License
 
-FinallyReact was created by and is maintained by `dotfinally, LLC`. It is open-source and available under the MIT license, which means anyone can use FinallyReact for free, for any purpose. Read the full license text in the LICENSE.txt file in the repo.
+Copyright © 2023 `dotfinally, LLC`
+
+Available under the MIT license, which means anyone can use FinallyReact for free, for any purpose. Read the full license text in the LICENSE.txt file in the repo.
 
 FinallyReact is not affiliated with nor endorsed by the ReactJS team or Meta Platforms, Inc.
 
 ## Contribute
 
-Anyone is welcome to see source code, contribute new code, give suggestions for improvements, request features, or report issues. If you find a problem or have an idea for a new feature, please create an Issue on GitHub.
+Anyone is welcome to see source code, contribute new code, give suggestions for improvements, request features, or report issues. If you find a problem or have an idea for a new feature, please create an Issue here on [GitHub](https://github.com/dotfinally/finallyreact).
 
 ### Issues
 
-FinallyReact is managed by a very small team. To make their lives easier, please follow the below guidelines for every Github Issue created:
+FinallyReact is managed by a very small team. To make their lives easier, please follow the below guidelines for every GitHub Issue created:
 
 - Search for existing Issues before creating a new one
 - Use a clear and descriptive title for the Issue to identify the problem
@@ -85,12 +87,12 @@ FinallyReact is managed by a very small team. To make their lives easier, please
 ```
 ## Description of defect or feature request
 
-(if defect):
-## Steps to reproduce
-
 ## Expected behavior
 
+(if defect):
 ## Actual behavior
+
+## Steps to reproduce
 
 ## Your environment (OS, browser, Node version, etc.)
 ```
