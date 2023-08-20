@@ -138,6 +138,7 @@ Pull Requests must follow the below guidelines:
 - Provide a link to any related GitHub Issues
 - Describe why this pull request is necessary - what does it solve?
 - Include screenshots, GIFs, or videos in the pull request to illustrate any UI/UX changes (required)
+- By creating a pull request, you acknowledge you have full authority to submit its code and you agree to submit it as part of the MIT license
 
 Technical requirements:
 
