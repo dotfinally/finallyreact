@@ -7,9 +7,6 @@
     "type": "git",
     "url": "https://github.com/dotfinally/finallyreact"
   },
-  "files": [
-    "lib"
-  ],
   "scripts": {
     "build": "npm run test && webpack",
     "build:watch": "webpack --watch",
