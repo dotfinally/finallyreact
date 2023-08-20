@@ -8,8 +8,8 @@ FinallyReact is a React design library created with flexibility and usability in
 
 - A full design and component library for your React application
 - Easily remove default styles on any component so you can style it with your own brand
-- A comprehensive set of utility class shortcuts, for faster styling
 - Your classnames take precedence over component styling
+- A comprehensive set of utility class shortcuts, for faster styling
 - Accessibility focused and tested
 
 **`FinallyReact is currently in beta (pre version 1) and not recommended for production use yet`**
@@ -17,6 +17,12 @@ FinallyReact is a React design library created with flexibility and usability in
 ## Documentation
 
 You can find examples of all component, design, and utility elements on the [FinallyReact website](https://finallyreact.com).
+
+## To use in your project
+
+- `npm install finallyreact`
+- (optional) create a config file in the root of your project (see below)
+- (optional) use PurgeCSS to reduce the size of the CSS bundle (see below)
 
 ### Config (optional)
 
@@ -38,14 +44,30 @@ export default {
 }
 ```
 
+### PurgeCSS (optional)
+To reduce the size of the CSS bundle, you can use PostCSS and PurgeCSS. Below is an example configuration for PostCSS:
+
+```js
+if (process.env.NODE_ENV === 'production') {
+  plugins['@fullhuman/postcss-purgecss'] = {
+    content: ['./**/*.js', './**/*.jsx', './**/*.ts', './**/*.tsx', './**/*.html'],
+    defaultExtractor: (content) => {
+      const matches = content.match(/[\w-/:]+(?<!:)/g) || [];
+      return matches.concat(matches.map((match) => match.replace(/\//g, '\\/')));
+    }
+  };
+}
+```
+
 ## Development
 
 ### Prerequisites
 
 - NodeJS 18.16.1 or higher
 - NPM 9.7.2 or higher
+- React 16.8 or higher
 
-(older versions might work but are not tested)
+(older versions of Node might work but are not tested)
 
 ### Setup
 
@@ -104,15 +126,15 @@ FinallyReact is managed by a very small team. To make their lives easier, please
 Pull Requests must follow the below guidelines:
 
 - Use a clear and descriptive title for the pull request
-- Provide a link to any related Issues
-- Comment why this pull request is necessary - what does it solve?
-- Include screenshots, GIFs, or videos in the pull request to illustrate any UI/UX changes
+- Provide a link to any related GitHub Issues
+- Describe why this pull request is necessary - what does it solve?
+- Include screenshots, GIFs, or videos in the pull request to illustrate any UI/UX changes (required)
 
 Technical requirements:
 
 - Must pass all tests
-- Must be formatted with Prettier config settings
 - Must NOT use any external libraries except for React and React DOM
+- Must be formatted with Prettier config settings
 
 #### Pull Request Description Template
 
@@ -130,6 +152,8 @@ Technical requirements:
 
 ## FAQ
 
-- Importing `finallyreact/main.css` in my NextJS _app.js file isn't working
-  - Try importing it in the app.scss file instead, with `@import '~finallyreact/main.css';`
+- Importing `finallyreact/main.css` in my NextJS _app.js file isn't applying styles correctly
+  - Try importing it in a separate .scss file instead, with `@import '~finallyreact/main.css';`
 
+- The build size of my project is too large after including FinallyReact styles
+  - Try using PurgeCSS to reduce the size of the CSS bundle (see steps above)
