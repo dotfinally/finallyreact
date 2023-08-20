@@ -21,6 +21,8 @@ You can find examples of all component, design, and utility elements on the [Fin
 ## To use in your project
 
 - `npm install finallyreact`
+- Import FinallyReact CSS in your app, most likely in a top level app file: `import 'finallyreact/main.css'`
+- Import components as needed, for example: `import { Column, Row, Card } from 'finallyreact'`
 - (optional) create a config file in the root of your project (see below)
 - (optional) use PurgeCSS to reduce the size of the CSS bundle (see below)
 
@@ -69,7 +71,7 @@ FinallyReact is not affiliated with nor endorsed by the ReactJS team or Meta Pla
 
 ## Development
 
-If you'd like to run FinallyReact locally on your computer to make or test changes
+If you'd like to run FinallyReact locally on your computer to make or test changes:
 
 ### Prerequisites
 
@@ -95,7 +97,7 @@ If you'd like to run FinallyReact locally on your computer to make or test chang
 
 ## Contribute
 
-Anyone is welcome to see source code, contribute new code, give suggestions for improvements, request features, or report issues. If you find a problem or have an idea for a new feature, please create an Issue on [GitHub](https://github.com/dotfinally/finallyreact).
+Anyone is welcome to see source code, contribute new code, give suggestions for improvements, request new features, or report issues. If you find a problem or have an idea for a new feature, please create an Issue on [GitHub](https://github.com/dotfinally/finallyreact).
 
 ### Issues
 
@@ -157,10 +159,10 @@ Technical requirements:
 
 - Any pull requests that do not follow the above guidelines and description template will be closed.
 
-## FAQ
-
-- Importing `finallyreact/main.css` in my NextJS _app.js file isn't applying styles correctly
-  - Try importing it in a separate .scss file instead, with `@import '~finallyreact/main.css';`
+## FAQ and Troubleshooting
 
 - The build size of my project is too large after including FinallyReact styles
   - Try using PurgeCSS to reduce the size of the CSS bundle (see steps above)
+
+- Importing `finallyreact/main.css` in my NextJS _app.js file isn't applying styles correctly
+  - Try importing it in a separate .scss file instead, with `@import '~finallyreact/main.css';`
