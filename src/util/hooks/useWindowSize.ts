@@ -3,7 +3,7 @@ import { getBreakpoint } from '../helpers/getBreakpoint';
 import { debounce } from '../helpers/debounce';
 
 export function useWindowSize() {
-  const [size, setSize] = useState<[number, number, string, boolean]>([0, 0, '', false]);
+  const [size, setSize] = useState<[number, number, string, boolean]>([0, 0, '', true]);
 
   useEffect(() => {
     function resize() {
