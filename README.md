@@ -45,7 +45,7 @@ export default {
 ```
 
 ### PurgeCSS (optional)
-To reduce the size of the CSS bundle, you can use PostCSS and PurgeCSS. Below is an example configuration for PostCSS:
+To reduce the size of the CSS bundle, you can use PostCSS and PurgeCSS. Below is example configuration to add to PostCSS:
 
 ```js
 if (process.env.NODE_ENV === 'production') {
@@ -59,7 +59,17 @@ if (process.env.NODE_ENV === 'production') {
 }
 ```
 
+## License
+
+Copyright © 2023 `dotfinally, LLC`
+
+Available under the MIT license, which means anyone can use FinallyReact for free, for any purpose. Read the full license text in the LICENSE.txt file in the repo.
+
+FinallyReact is not affiliated with nor endorsed by the ReactJS team or Meta Platforms, Inc.
+
 ## Development
+
+If you'd like to run FinallyReact locally on your computer to make or test changes
 
 ### Prerequisites
 
@@ -83,17 +93,9 @@ if (process.env.NODE_ENV === 'production') {
 
 - `npm run test`
 
-## License
-
-Copyright © 2023 `dotfinally, LLC`
-
-Available under the MIT license, which means anyone can use FinallyReact for free, for any purpose. Read the full license text in the LICENSE.txt file in the repo.
-
-FinallyReact is not affiliated with nor endorsed by the ReactJS team or Meta Platforms, Inc.
-
 ## Contribute
 
-Anyone is welcome to see source code, contribute new code, give suggestions for improvements, request features, or report issues. If you find a problem or have an idea for a new feature, please create an Issue here on [GitHub](https://github.com/dotfinally/finallyreact).
+Anyone is welcome to see source code, contribute new code, give suggestions for improvements, request features, or report issues. If you find a problem or have an idea for a new feature, please create an Issue on [GitHub](https://github.com/dotfinally/finallyreact).
 
 ### Issues
 
@@ -102,7 +104,6 @@ FinallyReact is managed by a very small team. To make their lives easier, please
 - Search for existing Issues before creating a new one
 - Use a clear and descriptive title for the Issue to identify the problem
 - Describe the exact steps which reproduce the problem in as many details as possible
-
 
 #### Issue Template
 
@@ -117,6 +118,10 @@ FinallyReact is managed by a very small team. To make their lives easier, please
 ## Steps to reproduce
 
 ## Your environment (OS, browser, Node version, etc.)
+
+(if feature request):
+## Will you be working on this feature yourself? (to avoid duplicate work by multiple people)
+
 ```
 
 - Any issues that do not follow the above guidelines and template will be closed.
@@ -125,6 +130,8 @@ FinallyReact is managed by a very small team. To make their lives easier, please
 
 Pull Requests must follow the below guidelines:
 
+- Create a new branch from the `dev` branch for your changes
+- Point your PR back to `dev`
 - Use a clear and descriptive title for the pull request
 - Provide a link to any related GitHub Issues
 - Describe why this pull request is necessary - what does it solve?
