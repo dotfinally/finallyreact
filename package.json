@@ -1,12 +1,13 @@
 {
   "name": "finallyreact",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple and customizable design library for React, including a full set of component, style, and utility elements.",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/dotfinally/finallyreact"
   },
+  "homepage": "https://finallyreact.com",
   "scripts": {
     "build": "npm run test && webpack",
     "build:watch": "webpack --watch",
