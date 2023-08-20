@@ -1,11 +1,11 @@
 {
   "name": "finallyreact",
   "version": "0.0.1",
-  "description": "A simple and customizable design library for React, with components, styles, and utility classes",
+  "description": "A simple and customizable design library for React, including a full set of component, style, and utility elements.",
   "main": "src/index.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/machinellama/finallyreact"
+    "url": "https://github.com/dotfinally/finallyreact"
   },
   "files": [
     "lib"
