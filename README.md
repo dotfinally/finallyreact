@@ -2,7 +2,7 @@
 
 ### Where simplicity meets functionality
 
-Version 0.0.1
+[![npm](https://img.shields.io/npm/v/finallyreact.svg?color=005711)](https://www.npmjs.com/package/finallyreact)
 
 FinallyReact is a React design library created with flexibility and usability in mind.
 
