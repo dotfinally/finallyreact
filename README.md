@@ -43,10 +43,11 @@ export default {
     xxl: 2400
   },
   simple: false
-}
+};
 ```
 
 ### PurgeCSS (optional)
+
 To reduce the size of the CSS bundle, you can use PostCSS and PurgeCSS. Below is example configuration to add to PostCSS:
 
 ```js
@@ -163,7 +164,12 @@ Technical requirements:
 ## FAQ and Troubleshooting
 
 - The build size of my project is too large after including FinallyReact styles
+
   - Try using PurgeCSS to reduce the size of the CSS bundle (see steps above)
 
-- Importing `finallyreact/main.css` in my NextJS _app.js file isn't applying styles correctly
+- Importing `finallyreact/main.css` in my NextJS \_app.js file isn't applying styles correctly
+
   - Try importing it in a separate .scss file instead, with `@import '~finallyreact/main.css';`
+
+- Why are most component styles written in TS files instead of directly in SASS?
+  - The biggest issue with having all styles in SASS/CSS is overriding them with custom classes. You may have experienced the issue with many other React component libraries, which are difficult to customize if you use your own classes. This often leads to inspecting the component to find the exact, complicated CSS structure to target. FinallyReact makes this much easier! When you use FinallyReact utility classnames, any default styles in the same 'group' will be removed in favor of your overrides. And on top of that, you can set the `simple` prop for any component to remove all default styles, making it even easier to add your own styles.
