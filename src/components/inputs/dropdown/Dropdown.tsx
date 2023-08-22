@@ -18,7 +18,6 @@ export interface DropdownProps extends HTMLAttributes<any> {
   size?: 'sm' | 'md' | 'lg';
   value?: any;
   select?: boolean;
-  selectProps?: HTMLAttributes<any>;
 }
 
 export interface IDropdownOption extends HTMLAttributes<any> {
@@ -39,8 +38,7 @@ const omitValues = [
   'simple',
   'size',
   'value',
-  'select',
-  'selectProps'
+  'select'
 ];
 
 /**

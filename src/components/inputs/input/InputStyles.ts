@@ -144,8 +144,16 @@ export function getClassName({
         }
       }
 
-      if (name === 'finallyreact-input__clear' || name === 'finallyreact-input__dropdown') {
+      if (name === 'finallyreact-input__clear') {
         value += ' text-sm pt-2/5 pr-3/10 pb-0 pl-3/10';
+      }
+
+      if (name === 'finallyreact-input__dropdown') {
+        if (props.readOnly) {
+          value += ' text-sm pt-1/5 pr-3/10 pb-0 pl-3/10';
+        } else {
+          value += ' text-sm pt-2/5 pr-3/10 pb-0 pl-3/10';
+        }
       }
     }
 
@@ -216,8 +224,16 @@ export function getClassName({
         }
       }
 
-      if (name === 'finallyreact-input__clear' || name === 'finallyreact-input__dropdown') {
+      if (name === 'finallyreact-input__clear') {
         value += ' text-lg pr-2/5 pb-1 pl-2/5';
+      }
+
+      if (name === 'finallyreact-input__dropdown') {
+        value += ' text-lg pr-2/5 pb-1 pl-2/5';
+
+        if (props.readOnly) {
+          value += ' pt-1/10';
+        }
       }
     }
 
