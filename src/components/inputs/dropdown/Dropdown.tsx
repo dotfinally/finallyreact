@@ -199,7 +199,7 @@ export function Dropdown(props: DropdownProps) {
       })}
       onKeyDown={onkeydown}
       ref={popoverRef}
-      role={props.role ?? 'listbox'}
+      role={props.role ?? 'combobox'}
       aria-label={props['aria-label'] ?? props.textInputProps?.placeholder ?? 'Dropdown'}
       aria-expanded={isOpen}
       aria-disabled={props.disabled}
@@ -258,6 +258,8 @@ export function Dropdown(props: DropdownProps) {
             simple,
             custom: props.optionContainerProps?.className
           })}
+          role="listbox"
+          aria-hidden={!isOpen}
         >
           {props.children ? (
             props.children
