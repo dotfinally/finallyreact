@@ -21,8 +21,10 @@ You can find examples of all component, design, and utility elements on the [Fin
 ## To use in your project
 
 - `npm install finallyreact`
-- Import FinallyReact CSS in your app, most likely in a top level app file: `import 'finallyreact/main.css'`
-- Import components as needed, for example: `import { Column, Row, Card } from 'finallyreact'`
+- Import FinallyReact CSS in your app, most likely in a top level app file:
+  - `import 'finallyreact/main.css'`
+- Import components as needed, for example:
+  - `import { Column, Row, Card } from 'finallyreact'`
 - (optional) create a config file in the root of your project (see below)
 - (optional) use PurgeCSS to reduce the size of the CSS bundle (see below)
 
