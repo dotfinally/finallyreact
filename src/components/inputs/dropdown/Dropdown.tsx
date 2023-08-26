@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect, useMemo, useState } from 'react';
-import { dispatchChangeValue, getFinallyConfig, omit, usePopover } from '@util/index';
+import { dispatchChangeValue, getFinallyConfig, omit, usePopover, isEqual } from '@util/index';
 
 import TextInput, { TextInputProps } from '../input/TextInput';
 import { getClassName } from './DropdownStyles';
@@ -52,22 +52,22 @@ export function Dropdown(props: DropdownProps) {
   const simple = finallySimple || props.simple;
 
   const [popoverRef, isOpen, setIsOpen] = usePopover(false, null);
-  const [selectedOption, setSelectedOption] = useState<IDropdownOption | null>(null);
+  const [selectedOption, setSelectedOption] = useState<IDropdownOption | null>(getInitialOption());
   const [options, setOptions] = useState<IDropdownOption[]>(props.options);
-  const [currentOption, setCurrentOption] = useState<IDropdownOption | null>(null);
+  const [currentOption, setCurrentOption] = useState<IDropdownOption | null>(getInitialOption());
 
   useEffect(() => {
-    if (props.value !== selectedOption?.value) {
-      setSelectedOption(props.options?.find((option) => option.value === props.value));
+    if (props.value !== undefined && props.value !== selectedOption?.value) {
+      const valueOption = props.options?.find((option) => option.value === props.value)
+      setSelectedOption(valueOption);
     }
   }, [props.value]);
 
   useEffect(() => {
-    setSelectedOption(getInitialOption());
-  }, []);
-
-  useEffect(() => {
-    setOptions(props.options);
+    if (!isEqual(props.options, options)) {
+      setOptions(props.options);
+      setSelectedOption(getInitialOption());
+    }
   }, [props.options]);
 
   // Emit change event when option is selected (for Form)
@@ -78,13 +78,13 @@ export function Dropdown(props: DropdownProps) {
   }, [selectedOption]);
 
   function getInitialOption() {
-    if (props.initialValue != null) {
-      return props.options?.find((option) => option.value === props.initialValue);
-    } else if (props.value != null) {
-      return props.options?.find((option) => option.value === props.value);
+    let initOption = props.options?.find((option) => option.value === props.initialValue);
+
+    if (!initOption) {
+      initOption = props.options?.find((option) => option.value === props.value);
     }
 
-    return null;
+    return initOption;
   }
 
   function onChange(e: any, option) {
