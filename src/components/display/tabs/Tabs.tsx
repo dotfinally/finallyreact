@@ -95,7 +95,7 @@ export function Tabs(props: TabsProps) {
 
           return (
             <div
-              {...(props.tabProps || {})}
+              {...omit(props.tabProps || {}, omitTabValues)}
               {...(isActive ? props.activeTabProps || {} : {})}
               {...omit(tab, omitTabValues)}
               className={getClassName({

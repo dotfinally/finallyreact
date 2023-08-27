@@ -9,6 +9,7 @@ export * from './helpers/generateId';
 export * from './helpers/getBrowserLocale';
 export * from './helpers/getCurrency';
 export * from './helpers/getFinallyConfig';
+export * from './helpers/isEqual';
 export * from './helpers/isNumber';
 export * from './helpers/omit';
 export * from './helpers/toNumber';
