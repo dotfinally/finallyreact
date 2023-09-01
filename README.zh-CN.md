@@ -16,7 +16,7 @@ FinallyReact 是一个以灵活性和可用性为核心的 React 设计库。
 
 ## 文档
 
-您可以在 [FinallyReact 网站](https://finallyreact.com) 上找到所有组件、设计和实用元素的示例（该网站完全由 FinallyReact 构建）。
+您可以在 [FinallyReact 网站](https://finallyreact.com/zh) 上找到所有组件、设计和实用元素的示例（该网站完全由 FinallyReact 构建）。
 
 ## 在您的项目中使用
 
