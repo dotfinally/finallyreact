@@ -2,7 +2,8 @@
 
 ### Where simplicity meets functionality
 
-[![npm](https://img.shields.io/npm/v/finallyreact.svg?color=005711)](https://www.npmjs.com/package/finallyreact)
+[![npm](https://img.shields.io/npm/v/finallyreact.svg?color=005711)](https://www.npmjs.com/package/finallyreact) [![zh-CN](https://img.shields.io/badge/lang-simplified--chinese-green?color=1a5296)](https://github.com/dotfinally/finallyreact/blob/main/README.zh-CN.md)
+
 
 FinallyReact is a React design library created with flexibility and usability in mind.
 
@@ -63,6 +64,8 @@ if (process.env.NODE_ENV === 'production') {
   };
 }
 ```
+
+Note: Ensure your purgecss content includes `node_modules/finallyreact/index.js`. If your app is in a monorepo, use your path to node_module, for example: `../../node_modules/finallyreact/index.js`
 
 ## License
 
