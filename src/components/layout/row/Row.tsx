@@ -30,7 +30,6 @@ export function Row(props: RowProps) {
         simple,
         custom: props.className
       })}
-      tabIndex={props.tabIndex ?? -1}
     >
       {props.children}
     </div>
