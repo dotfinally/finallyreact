@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from 'react';
-import { omit } from '@util/index';
+import { omit, useWindowSize } from '@util/index';
 
 import Navbar, { NavbarProps } from '../navbar/Navbar';
 import Sidenav, { SidenavProps } from '../sidenav/Sidenav';
@@ -23,6 +23,8 @@ const omitValues = ['contentProps', 'fullHeight', 'navbarProps', 'showNavbar', '
  * @param props LayoutProps
  */
 export function Layout(props: LayoutProps) {
+  const [windowWidth, windowHeight, screenSize, isMobile] = useWindowSize();
+
   const content = (
     <div
       {...(props.contentProps || {})}
@@ -31,7 +33,8 @@ export function Layout(props: LayoutProps) {
         props,
         withNavbar: !!(props.showNavbar && props.navbarProps?.sticky),
         withNavbarFull: props.fullHeight,
-        custom: props.contentProps?.className
+        custom: props.contentProps?.className,
+        isMobile
       })}
     >
       {props.children}

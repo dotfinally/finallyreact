@@ -7,7 +7,8 @@ export function getClassName({
   custom,
   withNavbar,
   withNavbarFull,
-  sideNavFull
+  sideNavFull,
+  isMobile
 }: {
   name: string;
   props: LayoutProps;
@@ -15,11 +16,14 @@ export function getClassName({
   withNavbar?: boolean;
   withNavbarFull?: boolean;
   sideNavFull?: boolean;
+  isMobile?: boolean;
 }) {
   let value = name;
 
   if (name === 'finallyreact-layout__layout-content') {
-    value += ' w-full';
+    if (!isMobile) {
+      value += ' w-full';
+    }
 
     if (withNavbar) {
       value += ' pt-3';

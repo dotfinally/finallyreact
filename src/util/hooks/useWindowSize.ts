@@ -8,7 +8,7 @@ export function useWindowSize() {
   useEffect(() => {
     function resize() {
       const screenSize = getBreakpoint();
-      const isMobile = screenSize === 'xs';
+      const isMobile = screenSize === 'xs' || screenSize === 'sm';
       setSize([window?.innerWidth, window?.innerHeight, screenSize, isMobile]);
     }
     const debouncedResize = debounce(resize, 100);
