@@ -32,7 +32,7 @@ export function getClassName({
     }
 
     if (props.rounded) {
-      value += 'rounded-1';
+      value += ' rounded-1';
     }
 
     if (!simple) {
