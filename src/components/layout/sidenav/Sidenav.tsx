@@ -58,7 +58,7 @@ export function Sidenav(props: SidenavProps) {
   const simple = finallySimple || props.simple;
 
   const [activeKey, setActiveKey] = useState(props.activeKey || '');
-  const [windowWidth, windowHeight, screenSize, isMobile] = useWindowSize();
+  const { isMobile } = useWindowSize();
 
   const [open, setOpen] = useState(!isMobile);
   const [search, setSearch] = useState('');

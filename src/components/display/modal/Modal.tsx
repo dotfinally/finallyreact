@@ -41,7 +41,7 @@ export function Modal(props: ModalProps) {
     return getFinallyConfig().simple;
   }, []);
   const simple = finallySimple || props.simple;
-  const [windowWidth, windowHeight, screenSize, isMobile] = useWindowSize();
+  const { isMobile } = useWindowSize();
 
   const children = useMemo(() => {
     return props.children;

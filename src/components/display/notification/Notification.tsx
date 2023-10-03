@@ -27,7 +27,7 @@ export const Notification = forwardRef((props: NotificationProps, ref) => {
   }, []);
   const simple = finallySimple || props.simple;
 
-  const [windowWidth, windowHeight, screenSize, isMobile] = useWindowSize();
+  const { isMobile } = useWindowSize();
   const [show, setShow] = useState<boolean>();
   const [timeKey, setTimeKey] = useState<number>();
   const [notificationY, setNotificationY] = useState<string>();

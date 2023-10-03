@@ -23,7 +23,7 @@ const omitValues = ['contentProps', 'fullHeight', 'navbarProps', 'showNavbar', '
  * @param props LayoutProps
  */
 export function Layout(props: LayoutProps) {
-  const [windowWidth, windowHeight, screenSize, isMobile] = useWindowSize();
+  const { isMobile } = useWindowSize();
 
   const content = (
     <div

@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect, useState } from 'react';
-import { classnames, omit, useWindowSize } from '@util/index';
+import { omit, useWindowSize } from '@util/index';
 import { Dropdown } from '@components/index';
 
 import { getClassName } from './NavbarStyles';
@@ -55,7 +55,7 @@ const omitValues = [
  */
 export function Navbar(props: NavbarProps) {
   const [activeKey, setActiveKey] = useState(props.activeKey || '');
-  const [windowWidth, windowHeight, screenSize, isMobile] = useWindowSize();
+  const { screenSize, isMobile } = useWindowSize();
   const showMobileDropdown = isMobile || screenSize === 'sm';
 
   useEffect(() => {

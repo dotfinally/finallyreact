@@ -33,7 +33,7 @@ const omitValues = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'verticalAlign', 'horiz
  * @param props ColumnProps
  */
 export function Column(props: ColumnProps) {
-  const [windowWidth, windowHeight, screenSize] = useWindowSize();
+  const { windowWidth, screenSize } = useWindowSize();
 
   // Determine width percent based on input props and current screen width
   const columnSize = useMemo(() => {
