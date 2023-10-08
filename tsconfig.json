@@ -9,7 +9,8 @@
     "outDir": "./lib",
     "paths": {
       "@components/*": ["src/components/*"],
-      "@util/*": ["src/util/*"]
+      "@util/*": ["src/util/*"],
+      "@icons/*": ["src/design/icons/*"],
     },
     "rootDir": "./src",
     "skipLibCheck": true,

@@ -71,7 +71,7 @@ export function getClassName({
 
   if (name === 'finallyreact-accordion__header_arrow') {
     if (!simple) {
-      value += ' border-r-1 border-b-1 w-1/2 h-1/2 vertical-align-middle transition-transform-2-ease-quick mt-1/3';
+      value += ' border-r-2 border-b-2 w-1/2 h-1/2 vertical-align-middle transition-transform-2-ease-quick mt-1/3';
     }
 
     if (open) {
