@@ -12,7 +12,8 @@ export function QuestionMarkIcon(props: Props) {
 
   return (
     <svg
-    tabIndex={0} aria-label="question-mark-icon"
+      tabIndex={0}
+      aria-label="question-mark-icon"
       {...omit(props, ['color'])}
       fill={strokeColor}
       width={props.width || 42}

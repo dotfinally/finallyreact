@@ -9,10 +9,11 @@ interface Props extends HTMLAttributes<SVGElement> {
 
 export function GearIcon(props: Props) {
   const strokeColor = props.color ? `var(--${props.color})` : 'black';
-  
+
   return (
     <svg
-    tabIndex={0} aria-label="gear-icon"
+      tabIndex={0}
+      aria-label="gear-icon"
       {...omit(props, ['color'])}
       fill={strokeColor}
       width={props.width || 42}

@@ -9,10 +9,11 @@ interface Props extends HTMLAttributes<SVGElement> {
 
 export function BellIcon(props: Props) {
   const strokeColor = props.color ? `var(--${props.color})` : 'black';
-  
+
   return (
     <svg
-      tabIndex={0} aria-label="bell-icon"
+      tabIndex={0}
+      aria-label="bell-icon"
       {...omit(props, ['color'])}
       fill={strokeColor}
       width={props.width || 42}

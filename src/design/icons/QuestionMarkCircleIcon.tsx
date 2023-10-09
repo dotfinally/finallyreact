@@ -12,7 +12,8 @@ export function QuestionMarkCircleIcon(props: Props) {
 
   return (
     <svg
-    tabIndex={0} aria-label="question-mark-circle-icon"
+      tabIndex={0}
+      aria-label="question-mark-circle-icon"
       {...omit(props, ['color'])}
       fill="none"
       width={props.width || 42}

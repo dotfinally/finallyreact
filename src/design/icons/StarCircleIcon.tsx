@@ -12,7 +12,8 @@ export function StarCircleIcon(props: Props) {
 
   return (
     <svg
-    tabIndex={0} aria-label="search-circle-icon"
+      tabIndex={0}
+      aria-label="search-circle-icon"
       {...omit(props, ['color'])}
       fill={strokeColor}
       width={props.width || 42}
