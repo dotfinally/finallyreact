@@ -12,6 +12,7 @@ export function GearIcon(props: Props) {
   
   return (
     <svg
+    tabIndex={0} aria-label="gear-icon"
       {...omit(props, ['color'])}
       fill={strokeColor}
       width={props.width || 42}

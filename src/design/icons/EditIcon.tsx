@@ -12,6 +12,7 @@ export function EditIcon(props: Props) {
 
   return (
     <svg
+    tabIndex={0} aria-label="edit-icon"
       {...omit(props, ['color'])}
       fill={strokeColor}
       width={props.width || 42}

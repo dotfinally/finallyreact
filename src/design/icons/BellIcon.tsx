@@ -12,6 +12,7 @@ export function BellIcon(props: Props) {
   
   return (
     <svg
+      tabIndex={0} aria-label="bell-icon"
       {...omit(props, ['color'])}
       fill={strokeColor}
       width={props.width || 42}

@@ -12,6 +12,7 @@ export function UpArrowIcon(props: Props) {
 
   return (
     <svg
+    tabIndex={0} aria-label="up-arrow-icon"
       {...omit(props, ['color'])}
       width={props.width || 42}
       height={props.height || 42}
