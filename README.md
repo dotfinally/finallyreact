@@ -56,7 +56,22 @@ To reduce the size of the CSS bundle, you can use PostCSS and PurgeCSS. Below is
 ```js
 if (process.env.NODE_ENV === 'production') {
   plugins['@fullhuman/postcss-purgecss'] = {
-    content: ['./**/*.js', './**/*.jsx', './**/*.ts', './**/*.tsx', './**/*.html'],
+    content: [
+      './**/*.ts',
+      './**/*.tsx',
+      './**/*.html',
+      '../../node_modules/finallyreact/index.js',
+      '../../libs/ui/src/**/*.ts',
+      '../../libs/ui/src/**/*.tsx',
+    ],
+    safelist: [
+      /lava/,
+      /apple/,
+      /ruby/,
+      /red/,
+      /flamingo/,
+      ...(any other colors you use)
+    ],
     defaultExtractor: (content) => {
       const matches = content.match(/[\w-/:]+(?<!:)/g) || [];
       return matches.concat(matches.map((match) => match.replace(/\//g, '\\/')));

@@ -24,7 +24,7 @@ export function getClassName({
     }
 
     if (name === 'finallyreact-table__header-row_cell') {
-      value += ' table-cell border-b-gray-3 border-b-1 padding-1/2';
+      value += ' table-cell border-b-gray-3 padding-1/2';
     }
 
     if (name === 'finallyreact-table__row') {
@@ -32,7 +32,7 @@ export function getClassName({
     }
 
     if (name === 'finallyreact-table__row_cell') {
-      value += ' table-cell border-b-gray-3 border-b-1 padding-1/2';
+      value += ' table-cell border-b-gray-3 padding-1/2';
     }
 
     if (name === 'finallyreact-table__pagination') {
