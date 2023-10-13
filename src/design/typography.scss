@@ -290,6 +290,26 @@ h6 {
   white-space: pre;
 }
 
+.word-wrap-break {
+  word-wrap: break-word;
+}
+
+.word-wrap-normal {
+  word-wrap: normal;
+}
+
+.word-break {
+  word-break: break-word;
+}
+
+.word-break-all {
+  word-break: break-all;
+}
+
+.word-break-normal {
+  word-break: normal;
+}
+
 /* --------------------- */
 /* -- TEXT ALIGNMENT --- */
 /* --------------------- */

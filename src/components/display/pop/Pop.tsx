@@ -10,9 +10,10 @@ export interface PopWrapperProps extends HTMLAttributes<any> {
   triggerType?: 'click' | 'hover' | 'manual';
   show?: boolean;
   tooltipProps?: HTMLAttributes<any>;
+  showArrow?: boolean;
 }
 
-const omitValues = ['customDisplay', 'location', 'simple', 'text', 'triggerType', 'show', 'tooltipProps'];
+const omitValues = ['customDisplay', 'location', 'simple', 'text', 'triggerType', 'show', 'tooltipProps', 'showArrow'];
 
 /**
  * Pop component for displaying a tooltip around a component, on hover or click.
@@ -38,6 +39,7 @@ export function Pop(props: PopWrapperProps) {
         name: 'finallyreact-pop',
         props,
         simple,
+        showArrow: props.showArrow,
         custom: props.className
       })}
       style={props.style}
