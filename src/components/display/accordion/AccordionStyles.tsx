@@ -30,6 +30,8 @@ export function getClassName({
   }
 
   if (name === 'finallyreact-accordion__header') {
+    value += ' align-center';
+
     if (props.rounded) {
       if (open) {
         value += ' rounded-b-0 rounded-t-1';

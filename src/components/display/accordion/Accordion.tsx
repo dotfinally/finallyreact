@@ -2,7 +2,7 @@ import React, { HTMLAttributes, useEffect, useMemo, useState } from 'react';
 import { classnames, getFinallyConfig, omit } from '@util/index';
 import { getClassName } from './AccordionStyles';
 
-export interface AccordionProps extends HTMLAttributes<any> {
+export interface AccordionProps extends Omit<HTMLAttributes<any>, 'title'> {
   arrowProps?: HTMLAttributes<any>;
   contentProps?: HTMLAttributes<any>;
   customHeader?: React.ReactNode;
@@ -14,7 +14,7 @@ export interface AccordionProps extends HTMLAttributes<any> {
   rounded?: boolean;
   simple?: boolean;
   text?: string;
-  title?: string;
+  title?: string | React.ReactNode;
   titleHeader?: boolean;
   titleProps?: HTMLAttributes<any>;
 }
@@ -126,7 +126,9 @@ export function Accordion(props: AccordionProps) {
           tabIndex={props.headerProps?.tabIndex ?? 0}
         >
           {props.title &&
-            (props.titleHeader ? (
+            (typeof props.title !== 'string' ? (
+              props.title
+            ) : props.titleHeader ? (
               <h3 {...(props.titleProps || {})} className={classnames('header_title', props.titleProps?.className)}>
                 {props.title}
               </h3>
