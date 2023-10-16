@@ -1,5 +1,5 @@
 import React, { useState, useEffect, HTMLAttributes, useMemo } from 'react';
-import { classnames, dispatchChangeValue, formatMask, getFinallyConfig, omit, unformatMask } from '@util/index';
+import { dispatchChangeValue, formatMask, getFinallyConfig, omit, unformatMask } from '@util/index';
 
 import { Pop } from '../../display/pop/Pop';
 import { getClassName } from './InputStyles';
@@ -34,7 +34,7 @@ export interface TextInputProps extends HTMLAttributes<any> {
   showDropdown?: boolean;
   simple?: boolean;
   size?: 'sm' | 'md' | 'lg';
-  type?: 'text' | 'password';
+  type?: 'text' | 'password' | 'textarea';
   value?: string;
 }
 
@@ -231,6 +231,25 @@ export function TextInput(props: TextInputProps) {
           >
             {value}
           </div>
+        ) : props.type === 'textarea' ? (
+          <textarea
+            {...props.inputProps}
+            className={getClassName({
+              name: 'finallyreact-input__box',
+              props,
+              simple,
+              custom: props.inputProps?.className,
+              active: !!value
+            })}
+            disabled={props.disabled ?? false}
+            onBlur={onBlur}
+            onChange={onChange}
+            onKeyDown={onKeyDown}
+            placeholder={props.simple ? props.placeholder : undefined}
+            value={value}
+            aria-labelledby={ariaLabelledBy}
+            aria-label={ariaLabel}
+          />
         ) : (
           <input
             {...props.inputProps}
