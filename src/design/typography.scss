@@ -11,6 +11,14 @@ textarea {
   font-family: 'Noto Sans', sans-serif;
 }
 
+.noto {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.monsterrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
 html {
   font-size: 100%;
 }
@@ -289,6 +297,10 @@ h6 {
 .text-pre,
 .pre {
   white-space: pre;
+}
+
+.pre-wrap {
+  white-space: pre-wrap;
 }
 
 .word-wrap-break {
