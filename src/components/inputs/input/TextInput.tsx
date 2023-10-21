@@ -7,6 +7,7 @@ import { getClassName } from './InputStyles';
 export interface TextInputProps extends HTMLAttributes<any> {
   clearProps?: HTMLAttributes<any>;
   color?: string;
+  customClear?: React.ReactNode;
   disabled?: boolean;
   dropdownProps?: HTMLAttributes<any>;
   floatingPlaceholder?: boolean;
@@ -41,6 +42,7 @@ export interface TextInputProps extends HTMLAttributes<any> {
 const omitValues = [
   'clearProps',
   'color',
+  'customClear',
   'disabled',
   'dropdownProps',
   'floatingPlaceholder',
@@ -272,26 +274,31 @@ export function TextInput(props: TextInputProps) {
           />
         )}
 
-        {props.showClear && !props.disabled && value && (
-          <span
-            {...props.clearProps}
-            className={getClassName({
-              name: 'finallyreact-input__clear',
-              props,
-              simple,
-              custom: props.clearProps?.className,
-              active: !!value
-            })}
-            onClick={onClear}
-            tabIndex={0}
-            onKeyDown={(e) => {
-              props.clearProps?.onKeyDown?.(e);
-              if (e.key === 'Enter') {
-                onClear(e);
-              }
-            }}
-          />
-        )}
+        {props.showClear &&
+          !props.disabled &&
+          value &&
+          (props.customClear ? (
+            props.customClear
+          ) : (
+            <span
+              {...props.clearProps}
+              className={getClassName({
+                name: 'finallyreact-input__clear',
+                props,
+                simple,
+                custom: props.clearProps?.className,
+                active: !!value
+              })}
+              onClick={onClear}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                props.clearProps?.onKeyDown?.(e);
+                if (e.key === 'Enter') {
+                  onClear(e);
+                }
+              }}
+            />
+          ))}
 
         {props.showDropdown && !(props.showClear && !props.disabled && value) && (
           <div

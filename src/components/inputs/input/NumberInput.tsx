@@ -14,6 +14,7 @@ export interface NumberInputProps extends HTMLAttributes<any> {
   clearProps?: HTMLAttributes<any>;
   color?: string;
   currency?: string;
+  customClear?: React.ReactNode;
   decimals?: number;
   disabled?: boolean;
   floatingPlaceholder?: boolean;
@@ -48,6 +49,7 @@ const omitValues = [
   'clearProps',
   'color',
   'currency',
+  'customClear',
   'decimals',
   'disabled',
   'floatingPlaceholder',
@@ -306,25 +308,30 @@ export function NumberInput(props: NumberInputProps) {
           />
         )}
 
-        {props.showClear && !props.disabled && numberValue != null && (
-          <span
-            {...props.clearProps}
-            className={getClassName({
-              name: 'finallyreact-input__clear',
-              props,
-              simple,
-              custom: props.clearProps?.className
-            })}
-            onClick={onClear}
-            tabIndex={0}
-            onKeyDown={(e) => {
-              props.clearProps?.onKeyDown?.(e);
-              if (e.key === 'Enter') {
-                onClear(e);
-              }
-            }}
-          />
-        )}
+        {props.showClear &&
+          !props.disabled &&
+          numberValue != null &&
+          (props.customClear ? (
+            props.customClear
+          ) : (
+            <span
+              {...props.clearProps}
+              className={getClassName({
+                name: 'finallyreact-input__clear',
+                props,
+                simple,
+                custom: props.clearProps?.className
+              })}
+              onClick={onClear}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                props.clearProps?.onKeyDown?.(e);
+                if (e.key === 'Enter') {
+                  onClear(e);
+                }
+              }}
+            />
+          ))}
 
         {props.placeholder && !props.simple && (
           <div
