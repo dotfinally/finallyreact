@@ -13,6 +13,7 @@ export interface ButtonProps extends HTMLAttributes<any> {
   size?: 'sm' | 'md' | 'lg';
   submit?: boolean;
   text?: string;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 const omitValues = ['borderColor', 'color', 'noColorChange', 'onClick', 'rounded', 'simple', 'size', 'submit', 'text'];
@@ -52,13 +53,15 @@ export function Button(props: ButtonProps) {
     darkerBorderColor = `${borderColorSplit[0]}-${Number(borderColorSplit[1]) + 2}`;
   }
 
+  const isSubmitButton = props.submit != null ? props.submit : props.type != null ? props.type === 'submit' : false;
+
   function onClick(e) {
     if (props.onClick && !props.disabled) {
       props.onClick(e);
     }
 
-    if (props.submit && !props.disabled) {
-      dispatchSubmitEvent(props.id || props.name);
+    if (isSubmitButton && !props.disabled) {
+      dispatchSubmitEvent(props.name, props.id);
     }
   }
 
