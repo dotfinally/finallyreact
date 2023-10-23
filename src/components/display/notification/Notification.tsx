@@ -31,6 +31,7 @@ export const Notification = forwardRef((props: NotificationProps, ref) => {
   const [show, setShow] = useState<boolean>();
   const [timeKey, setTimeKey] = useState<number>();
   const [notificationY, setNotificationY] = useState<string>();
+  const [text, setText] = useState<string>(props.text || '');
   const time = props.time || DEFAULT_NOTIFICATION_TIME;
   let intervalCheck;
 
@@ -42,8 +43,9 @@ export const Notification = forwardRef((props: NotificationProps, ref) => {
   useImperativeHandle(
     ref,
     () => ({
-      trigger() {
+      trigger(triggerText?: string) {
         if (!show) {
+          setText(triggerText || props.text || '');
           calculateHeight();
           setTimeKey(Date.now());
           setShow(true);
@@ -160,11 +162,11 @@ export const Notification = forwardRef((props: NotificationProps, ref) => {
       }}
       role={props.role ?? 'status'}
       aria-atomic={props['aria-atomic'] ?? true}
-      aria-label={props['aria-label'] ?? props.text ?? 'Notification'}
+      aria-label={props['aria-label'] ?? text ?? 'Notification'}
       aria-describedby={props['aria-describedby'] ?? props.textProps?.id ?? undefined}
       tabIndex={props.tabIndex ?? 0}
     >
-      {props.text ? (
+      {text ? (
         <div
           {...(props.textProps || {})}
           className={getClassName({
@@ -175,7 +177,7 @@ export const Notification = forwardRef((props: NotificationProps, ref) => {
             custom: props.textProps?.className
           })}
         >
-          {props.text}
+          {text}
         </div>
       ) : (
         children
