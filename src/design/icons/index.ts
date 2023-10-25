@@ -15,6 +15,7 @@ export * from './LeftArrowCircleIcon';
 export * from './LeftArrowIcon';
 export * from './LeftCircleIcon';
 export * from './LeftIcon';
+export * from './LinkIcon';
 export * from './MenuIcon';
 export * from './MinusCircleIcon';
 export * from './MinusIcon';
