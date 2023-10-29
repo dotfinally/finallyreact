@@ -13,6 +13,7 @@ export function getClassName({
   custom?: string;
 }) {
   let value = name;
+  const isMobile = props.isMobile;
 
   if (name === 'finallyreact-table') {
     value += ' table';
@@ -28,15 +29,28 @@ export function getClassName({
     }
 
     if (name === 'finallyreact-table__row') {
-      value += ' table-row';
+      if (props.isMobile) {
+        value += ' p-1 block'
+      } else {
+        value += ' table-row';
+      }
     }
 
     if (name === 'finallyreact-table__row_cell') {
-      value += ' table-cell border-b-gray-3 padding-1/2';
+      if (props.isMobile) {
+        value += ' flex';
+      } else {
+        value += ' table-cell border-b-gray-3 padding-1/2';
+      }
+      
     }
 
     if (name === 'finallyreact-table__pagination') {
       value += ' flex';
+    }
+
+    if (name === 'finallyreact-mobile-row__key') {
+      value += ' bold mr-1/2';
     }
   }
 

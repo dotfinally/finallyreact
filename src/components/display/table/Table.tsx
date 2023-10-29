@@ -14,6 +14,9 @@ export interface TableProps extends HTMLAttributes<any> {
   showPagination?: boolean;
   simple?: boolean;
   disabled?: boolean;
+  isMobile?: boolean;
+  mobileCellKeyProps?: HTMLAttributes<any>;
+  mobileCellValueProps?: HTMLAttributes<any>;
 }
 
 export interface TableColumnProps extends HTMLAttributes<any> {
@@ -48,7 +51,10 @@ const omitValues = [
   'rows',
   'showPagination',
   'simple',
-  'disabled'
+  'disabled',
+  'isMobile',
+  'mobileCellKeyProps',
+  'mobileCellValueProps'
 ];
 const omitColumnValues = ['index', 'label', 'headerCell', 'rowCell'];
 const omitRowValues = ['cells'];
@@ -180,7 +186,77 @@ export function Table(props: TableProps) {
     return rows;
   }, [props.columns, props.rows, props.rowCellProps, props.simple]);
 
-  return (
+  function getMobileTableRow(row: TableRowProps, index: number) {
+    return (
+      <div
+        className={getClassName({
+          name: 'finallyreact-table__row',
+          props,
+          simple,
+          custom: `${row?.className} ${props.rowProps?.className}`
+        })}
+        key={`finallyreact-table__mobile-row-${index}`}
+        aria-label={props.rowProps?.['aria-label'] || `Table Mobile Row ${index + 1}`}
+      >
+        {row.cells.map((cell, index) => {
+          const cellValue = cell?.label || cell?.render(cell?.index, cell?.label);
+          const cellHeader =
+            props.columns[index]?.label ||
+            props.columns[index]?.headerCell?.(props.columns[index]?.index, props.columns[index]?.label);
+
+          return (
+            <div
+              className={getClassName({
+                name: 'finallyreact-table__row_cell',
+                props,
+                simple,
+                custom: `${cell?.className} ${props.rowCellProps?.className}`
+              })}
+              key={`finallyreact-table__mobile-row-${index}_cell-${index}`}
+            >
+              <div
+                className={getClassName({
+                  name: 'finallyreact-mobile-row__key',
+                  props,
+                  simple,
+                  custom: `${props.mobileCellKeyProps?.className}`
+                })}
+              >
+                {cellHeader}
+              </div>
+              <div
+                className={getClassName({
+                  name: 'finallyreact-mobile-row__value',
+                  props,
+                  simple,
+                  custom: `${props.mobileCellKeyProps?.className}`
+                })}
+              >
+                {cellValue}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
+  return props.isMobile ? (
+    <div
+      {...omit(props, omitValues)}
+      className={getClassName({
+        name: 'finallyreact-table__mobile',
+        props,
+        simple,
+        custom: props.className
+      })}
+      tabIndex={props.tabIndex || 0}
+      aria-label={props['aria-label'] || 'Table Mobile View'}
+      aria-disabled={props.disabled}
+    >
+      {props.rows.map((row, index) => getMobileTableRow(row, index))}
+    </div>
+  ) : (
     <>
       <table
         {...omit(props, omitValues)}
