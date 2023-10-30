@@ -16,15 +16,22 @@ export function getClassName({
 
   if (name === 'finallyreact-loading__icon') {
     if (!simple) {
-      value +=
-        ' inline-block spinning border-2 border-t-transparent rounded-1/2 content-empty h-2 w-2 will-change-transform';
+      value += ' inline-block border-2 border-t-transparent rounded-1/2 content-empty h-2 w-2 will-change-transform';
+
+      if (props.rainbow) {
+        value += ' spinning-rainbow';
+      } else {
+        value += ' spinning';
+      }
     }
   }
 
-  if (props.color) {
-    value += ' border-' + props.color;
-  } else {
-    value += ' border-black';
+  if (!props.rainbow) {
+    if (props.color) {
+      value += ' border-' + props.color;
+    } else {
+      value += ' border-black';
+    }
   }
 
   return filterClassName(value, custom);

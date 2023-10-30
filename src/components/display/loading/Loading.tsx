@@ -8,9 +8,10 @@ export interface LoadingProps extends HTMLAttributes<any> {
   spinnerProps?: HTMLAttributes<any>;
   text?: string;
   textProps?: HTMLAttributes<any>;
+  rainbow?: boolean;
 }
 
-const omitValues = ['color', 'simple', 'spinnerProps', 'text', 'textProps'];
+const omitValues = ['color', 'simple', 'spinnerProps', 'text', 'textProps', 'rainbow'];
 
 /**
  * Loading component for displaying a loading spinner

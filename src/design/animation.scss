@@ -1,3 +1,5 @@
+@use './colors' as colors;
+
 .transition-transform-1-ease-in-out {
   transition: transform 0.1s ease-in-out;
 }
@@ -191,6 +193,11 @@
   animation-play-state: inherit;
 }
 
+.spinning-rainbow {
+  animation: 1.5s linear infinite spinner, 4.5s linear infinite spinner-rainbow;
+  animation-play-state: inherit;
+}
+
 .will-change-transform {
   will-change: transform;
 }
@@ -212,5 +219,48 @@
   }
   100% {
     transform: translate3d(-50%, -50%, 0) rotate(360deg);
+  }
+}
+
+@keyframes spinner-rainbow {
+  0% {
+    border-right-color: colors.$lava-6;
+    border-bottom-color: colors.$lava-6;
+    border-left-color: colors.$lava-6;
+  }
+  14% {
+    border-right-color: colors.$carrot-6;
+    border-bottom-color: colors.$carrot-6;
+    border-left-color: colors.$carrot-6;
+  }
+  28% {
+    border-right-color: colors.$banana-7;
+    border-bottom-color: colors.$banana-7;
+    border-left-color: colors.$banana-7;
+  }
+  42% {
+    border-right-color: colors.$emerald-6;
+    border-bottom-color: colors.$emerald-6;
+    border-left-color: colors.$emerald-6;
+  }
+  57% {
+    border-right-color: colors.$blue-6;
+    border-bottom-color: colors.$blue-6;
+    border-left-color: colors.$blue-6;
+  }
+  71% {
+    border-right-color: colors.$purple-7;
+    border-bottom-color: colors.$purple-7;
+    border-left-color: colors.$purple-7;
+  }
+  85% {
+    border-right-color: colors.$violet-9;
+    border-bottom-color: colors.$violet-9;
+    border-left-color: colors.$violet-9;
+  }
+  100% {
+    border-right-color: colors.$lava-6;
+    border-bottom-color: colors.$lava-6;
+    border-left-color: colors.$lava-6;
   }
 }
