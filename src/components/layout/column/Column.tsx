@@ -16,16 +16,37 @@ import { getClassName } from './ColumnStyles';
 export interface ColumnProps extends HTMLAttributes<any> {
   children?: React.ReactNode;
   xs?: number; // width % for extra small (mobile) screens
+  xsProps?: HTMLAttributes<any>; // props for extra small (mobile) screens
   sm?: number; // width % for small screens
+  smProps?: HTMLAttributes<any>; // props for small screens
   md?: number; // width % for medium screens
+  mdProps?: HTMLAttributes<any>; // props for medium screens
   lg?: number; // width % for large screens
+  lgProps?: HTMLAttributes<any>; // props for large screens
   xl?: number; // width % for extra large screens
+  xlProps?: HTMLAttributes<any>; // props for extra large screens
   xxl?: number; // width % for extra extra large screens
+  xxlProps?: HTMLAttributes<any>; // props for extra extra large screens
   verticalAlign?: 'top' | 'center' | 'bottom';
   horizontalAlign?: 'left' | 'center' | 'right';
 }
 
-const omitValues = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'verticalAlign', 'horizontalAlign'];
+const omitValues = [
+  'xs',
+  'xsProps',
+  'sm',
+  'smProps',
+  'md',
+  'mdProps',
+  'lg',
+  'lgProps',
+  'xl',
+  'xlProps',
+  'xxl',
+  'xxlProps',
+  'verticalAlign',
+  'horizontalAlign'
+];
 
 /**
  * Column component for grouping elements in columns.
@@ -73,15 +94,31 @@ export function Column(props: ColumnProps) {
     return props.children;
   }, [props.children]);
 
+  const customProps =
+    props.xsProps && screenSize === 'xs'
+      ? props.xsProps
+      : props.smProps && screenSize === 'sm'
+      ? props.smProps
+      : props.mdProps && screenSize === 'md'
+      ? props.mdProps
+      : props.lgProps && screenSize === 'lg'
+      ? props.lgProps
+      : props.xlProps && screenSize === 'xl'
+      ? props.xlProps
+      : props.xxlProps && screenSize === 'xxl'
+      ? props.xxlProps
+      : {};
+
   return (
     <div
       {...omit(props, omitValues)}
+      {...customProps}
       className={getClassName({
         name: 'finallyreact-column',
         props,
-        custom: props.className
+        custom: classnames(props.className, customProps?.className)
       })}
-      style={{ ...props.style, width: columnSize }}
+      style={{ ...props.style, width: columnSize, ...(customProps.style || {}) }}
     >
       {childrenContent}
     </div>
