@@ -43,6 +43,7 @@ export interface NumberInputProps extends HTMLAttributes<any> {
   size?: 'sm' | 'md' | 'lg';
   type?: 'number' | 'currency' | 'percent';
   value?: number;
+  disableFormat?: boolean;
 }
 
 const omitValues = [
@@ -76,7 +77,8 @@ const omitValues = [
   'simple',
   'size',
   'type',
-  'value'
+  'value',
+  'disableFormat'
 ];
 
 /**
@@ -287,7 +289,7 @@ export function NumberInput(props: NumberInputProps) {
               focused
             })}
           >
-            {formattedValue}
+            {props.disableFormat ? numberValue : formattedValue}
           </div>
         ) : (
           <input
@@ -304,7 +306,15 @@ export function NumberInput(props: NumberInputProps) {
             onFocus={onFocus}
             placeholder={props.simple ? props.placeholder : undefined}
             type="text"
-            value={props.disabled ? formattedValue : focused ? numberValue ?? '' : formattedValue}
+            value={
+              props.disabled
+                ? formattedValue
+                : focused
+                ? numberValue ?? ''
+                : props.disableFormat
+                ? numberValue
+                : formattedValue
+            }
           />
         )}
 

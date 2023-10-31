@@ -2,6 +2,7 @@ import React, { HTMLAttributes, useEffect, useMemo } from 'react';
 import { classnames, dispatchChangeValue, getFinallyConfig, omit, usePopover } from '@util/index';
 import { TextInput, TextInputProps } from '../input/TextInput';
 import { getClassName } from './DatepickerStyles';
+import { Dropdown, DropdownProps, NumberInput, NumberInputProps } from '@components/index';
 
 export interface DatepickerProps extends HTMLAttributes<any> {
   color?: string;
@@ -17,6 +18,12 @@ export interface DatepickerProps extends HTMLAttributes<any> {
   todayProps?: HTMLAttributes<any>;
   value?: string;
   initialValue?: string;
+  monthLabelProps?: HTMLAttributes<any>;
+  monthPickerProps?: DropdownProps;
+  customMonthPicker?: any;
+  yearLabelProps?: HTMLAttributes<any>;
+  yearPickerProps?: NumberInputProps;
+  customYearPicker?: any;
 }
 
 const omitValues = [
@@ -32,7 +39,13 @@ const omitValues = [
   'todayLinkProps',
   'todayProps',
   'value',
-  'initialValue'
+  'initialValue',
+  'monthLabelProps',
+  'monthPickerProps',
+  'customMonthPicker',
+  'yearLabelProps',
+  'yearPickerProps',
+  'customYearPicker'
 ];
 
 const DEFAULT_DATE_MASK = 'yyyy-mm-dd';
@@ -55,6 +68,9 @@ export function Datepicker(props: DatepickerProps) {
 
   const [displayMonth, setDisplayMonth] = React.useState<number>();
   const [displayYear, setDisplayYear] = React.useState<number>();
+
+  const [editMonth, setEditMonth] = React.useState<boolean>(false);
+  const [editYear, setEditYear] = React.useState<boolean>(false);
 
   // mask must use yyyy, mm, and dd in order to work
   const dateMask = props.inputProps?.mask?.toLowerCase()?.trim() || DEFAULT_DATE_MASK;
@@ -156,23 +172,59 @@ export function Datepicker(props: DatepickerProps) {
     return d.getDate();
   }
 
-  function getMonthName(month) {
-    const monthNames = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December'
-    ];
+  const months = [
+    {
+      label: 'January',
+      value: 1
+    },
+    {
+      label: 'February',
+      value: 2
+    },
+    {
+      label: 'March',
+      value: 3
+    },
+    {
+      label: 'April',
+      value: 4
+    },
+    {
+      label: 'May',
+      value: 5
+    },
+    {
+      label: 'June',
+      value: 6
+    },
+    {
+      label: 'July',
+      value: 7
+    },
+    {
+      label: 'August',
+      value: 8
+    },
+    {
+      label: 'September',
+      value: 9
+    },
+    {
+      label: 'October',
+      value: 10
+    },
+    {
+      label: 'November',
+      value: 11
+    },
+    {
+      label: 'December',
+      value: 12
+    }
+  ];
 
-    return monthNames[month - 1];
+  function getMonthName(month) {
+    return months[month - 1].label;
   }
 
   function getDays() {
@@ -432,26 +484,102 @@ export function Datepicker(props: DatepickerProps) {
           }}
           tabIndex={0}
         />
-        <div
-          className={getClassName({
-            name: 'finallyreact-datepicker__header-month',
-            props,
-            simple
-          })}
-          tabIndex={0}
-        >
-          {getMonthName(displayMonth != null ? displayMonth : details.month)}
-        </div>
-        <div
-          className={getClassName({
-            name: 'finallyreact-datepicker__header-year',
-            props,
-            simple
-          })}
-          tabIndex={0}
-        >
-          {displayYear != null ? displayYear : details.year}
-        </div>
+
+        {editMonth ? (
+          props.customMonthPicker ? (
+            props.customMonthPicker
+          ) : (
+            <Dropdown
+              {...(props.monthPickerProps || {})}
+              options={props.monthPickerProps?.options ?? months}
+              autoFilterOnSearch={props.monthPickerProps?.autoFilterOnSearch ?? true}
+              initialValue={props.monthPickerProps?.initialValue ?? displayMonth != null ? displayMonth : details.month}
+              onChange={(e: any) => {
+                console.log('month on change', e.target.value);
+                setDisplayMonth(e.target.value);
+                setEditMonth(false);
+                props.monthPickerProps?.onChange?.(e);
+              }}
+              className={getClassName({
+                name: 'finallyreact-datepicker__month-picker',
+                props,
+                simple,
+                custom: props.monthPickerProps?.className
+              })}
+            />
+          )
+        ) : (
+          <div
+            {...(props.monthLabelProps || {})}
+            className={getClassName({
+              name: 'finallyreact-datepicker__header-month',
+              props,
+              simple,
+              custom: props.monthLabelProps?.className
+            })}
+            tabIndex={props.monthLabelProps?.tabIndex ?? 0}
+            onClick={(e: any) => {
+              setEditMonth(true);
+              props.monthLabelProps?.onClick?.(e);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                setEditMonth(true);
+              }
+              props.monthLabelProps?.onKeyDown?.(e);
+            }}
+          >
+            {getMonthName(displayMonth != null ? displayMonth : details.month)}
+          </div>
+        )}
+
+        {editYear ? (
+          props.customYearPicker ? (
+            props.customYearPicker
+          ) : (
+            <NumberInput
+              {...(props.yearPickerProps || {})}
+              initialValue={props.yearPickerProps?.initialValue ?? displayYear != null ? displayYear : details.year}
+              onBlur={(e: any) => {
+                setDisplayYear(e.target.value);
+                setEditYear(false);
+                props.yearPickerProps?.onChange?.(e);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  setDisplayYear(e.target.value);
+                  setEditYear(false);
+                }
+                props.yearPickerProps?.onKeyDown?.(e);
+              }}
+              className={getClassName({
+                name: 'finallyreact-datepicker__year-picker',
+                props,
+                simple,
+                custom: props.yearPickerProps?.className
+              })}
+              disableFormat={props.yearPickerProps?.disableFormat ?? true}
+            />
+          )
+        ) : (
+          <div
+            {...(props.yearLabelProps || {})}
+            className={getClassName({
+              name: 'finallyreact-datepicker__header-year',
+              props,
+              simple,
+              custom: props.yearLabelProps?.className
+            })}
+            tabIndex={props.yearLabelProps?.tabIndex ?? 0}
+            onClick={(e: any) => {
+              setEditYear(true);
+              props.yearLabelProps?.onClick?.(e);
+            }}
+          >
+            {displayYear != null ? displayYear : details.year}
+          </div>
+        )}
+
         <div
           className={getClassName({
             name: 'finallyreact-datepicker__header-right',

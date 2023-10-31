@@ -149,7 +149,7 @@ export function getClassName({
   }
 
   if (name === 'finallyreact-datepicker__header') {
-    value += ' flex justify-content-between';
+    value += ' flex justify-content-between align-center';
   }
 
   const arrowValue =
@@ -168,11 +168,11 @@ export function getClassName({
   }
 
   if (name === 'finallyreact-datepicker__header-month') {
-    value += ' my-0 mx-3/10';
+    value += ' my-0 mx-3/10 pointer';
   }
 
   if (name === 'finallyreact-datepicker__header-year') {
-    value += ' my-0 mx-3/10';
+    value += ' my-0 mx-3/10 pointer';
   }
 
   if (name === 'finallyreact-datepicker__day-header') {
