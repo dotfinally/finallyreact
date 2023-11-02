@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useMemo } from 'react';
-import { classnames, dispatchSubmitEvent, omit, getFinallyConfig } from '@util/index';
+import { classnames, dispatchSubmitEvent, omit, getFinallyConfig, checkHex } from '@util/index';
 import { getClassName } from './ButtonStyles';
 
 export interface ButtonProps extends HTMLAttributes<any> {
@@ -87,6 +87,10 @@ export function Button(props: ButtonProps) {
         custom: props.className,
         size
       })}
+      style={{
+        borderColor: checkHex(props.color),
+        backgroundColor: checkHex(props.color)
+      }}
       onClick={onClick}
       role={props.role ?? 'button'}
       aria-label={props['aria-label'] ?? props.text ?? 'Button'}

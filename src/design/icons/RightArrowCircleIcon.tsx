@@ -1,4 +1,4 @@
-import { omit } from '@util/index';
+import { checkHex, omit } from '@util/index';
 import React, { HTMLAttributes } from 'react';
 
 interface Props extends HTMLAttributes<SVGElement> {
@@ -8,7 +8,7 @@ interface Props extends HTMLAttributes<SVGElement> {
 }
 
 export function RightArrowCircleIcon(props: Props) {
-  const strokeColor = props.color ? `var(--${props.color})` : 'black';
+  const strokeColor = checkHex(props.color) ? props.color : props.color ? `var(--${props.color})` : 'black';
 
   return (
     <svg

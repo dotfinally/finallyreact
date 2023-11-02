@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect, useMemo, useState } from 'react';
-import { omit, dispatchChangeValue, getFinallyConfig } from '@util/index';
+import { omit, dispatchChangeValue, getFinallyConfig, checkHex } from '@util/index';
 import { getClassName } from './CheckStyles';
 
 export interface CheckProps extends HTMLAttributes<any> {
@@ -122,6 +122,10 @@ export function Check(props: CheckProps) {
         checked,
         custom: props.inputProps?.className
       })}
+      style={{
+        borderColor: checkHex(props.color),
+        color: checkHex(props.color)
+      }}
     >
       <span
         className={getClassName({
@@ -131,6 +135,10 @@ export function Check(props: CheckProps) {
           size,
           checked
         })}
+        style={{
+          borderColor: checkHex(props.color),
+          color: checkHex(props.color)
+        }}
       />
     </div>
   );
@@ -171,6 +179,10 @@ export function Check(props: CheckProps) {
             size,
             checked
           })}
+          style={{
+            borderColor: checkHex(props.color),
+            color: checkHex(props.color)
+          }}
         >
           {checkInput}
         </div>

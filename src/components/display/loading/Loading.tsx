@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useMemo } from 'react';
-import { classnames, getFinallyConfig, omit } from '@util/index';
+import { checkHex, classnames, getFinallyConfig, omit } from '@util/index';
 import { getClassName } from './LoadingStyles';
 
 export interface LoadingProps extends HTMLAttributes<any> {
@@ -40,6 +40,11 @@ export function Loading(props: LoadingProps) {
           simple,
           custom: props.spinnerProps?.className
         })}
+        style={{
+          borderRightColor: checkHex(props.color),
+          borderBottomColor: checkHex(props.color),
+          borderLeftColor: checkHex(props.color)
+        }}
       />
 
       {props.text && (
