@@ -6,9 +6,10 @@ export interface TableOfContentsProps extends HTMLAttributes<any> {
   simple?: boolean;
   refId: string;
   levelProps?: HTMLAttributes<any>;
+  refresh?: string;
 }
 
-const omitValues = ['simple', 'refId', 'levelProps'];
+const omitValues = ['simple', 'refId', 'levelProps', 'refresh'];
 
 /**
  * Display table of contents based on headings in the page
@@ -24,7 +25,7 @@ export function TableOfContents(props: TableOfContentsProps) {
 
   useEffect(() => {
     setHeaders(getHeaders(props.refId));
-  }, []);
+  }, [props.refresh]);
 
   function onClickHeader(header: any) {
     const level = header.level;
