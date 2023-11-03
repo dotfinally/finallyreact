@@ -9,6 +9,7 @@ export * from './display/pop/Pop';
 export * from './display/slideout/Slideout';
 export * from './display/table/Table';
 export * from './display/tabs/Tabs';
+export * from './display/toc/TOC';
 
 export * from './inputs/button/Button';
 export * from './inputs/check/Check';
