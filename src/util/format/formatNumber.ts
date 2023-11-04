@@ -14,6 +14,7 @@ export interface IFormatNumber {
   decimals?: number;
   minDecimals?: number;
   maxDecimals?: number;
+  round?: 'round' | 'ceil' | 'floor' | 'truncate';
 }
 
 /*
@@ -100,6 +101,8 @@ export function formatNumber(props: IFormatNumber): string {
     locale = locale.replace('_', '-'); // just in case
 
     try {
+      const roundedValue = roundNumber(newValue, params.round);
+
       if (type === 'percent') {
         return new Intl.NumberFormat(locale, {
           style: 'percent',
@@ -120,7 +123,7 @@ export function formatNumber(props: IFormatNumber): string {
       return new Intl.NumberFormat(locale, {
         minimumFractionDigits: newMinDecimals,
         maximumFractionDigits: newMaxDecimals
-      }).format(newValue);
+      }).format(roundedValue);
     } catch (e) {
       console.error('Error formatting value: ', e);
       return '';
@@ -142,3 +145,27 @@ function cleanParams(params: IFormatNumber) {
 }
 
 export default formatNumber;
+
+function roundNumber(value: number, round?: 'round' | 'ceil' | 'floor' | 'truncate'): number {
+  if (!round) {
+    return value;
+  }
+
+  if (round === 'round') {
+    return Math.round(value);
+  }
+
+  if (round === 'ceil') {
+    return Math.ceil(value);
+  }
+
+  if (round === 'floor') {
+    return Math.floor(value);
+  }
+
+  if (round === 'truncate') {
+    return Math.trunc(value);
+  }
+
+  return value;
+}

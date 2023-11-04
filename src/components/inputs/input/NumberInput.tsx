@@ -44,6 +44,7 @@ export interface NumberInputProps extends HTMLAttributes<any> {
   type?: 'number' | 'currency' | 'percent';
   value?: number;
   disableFormat?: boolean;
+  round?: 'round' | 'ceil' | 'floor' | 'truncate';
 }
 
 const omitValues = [
@@ -78,7 +79,8 @@ const omitValues = [
   'size',
   'type',
   'value',
-  'disableFormat'
+  'disableFormat',
+  'round'
 ];
 
 /**
@@ -136,7 +138,8 @@ export function NumberInput(props: NumberInputProps) {
     props.min,
     props.maxDecimals,
     props.minDecimals,
-    props.decimals
+    props.decimals,
+    props.round
   ]);
 
   // Emit change event when numberValue changes (for Form)
@@ -156,7 +159,8 @@ export function NumberInput(props: NumberInputProps) {
       max: props.max,
       decimals: props.decimals,
       minDecimals: props.minDecimals,
-      maxDecimals: props.maxDecimals
+      maxDecimals: props.maxDecimals,
+      round: props.round
     });
   }
 

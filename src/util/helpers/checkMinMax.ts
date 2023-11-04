@@ -23,7 +23,7 @@ export function checkMinMax(value: number, min: number, max: number): number {
     }
   }
 
-  return newValue;
+  return Number(newValue);
 }
 
 export default checkMinMax;
