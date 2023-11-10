@@ -19,6 +19,7 @@ export * from './LinkIcon';
 export * from './MenuIcon';
 export * from './MinusCircleIcon';
 export * from './MinusIcon';
+export * from './MoveIcon';
 export * from './PlusCircleIcon';
 export * from './PlusIcon';
 export * from './QuestionMarkCircleIcon';
