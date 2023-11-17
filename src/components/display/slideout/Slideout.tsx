@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect, useMemo } from 'react';
-import { generateId, getFinallyConfig, omit } from '@util/index';
+import { getFinallyConfig, omit } from '@util/index';
 import { getClassName } from './SlideoutStyles';
 
 export interface SlideoutProps extends HTMLAttributes<any> {
@@ -47,7 +47,7 @@ export function Slideout(props: SlideoutProps) {
   const simple = finallySimple || props.simple;
 
   const slideoutCardId = useMemo(() => {
-    return props.cardProps?.id || `finallyreact-slideout__card_${generateId()}`;
+    return props.cardProps?.id || `finallyreact-slideout__card`;
   }, []);
 
   const children = useMemo(() => {
