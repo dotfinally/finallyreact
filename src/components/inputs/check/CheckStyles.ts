@@ -60,7 +60,7 @@ export function getClassName({
       value += ` border-${props.color || 'black'} ${props.color || 'black'}`;
 
       if (size === 'sm') {
-        value += ' w-2-1/5 h-1-1/10';
+        value += ' w-2-1/5 h-1';
       }
 
       if (size === 'md') {
@@ -69,6 +69,20 @@ export function getClassName({
 
       if (size === 'lg') {
         value += ' w-3-2/5 h-1-1/2';
+      }
+    }
+
+    if (name === 'finallyreact-toggle__x') {
+      if (size === 'sm') {
+        value += ' w-1 -mt-4/5';
+      }
+
+      if (size === 'md') {
+        value += ' w-1-1/4 -mt-3/5';
+      }
+
+      if (size === 'lg') {
+        value += ' w-1-2/5 -mt-1/2';
       }
     }
 
@@ -118,7 +132,7 @@ export function getClassName({
     }
 
     if (size === 'sm') {
-      value += ' w-1 h-1-1/10';
+      value += ' w-1 h-1';
     }
 
     if (size === 'md') {
@@ -140,7 +154,7 @@ export function getClassName({
     value += ` border-${checkColor || 'black'}`;
 
     if (size === 'sm') {
-      value += ' border-b-2 border-r-2 w-3/10 h-4/5 left-3/10 bottom-1/10';
+      value += ' border-b-2 border-r-2 w-3/10 h-4/5 left-3/10 bottom-1/5';
     }
 
     if (size === 'md') {

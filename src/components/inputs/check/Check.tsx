@@ -1,6 +1,7 @@
 import React, { HTMLAttributes, useEffect, useMemo, useState } from 'react';
 import { omit, dispatchChangeValue, getFinallyConfig, checkHex } from '@util/index';
 import { getClassName } from './CheckStyles';
+import { XIcon } from '@icons/XIcon';
 
 export interface CheckProps extends HTMLAttributes<any> {
   checkColor?: string;
@@ -184,7 +185,21 @@ export function Check(props: CheckProps) {
             color: checkHex(props.color)
           }}
         >
-          {checkInput}
+          <div className="flex">
+            {checkInput}
+            {!checked && (
+              <XIcon
+                className={getClassName({
+                  name: 'finallyreact-toggle__x',
+                  props,
+                  simple,
+                  size,
+                  checked
+                })}
+                color={props.color}
+              />
+            )}
+          </div>
         </div>
       ) : (
         checkInput
