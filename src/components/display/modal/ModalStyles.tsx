@@ -17,9 +17,7 @@ export function getClassName({
   let value = name;
 
   if (name === 'finallyreact-modal') {
-    if (props.show) {
-      value += ' block';
-    } else {
+    if (!props.show) {
       value += ' none';
     }
   }
@@ -29,12 +27,10 @@ export function getClassName({
   }
 
   if (name === 'finallyreact-modal__card') {
-    value += ' left-50p fixed top-25p translate-50-25 z-310 modal-max-height';
+    value += ' fixed top-10p left-50p translate-50-50 z-310';
 
     if (isMobile) {
       value += ' scroll-y';
-    } else {
-      value += ' mt-4';
     }
   }
 
