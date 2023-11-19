@@ -13,6 +13,7 @@ export interface CheckProps extends HTMLAttributes<any> {
   inputProps?: HTMLAttributes<any>;
   label?: string;
   labelProps?: HTMLAttributes<any>;
+  toggleProps?: HTMLAttributes<any>;
   name?: string;
   simple?: boolean;
   size?: 'sm' | 'md' | 'lg';
@@ -173,12 +174,14 @@ export function Check(props: CheckProps) {
     >
       {props.toggle ? (
         <div
+          {...(props.toggleProps || {})}
           className={getClassName({
             name: 'finallyreact-toggle__input',
             props,
             simple,
             size,
-            checked
+            checked,
+            custom: props.toggleProps?.className
           })}
           style={{
             borderColor: checkHex(props.color),
