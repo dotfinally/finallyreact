@@ -189,7 +189,6 @@ export function Check(props: CheckProps) {
           }}
         >
           <div className="flex">
-            {checkInput}
             {!checked && (
               <XIcon
                 className={getClassName({
@@ -202,6 +201,7 @@ export function Check(props: CheckProps) {
                 color={props.color}
               />
             )}
+            {checkInput}
           </div>
         </div>
       ) : (

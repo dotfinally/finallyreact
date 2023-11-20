@@ -17,17 +17,19 @@ export function getClassName({
   let value = name;
 
   if (name === 'finallyreact-modal') {
-    if (!props.show) {
-      value += ' none';
+    if (props.show) {
+      value += ' h-screen w-screen scroll-x-hidden scroll-y-hidden fixed top-0 left-0 flex justify-center align-center'
+    } else {
+      value += ' none a';
     }
   }
 
   if (name === 'finallyreact-modal__overlay') {
-    value += ' stone-8-bg bottom-0 left-0 opacity-50 fixed right-0 top-0 transition-opacity-ease-out z-300';
+    value += ' stone-8-bg opacity-50 z-300 w-full h-full';
   }
 
   if (name === 'finallyreact-modal__card') {
-    value += ' fixed top-10p left-50p translate-50-50 z-310';
+    value += ' z-310 absolute';
 
     if (isMobile) {
       value += ' scroll-y';

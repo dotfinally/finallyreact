@@ -73,6 +73,8 @@ export function getClassName({
     }
 
     if (name === 'finallyreact-toggle__x') {
+      value += ' absolute transition-3-ease-all';
+
       if (size === 'sm') {
         value += ' w-1 -mt-4/5';
       }
