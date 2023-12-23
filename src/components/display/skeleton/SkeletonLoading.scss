@@ -1,0 +1,44 @@
+@use '../../../design/colors' as colors;
+
+.finallyreact-skeleton-loading {
+  &.simple {
+    background-color: colors.$cloud-2;
+    animation: pulse 1.5s infinite ease-in-out;
+    @keyframes pulse {
+      0% {
+        background-color: colors.$cloud-2;
+      }
+      50% {
+        background-color: colors.$cloud-4;
+      }
+      100% {
+        background-color: colors.$cloud-2;
+      }
+    }
+  }
+
+  &:not(.simple) {
+    background-color: colors.$cloud-2;
+    background-size: 200% 100%;
+    background-image: linear-gradient(
+      to right,
+      colors.$cloud-2 40%,
+      colors.$cloud-4 50%,
+      colors.$cloud-2 60%
+    );
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    animation: loading 1.4s infinite linear;
+  
+    @keyframes loading {
+      0% {
+        background-position: 100% 0;
+      }
+      100% {
+        background-position: -100% 0;
+      }
+    }
+  }  
+}

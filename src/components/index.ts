@@ -6,6 +6,7 @@ export * from './display/modal/Modal';
 export * from './display/notification/Notification';
 export * from './display/pagination/Pagination';
 export * from './display/pop/Pop';
+export * from './display/skeleton/SkeletonLoading';
 export * from './display/slideout/Slideout';
 export * from './display/table/Table';
 export * from './display/tabs/Tabs';
