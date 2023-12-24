@@ -10,6 +10,7 @@ export interface TextInputProps extends HTMLAttributes<any> {
   customClear?: React.ReactNode;
   disabled?: boolean;
   dropdownProps?: HTMLAttributes<any>;
+  dropdownArrowProps?: HTMLAttributes<any>;
   floatingPlaceholder?: boolean;
   initialValue?: string;
   inputProps?: HTMLAttributes<any> & {
@@ -45,6 +46,7 @@ const omitValues = [
   'customClear',
   'disabled',
   'dropdownProps',
+  'dropdownArrowProps',
   'floatingPlaceholder',
   'initialValue',
   'inputProps',
@@ -302,6 +304,7 @@ export function TextInput(props: TextInputProps) {
 
         {props.showDropdown && !(props.showClear && !props.disabled && value) && (
           <div
+            {...(props.dropdownProps || {})}
             className={getClassName({
               name: 'finallyreact-input__dropdown',
               props,
@@ -311,10 +314,12 @@ export function TextInput(props: TextInputProps) {
             onClick={props.inputProps?.onClick}
           >
             <div
+              {...(props.dropdownArrowProps || {})}
               className={getClassName({
                 name: 'finallyreact-input__down-arrow',
                 props,
-                simple
+                simple,
+                custom: props.dropdownArrowProps?.className
               })}
             />
           </div>
