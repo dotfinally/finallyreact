@@ -18,9 +18,9 @@ export function getClassName({
 
   if (name === 'finallyreact-modal') {
     if (props.show) {
-      value += ' h-screen w-screen scroll-x-hidden scroll-y-hidden fixed top-0 left-0 flex justify-center align-center'
+      value += ' z-300 h-screen w-screen scroll-x-hidden scroll-y-hidden fixed top-0 left-0 flex justify-center align-center'
     } else {
-      value += ' none a';
+      value += ' none';
     }
   }
 
