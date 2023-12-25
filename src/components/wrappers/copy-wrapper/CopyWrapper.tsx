@@ -89,7 +89,9 @@ export function CopyWrapper(props: CopyWrapperProps) {
       location={props.popProps?.location || triggerLocation}
       simple={simple}
     >
-      {props.popProps?.children || (
+      {props.popProps?.children ? (
+        <div onClick={onClickCopy}>{props.popProps?.children}</div>
+      ) : (
         <div
           {...(props.iconProps || {})}
           className={getClassName({
