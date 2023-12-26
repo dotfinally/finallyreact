@@ -21,8 +21,8 @@ export function DownArrowIcon(props: Props) {
       xmlns="http://www.w3.org/2000/svg"
     >
       <line x1="50" y1="30" x2="50" y2="70" stroke={strokeColor} strokeWidth="5" />
-      <line x1="32" y1="53" x2="50" y2="70" stroke={strokeColor} strokeWidth="5" />
-      <line x1="68" y1="53" x2="50" y2="70" stroke={strokeColor} strokeWidth="5" />
+      <line x1="32" y1="53" x2="52" y2="70" stroke={strokeColor} strokeWidth="5" />
+      <line x1="68" y1="53" x2="48" y2="70" stroke={strokeColor} strokeWidth="5" />
     </svg>
   );
 }

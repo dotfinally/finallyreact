@@ -21,8 +21,8 @@ export function RightArrowIcon(props: Props) {
       xmlns="http://www.w3.org/2000/svg"
     >
       <line x1="30" y1="50" x2="70" y2="50" stroke={strokeColor} strokeWidth="5" />
-      <line x1="53" y1="32" x2="70" y2="50" stroke={strokeColor} strokeWidth="5" />
-      <line x1="53" y1="68" x2="70" y2="50" stroke={strokeColor} strokeWidth="5" />
+      <line x1="53" y1="32" x2="70" y2="51" stroke={strokeColor} strokeWidth="5" />
+      <line x1="53" y1="68" x2="70" y2="49" stroke={strokeColor} strokeWidth="5" />
     </svg>
   );
 }

@@ -22,8 +22,8 @@ export function LeftArrowCircleIcon(props: Props) {
     >
       <circle cx="50" cy="50" r="40" stroke={strokeColor} strokeWidth="5" fill="none" />
       <line x1="70" y1="50" x2="30" y2="50" stroke={strokeColor} strokeWidth="5" />
-      <line x1="47" y1="32" x2="30" y2="50" stroke={strokeColor} strokeWidth="5" />
-      <line x1="47" y1="68" x2="30" y2="50" stroke={strokeColor} strokeWidth="5" />
+      <line x1="47" y1="32" x2="30" y2="51" stroke={strokeColor} strokeWidth="5" />
+      <line x1="47" y1="68" x2="30" y2="49" stroke={strokeColor} strokeWidth="5" />
     </svg>
   );
 }

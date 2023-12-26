@@ -22,8 +22,8 @@ export function UpArrowCircleIcon(props: Props) {
     >
       <circle cx="50" cy="50" r="40" stroke={strokeColor} strokeWidth="5" fill="none" />
       <line x1="50" y1="70" x2="50" y2="30" stroke={strokeColor} strokeWidth="5" />
-      <line x1="32" y1="47" x2="50" y2="30" stroke={strokeColor} strokeWidth="5" />
-      <line x1="68" y1="47" x2="50" y2="30" stroke={strokeColor} strokeWidth="5" />
+      <line x1="32" y1="47" x2="51" y2="30" stroke={strokeColor} strokeWidth="5" />
+      <line x1="68" y1="47" x2="49" y2="30" stroke={strokeColor} strokeWidth="5" />
     </svg>
   );
 }

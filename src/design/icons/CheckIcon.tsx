@@ -20,7 +20,7 @@ export function CheckIcon(props: Props) {
       viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <line x1="25" y1="50" x2="40" y2="70" stroke={strokeColor} strokeWidth="5" />
+      <line x1="25" y1="50" x2="42" y2="70" stroke={strokeColor} strokeWidth="5" />
       <line x1="40" y1="70" x2="75" y2="30" stroke={strokeColor} strokeWidth="5" />
     </svg>
   );

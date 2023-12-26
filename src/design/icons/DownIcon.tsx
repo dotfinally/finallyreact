@@ -20,8 +20,8 @@ export function DownIcon(props: Props) {
       viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <line x1="32" y1="43" x2="50" y2="60" stroke={strokeColor} strokeWidth="5" />
-      <line x1="68" y1="43" x2="50" y2="60" stroke={strokeColor} strokeWidth="5" />
+      <line x1="32" y1="43" x2="52" y2="60" stroke={strokeColor} strokeWidth="5" />
+      <line x1="68" y1="43" x2="48" y2="60" stroke={strokeColor} strokeWidth="5" />
     </svg>
   );
 }

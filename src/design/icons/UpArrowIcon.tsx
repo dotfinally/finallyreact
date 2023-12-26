@@ -21,8 +21,8 @@ export function UpArrowIcon(props: Props) {
       xmlns="http://www.w3.org/2000/svg"
     >
       <line x1="50" y1="70" x2="50" y2="30" stroke={strokeColor} strokeWidth="5" />
-      <line x1="32" y1="47" x2="50" y2="30" stroke={strokeColor} strokeWidth="5" />
-      <line x1="68" y1="47" x2="50" y2="30" stroke={strokeColor} strokeWidth="5" />
+      <line x1="32" y1="47" x2="51" y2="30" stroke={strokeColor} strokeWidth="5" />
+      <line x1="68" y1="47" x2="49" y2="30" stroke={strokeColor} strokeWidth="5" />
     </svg>
   );
 }
