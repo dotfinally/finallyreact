@@ -1,7 +1,9 @@
-import React, { HTMLAttributes, useMemo, useCallback } from 'react';
+import React, { HTMLAttributes, useMemo, useCallback, useState, useEffect } from 'react';
 import { classnames, getFinallyConfig, omit } from '@util/index';
 import { Pagination, PaginationProps } from '../pagination/Pagination';
 import { getClassName } from './TableStyles';
+import { UpArrowIcon } from '@icons/UpArrowIcon';
+import { DownArrowIcon } from '@icons/DownArrowIcon';
 
 export interface TableProps extends HTMLAttributes<any> {
   columns: TableColumnProps[];
@@ -17,12 +19,26 @@ export interface TableProps extends HTMLAttributes<any> {
   isMobile?: boolean;
   mobileCellKeyProps?: HTMLAttributes<any>;
   mobileCellValueProps?: HTMLAttributes<any>;
+  defaultSortOrder?: {
+    index: string | number;
+    order?: 'asc' | 'desc';
+  }[];
+  onSort?: (
+    sortOrder: {
+      index: string | number;
+      order?: 'asc' | 'desc';
+    }[]
+  ) => void;
+  sortIconProps?: HTMLAttributes<any>;
+  customSortIconAsc?: React.ReactNode;
+  customSortIconDesc?: React.ReactNode;
 }
 
 export interface TableColumnProps extends HTMLAttributes<any> {
   index: string | number;
   label?: any;
   headerCell?: (headerIndex: string | number, headerLabel: any) => React.ReactNode;
+  enableSort?: boolean;
   rowCell?: (
     headerIndex: string | number,
     headerLabel: any,
@@ -54,7 +70,12 @@ const omitValues = [
   'disabled',
   'isMobile',
   'mobileCellKeyProps',
-  'mobileCellValueProps'
+  'mobileCellValueProps',
+  'defaultSortOrder',
+  'onSort',
+  'sortIconProps',
+  'customSortIconAsc',
+  'customSortIconDesc'
 ];
 const omitColumnValues = ['index', 'label', 'headerCell', 'rowCell'];
 const omitRowValues = ['cells'];
@@ -65,6 +86,40 @@ const omitRowCellValues = ['index', 'label', 'render'];
  * @param props TableProps
  */
 export function Table(props: TableProps) {
+  const [sortOrder, setSortOrder] = useState(props.defaultSortOrder || []);
+
+  useEffect(() => {
+    if (props.defaultSortOrder) {
+      setSortOrder(props.defaultSortOrder);
+    }
+  }, [props.defaultSortOrder]);
+
+  function getSortOrderForColumn(columnIndex: string | number) {
+    return sortOrder.find((order) => order.index === columnIndex)?.order || undefined;
+  }
+
+  function setSortOrderForColumn(columnIndex: string | number) {
+    const currentSortOrder = getSortOrderForColumn(columnIndex);
+    let newSortOrder;
+
+    if (currentSortOrder === 'asc') {
+      newSortOrder = sortOrder.map((order) => {
+        if (order.index === columnIndex) {
+          return { ...order, order: 'desc' };
+        } else {
+          return order;
+        }
+      });
+    } else if (currentSortOrder === 'desc') {
+      newSortOrder = sortOrder.filter((order) => order.index !== columnIndex);
+    } else {
+      newSortOrder = [...sortOrder, { index: columnIndex, order: 'asc' }];
+    }
+
+    setSortOrder(newSortOrder);
+    return newSortOrder;
+  }
+
   const finallySimple = useMemo(() => {
     return getFinallyConfig().simple;
   }, []);
@@ -73,6 +128,14 @@ export function Table(props: TableProps) {
   if (!props.columns || !props.rows) {
     console.error('Table component requires columns and rows props');
     return null;
+  }
+
+  function onClickHeader(column: TableColumnProps) {
+    if (props.onSort && column.enableSort) {
+      const newOrder = setSortOrderForColumn(column.index);
+
+      props.onSort(newOrder as any);
+    }
   }
 
   const headerRow = useMemo(() => {
@@ -84,6 +147,8 @@ export function Table(props: TableProps) {
         render = column.label;
       }
 
+      const columnSortOrder = getSortOrderForColumn(column.index);
+
       return (
         <th
           {...(props.headerRowCellProps || {})}
@@ -93,12 +158,57 @@ export function Table(props: TableProps) {
             name: 'finallyreact-table__header-row_cell',
             props,
             simple,
-            custom: `${column?.className} ${props.headerRowCellProps?.className}`
+            custom: classnames(column?.className, props.headerRowCellProps?.className, column.enableSort && 'pointer')
           })}
           role="columnheader"
           tabIndex={props.headerRowCellProps?.tabIndex || 0}
+          onClick={() => onClickHeader(column)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              onClickHeader(column);
+            }
+          }}
         >
-          {render}
+          <div
+            className={getClassName({
+              name: 'finallyreact-table__header-row_cell-content',
+              props,
+              simple
+            })}
+          >
+            {render}
+
+            {props.customSortIconAsc && columnSortOrder === 'asc' && props.customSortIconAsc}
+            {props.customSortIconDesc && columnSortOrder === 'desc' && props.customSortIconDesc}
+
+            {!props.customSortIconAsc && columnSortOrder === 'asc' && (
+              <UpArrowIcon
+                {...(props.sortIconProps || {})}
+                className={getClassName({
+                  name: 'finallyreact-table__header-row_cell-sort-asc',
+                  props,
+                  simple,
+                  custom: props.sortIconProps?.className
+                })}
+                tabIndex={props.sortIconProps?.tabIndex || 0}
+                aria-label="Sort Ascending"
+              />
+            )}
+
+            {!props.customSortIconDesc && columnSortOrder === 'desc' && (
+              <DownArrowIcon
+                {...(props.sortIconProps || {})}
+                className={getClassName({
+                  name: 'finallyreact-table__header-row_cell-sort-desc',
+                  props,
+                  simple,
+                  custom: props.sortIconProps?.className
+                })}
+                tabIndex={props.sortIconProps?.tabIndex || 0}
+                aria-label="Sort Descending"
+              />
+            )}
+          </div>
         </th>
       );
     });
@@ -118,7 +228,7 @@ export function Table(props: TableProps) {
         {headers}
       </tr>
     );
-  }, [props.columns, props.headerRowCellProps, props.simple]);
+  }, [props.columns, props.headerRowCellProps, props.simple, sortOrder]);
 
   const rows = useMemo(() => {
     const rows = [];

@@ -54,5 +54,13 @@ export function getClassName({
     }
   }
 
+  if (name === 'finallyreact-table__header-row_cell-sort-asc' || name === 'finallyreact-table__header-row_cell-sort-desc') {
+    value += ' w-2 h-2'
+  }
+
+  if (name === 'finallyreact-table__header-row_cell-content') {
+    value += ' flex align-center';
+  }
+
   return filterClassName(value, custom);
 }
