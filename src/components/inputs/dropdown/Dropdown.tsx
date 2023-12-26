@@ -216,14 +216,30 @@ export function Dropdown(props: DropdownProps) {
           ...props.textInputProps?.inputProps,
           onClick: (e) => {
             if (!props.disabled) {
-              setIsOpen(true);
+              if (!props.select) {
+                setIsOpen(true);
+              } else {
+                if (isOpen) {
+                  setIsOpen(false);
+                } else {
+                  setIsOpen(true);
+                }
+              }
             }
 
             props.textInputProps?.onClick?.(e);
           },
           onFocus: (e) => {
             if (!props.disabled) {
-              setIsOpen(true);
+              if (!props.select) {
+                setIsOpen(true);
+              } else {
+                if (isOpen) {
+                  setIsOpen(false);
+                } else {
+                  setIsOpen(true);
+                }
+              }
             }
 
             props.textInputProps?.onFocus?.(e);
