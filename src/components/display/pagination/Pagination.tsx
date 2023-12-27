@@ -63,6 +63,9 @@ export function Pagination(props: PaginationProps) {
   const showArrows = totalPages > maxDisplayPages;
   const sizes = props.sizes || DEFAULT_SIZES;
 
+  const showFirstPageSquare = () => currentPage > 1 + Math.floor(maxDisplayPages / 2);
+  const showLastPageSquare = () => currentPage < totalPages - Math.floor(maxDisplayPages / 2);
+
   useEffect(() => {
     setCurrentPage(props.page || DEFAULT_PAGE);
     setCurrentSize(props.size || DEFAULT_SIZE);
@@ -160,6 +163,31 @@ export function Pagination(props: PaginationProps) {
       role={props.role || 'navigation'}
       aria-label={props['aria-label'] || 'Pagination for search results'}
     >
+      {showArrows && showFirstPageSquare() && (
+        <div
+          className={getClassName({
+            name: 'finallyreact-pagination__page',
+            props,
+            simple,
+            custom: props.pageProps?.className
+          })}
+          onClick={() => handlePageChange(1)}
+          onKeyDown={(e) => {
+            if (props.disabled) {
+              return;
+            }
+
+            if (e.key === 'Enter') {
+              handlePageChange(1);
+            }
+          }}
+          tabIndex={0}
+          aria-label="Pagination, press for page 1"
+        >
+          1
+        </div>
+      )}
+
       {showArrows && (
         <div
           {...(props.arrowProps || {})}
@@ -235,6 +263,31 @@ export function Pagination(props: PaginationProps) {
               custom: props.rightArrowProps?.className
             })}
           />
+        </div>
+      )}
+
+      {showArrows && showLastPageSquare() && (
+        <div
+          className={getClassName({
+            name: 'finallyreact-pagination__page',
+            props,
+            simple,
+            custom: props.pageProps?.className
+          })}
+          onClick={() => handlePageChange(totalPages)}
+          onKeyDown={(e) => {
+            if (props.disabled) {
+              return;
+            }
+
+            if (e.key === 'Enter') {
+              handlePageChange(totalPages);
+            }
+          }}
+          tabIndex={0}
+          aria-label={`Pagination, press for page ${totalPages}`}
+        >
+          {totalPages}
         </div>
       )}
 

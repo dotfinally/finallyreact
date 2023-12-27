@@ -49,15 +49,15 @@ export function getClassName({
     }
 
     if (name === 'finallyreact-pagination__arrow-left') {
-      value += ' mr-1/2 ml-4/5 rotate-135';
+      value += ' mr-1/2 ml-1 rotate-135';
     }
 
     if (name === 'finallyreact-pagination__arrow-right') {
-      value += ' mr-1/2 ml-4/5 -rotate-45';
+      value += ' ml-1/2 mr-1 -rotate-45';
     }
 
     if (name === 'finallyreact-pagination__size-dropdown') {
-      value += ' mt-1/2 ml-1/2';
+      value += ' mt-1/2 ml-1';
     }
   }
 
