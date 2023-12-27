@@ -77,7 +77,7 @@ const omitValues = [
   'customSortIconAsc',
   'customSortIconDesc'
 ];
-const omitColumnValues = ['index', 'label', 'headerCell', 'rowCell'];
+const omitColumnValues = ['index', 'label', 'headerCell', 'enableSort', 'rowCell'];
 const omitRowValues = ['cells'];
 const omitRowCellValues = ['index', 'label', 'render'];
 

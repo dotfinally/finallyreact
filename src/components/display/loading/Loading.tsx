@@ -41,8 +41,7 @@ export function Loading(props: LoadingProps) {
           custom: props.spinnerProps?.className
         })}
         style={{
-          borderRightColor: checkHex(props.color),
-          borderBottomColor: checkHex(props.color),
+          borderTopColor: checkHex(props.color),
           borderLeftColor: checkHex(props.color)
         }}
       />

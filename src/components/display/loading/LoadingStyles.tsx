@@ -16,7 +16,7 @@ export function getClassName({
 
   if (name === 'finallyreact-loading__icon') {
     if (!simple) {
-      value += ' inline-block border-2 border-t-transparent rounded-1/2 content-empty h-2 w-2 will-change-transform';
+      value += ' h-2 w-2 inline-block rounded-1/2 border-t-3 border-l-3 border-r-3 border-r-transparent border-box';
 
       if (props.rainbow) {
         value += ' spinning-rainbow';
@@ -28,9 +28,9 @@ export function getClassName({
 
   if (!props.rainbow) {
     if (props.color) {
-      value += ' border-' + props.color;
+      value += ' border-t-' + props.color + ' border-l-' + props.color;
     } else {
-      value += ' border-black';
+      value += ' border-t-black border-l-black';
     }
   }
 
