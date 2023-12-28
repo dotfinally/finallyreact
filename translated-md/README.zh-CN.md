@@ -16,8 +16,6 @@ FinallyReact是一个以灵活性和可用性为理念创建的React设计库。
 - 提供全面的实用类快捷方式集，加快样式设计速度
 - 专注于可访问性并经过测试
 
-**`FinallyReact目前处于测试版（1.0版本之前）阶段，暂不建议用于生产环境`**
-
 ## 文档
 
 您可以在[FinallyReact网站](https://finallyreact.com)上找到所有组件、设计和实用工具元素的示例（完全使用FinallyReact构建）。

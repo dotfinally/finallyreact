@@ -16,8 +16,6 @@ FinallyReact es una biblioteca de diseño para React creada con flexibilidad y u
 - Un conjunto completo de atajos de clases de utilidad para un estilo más rápido
 - Enfoque y pruebas en accesibilidad
 
-**`Actualmente FinallyReact está en beta (pre versión 1) y no se recomienda aún para uso en producción`**
-
 ## Documentación
 
 Puedes encontrar ejemplos de todos los componentes, diseños y elementos de utilidad en el [sitio web de FinallyReact](https://finallyreact.com) (construido enteramente con FinallyReact).
