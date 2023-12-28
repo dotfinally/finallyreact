@@ -15,9 +15,9 @@ We take the security of FinallyReact seriously. If you believe you have found a 
 
 If you have discovered a security issue with FinallyReact, please follow these steps:
 
-1. **Contact Us Privately**: Please email us at [security@dotfinally.com](mailto:security@dotfinally.com) with a detailed report. Do not disclose this vulnerability publicly until we have had a chance to investigate and address the issue.
+1. **Contact Us Privately**: Use Github's private security vulnerability reporting feature. Under the security tab, click "Report a vulnerability" and fill out details.
 
-2. **Provide Details**: In your email, please provide as much information as possible about the vulnerability. This can include:
+2. **Provide Details**: In the report, please provide as much information as possible about the vulnerability, including:
    - The version of FinallyReact you are using.
    - Any relevant configurations and dependencies.
    - Your operating system and its version.
