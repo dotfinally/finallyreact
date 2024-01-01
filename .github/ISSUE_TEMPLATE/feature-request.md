@@ -1,5 +1,5 @@
 ---
-name: Issue Template
+name: Feature Request
 about: Feature request for FinallyReact
 title: ''
 labels: ''
