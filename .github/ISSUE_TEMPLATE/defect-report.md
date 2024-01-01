@@ -1,5 +1,5 @@
 ---
-name: FinallyReact Defect Report
+name: Defect Report
 about: Defect report for FinallyReact
 title: ''
 labels: ''
