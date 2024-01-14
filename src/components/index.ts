@@ -1,6 +1,7 @@
 export * from './display/accordion/Accordion';
 export * from './display/accordion/AccordionGroup';
 export * from './display/card/Card';
+export * from './display/carousel/Carousel';
 export * from './display/loading/Loading';
 export * from './display/modal/Modal';
 export * from './display/notification/Notification';
