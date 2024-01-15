@@ -41,7 +41,7 @@ export function Carousel(props: CarouselProps) {
   const itemsToShow = props.itemsToShow || 1;
 
   const handleLeftArrowClick = (e: any) => {
-    const newIndex = Math.max(currentIndex - itemsToShow, 0);
+    const newIndex = Math.max(currentIndex - 1, 0);
     setCurrentIndex(newIndex);
 
     e.newIndex = newIndex;
@@ -49,7 +49,7 @@ export function Carousel(props: CarouselProps) {
   };
 
   const handleRightArrowClick = (e: any) => {
-    const newIndex = Math.min(currentIndex + itemsToShow, length - itemsToShow);
+    const newIndex = Math.min(currentIndex + 1, length - itemsToShow);
     setCurrentIndex(newIndex);
 
     e.newIndex = newIndex;
