@@ -40,5 +40,6 @@ export * from './UpIcon';
 export * from './UserCircleIcon';
 export * from './UserIcon';
 export * from './WarningIcon';
+export * from './WebIcon';
 export * from './XCircleIcon';
 export * from './XIcon';
