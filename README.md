@@ -97,9 +97,9 @@ If you'd like to run FinallyReact locally on your computer to make or test chang
 
 ### Prerequisites
 
-- NodeJS 18.16.1 or higher
-- NPM 9.7.2 or higher
-- React 16.8 or higher
+- NodeJS 20.x or higher
+- NPM 10.x or higher
+- React 18.x or higher
 
 (older versions of Node might work but are not tested)
 
