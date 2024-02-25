@@ -29,6 +29,7 @@ const omitValues = [
   'inputProps',
   'label',
   'labelProps',
+  'toggleProps',
   'simple',
   'size',
   'toggle'

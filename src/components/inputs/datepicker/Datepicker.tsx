@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect, useMemo } from 'react';
-import { classnames, dispatchChangeValue, getFinallyConfig, omit, usePopover } from '@util/index';
+import { dispatchChangeValue, getFinallyConfig, omit, usePopover } from '@util/index';
 import { TextInput, TextInputProps } from '../input/TextInput';
 import { getClassName } from './DatepickerStyles';
 import { Dropdown, DropdownProps, NumberInput, NumberInputProps } from '@components/index';
@@ -24,6 +24,7 @@ export interface DatepickerProps extends HTMLAttributes<any> {
   yearLabelProps?: HTMLAttributes<any>;
   yearPickerProps?: NumberInputProps;
   customYearPicker?: any;
+  placeholder?: string;
 }
 
 const omitValues = [
@@ -45,7 +46,8 @@ const omitValues = [
   'customMonthPicker',
   'yearLabelProps',
   'yearPickerProps',
-  'customYearPicker'
+  'customYearPicker',
+  'placeholder'
 ];
 
 const DEFAULT_DATE_MASK = 'yyyy-mm-dd';
@@ -506,6 +508,7 @@ export function Datepicker(props: DatepickerProps) {
                 simple,
                 custom: props.monthPickerProps?.className
               })}
+              simple={simple}
             />
           )
         ) : (
@@ -539,13 +542,14 @@ export function Datepicker(props: DatepickerProps) {
           ) : (
             <NumberInput
               {...(props.yearPickerProps || {})}
+              simple={simple}
               initialValue={props.yearPickerProps?.initialValue ?? displayYear != null ? displayYear : details.year}
               onBlur={(e: any) => {
                 setDisplayYear(e.target.value);
                 setEditYear(false);
                 props.yearPickerProps?.onChange?.(e);
               }}
-              onKeyDown={(e) => {
+              onKeyDown={(e: any) => {
                 if (e.key === 'Enter') {
                   setDisplayYear(e.target.value);
                   setEditYear(false);

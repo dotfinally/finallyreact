@@ -49,6 +49,10 @@ const omitValues = [
   'items'
 ];
 
+const omitNavItemValues = ['key', 'label', 'iconLeft', 'iconRight', 'onClick', 'itemProps', 'disabled', 'dropdownItems'];
+
+const omitDropdownItemValues = ['key', 'label', 'iconLeft', 'iconRight', 'itemProps', 'disabled', 'onClick'];
+
 /**
  * Navbar component for top level navigation items.
  * @param props NavbarProps
@@ -82,6 +86,7 @@ export function Navbar(props: NavbarProps) {
 
     return (
       <div
+        {...(omit(item.itemProps || {}, omitNavItemValues))}
         className={getClassName({
           name: 'finallyreact-navbar__dropdown_item',
           props,
@@ -123,7 +128,7 @@ export function Navbar(props: NavbarProps) {
           >
             {item.dropdownItems?.map((dropdownItem, index) => (
               <div
-                {...(dropdownItem.itemProps || {})}
+                {...(omit(dropdownItem.itemProps || {}, omitDropdownItemValues))}
                 className={getClassName({
                   name: 'finallyreact-navbar__item-dropdown_item',
                   props,
