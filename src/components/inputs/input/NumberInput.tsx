@@ -170,7 +170,7 @@ export function NumberInput(props: NumberInputProps) {
 
   // emit the raw number value on change
   function onChange(e) {
-    const changeValue = e.target.value;
+    const changeValue = e?.target.value;
     const unformattedChangeValue = unformatLocaleNumber(e.target.value, props.locale);
     setNumberValue(changeValue);
 

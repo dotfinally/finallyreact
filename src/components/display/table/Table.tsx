@@ -233,16 +233,16 @@ export function Table(props: TableProps) {
   const rows = useMemo(() => {
     const rows = [];
 
-    props.rows.forEach((row, index) => {
+    props.rows?.forEach((row, index) => {
       const rowData = [];
 
       // loop through columns to ensure row data is in the same order as columns
-      props.columns.forEach((column, index) => {
+      props.columns?.forEach((column, index) => {
         let rowItem;
         if (column.index != null) {
-          rowItem = row.cells.find((rowCell) => rowCell.index === column.index);
+          rowItem = row?.cells.find((rowCell) => rowCell.index === column.index);
         } else {
-          rowItem = row.cells[index];
+          rowItem = row?.cells[index];
         }
 
         let render;
@@ -308,7 +308,7 @@ export function Table(props: TableProps) {
         key={`finallyreact-table__mobile-row-${index}`}
         aria-label={props.rowProps?.['aria-label'] || `Table Mobile Row ${index + 1}`}
       >
-        {row.cells.map((cell, index) => {
+        {row?.cells?.map((cell, index) => {
           const cellValue = cell?.label || cell?.render(cell?.index, cell?.label);
           const cellHeader =
             props.columns[index]?.label ||

@@ -42,7 +42,7 @@ export function AccordionGroup(props: AccordionGroupProps) {
   function onClickGroup(e, item, index) {
     if (type === 'single') {
       const newAccordions = [...accordions];
-      newAccordions.forEach((newItem, newItemIndex) => {
+      newAccordions?.forEach((newItem, newItemIndex) => {
         if (newItemIndex === index && !newItem.open) {
           newAccordions[newItemIndex] = {
             ...newItem,

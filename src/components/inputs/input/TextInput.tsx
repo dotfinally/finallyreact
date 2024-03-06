@@ -109,7 +109,7 @@ export function TextInput(props: TextInputProps) {
       return;
     }
 
-    let changeValue = e.target.value;
+    let changeValue = e?.target.value;
     let unformattedValue = '';
 
     if (props.mask && changeValue?.length > props.mask?.length) {
@@ -149,7 +149,7 @@ export function TextInput(props: TextInputProps) {
       if (maskChar !== '1') {
         setValue(value.slice(0, -1) ?? '');
         props.onKeyDown?.(e);
-        e.preventDefault();
+        e?.preventDefault();
         return;
       }
     }

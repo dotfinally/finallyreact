@@ -35,7 +35,7 @@ export const Form = forwardRef((props: FormProps, ref) => {
         setValues(props.initialValues || {});
         // find every input or textarea in the form and reset it
         const inputs = document.querySelectorAll(`#${props.id} input, #${props.id} textarea`);
-        inputs.forEach((input: any) => {
+        inputs?.forEach((input: any) => {
           input.value = '';
         });
       },
@@ -145,7 +145,7 @@ export const Form = forwardRef((props: FormProps, ref) => {
   }
 
   function onSubmit(e) {
-    e.preventDefault();
+    e?.preventDefault();
 
     const validations = validateForm(props.validations, values);
     props.onSubmit?.({

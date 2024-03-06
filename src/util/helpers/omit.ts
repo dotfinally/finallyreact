@@ -14,7 +14,7 @@ export function omit(obj: any, keys: string | string[]) {
   if (typeof keys === 'string') {
     delete newObj[keys];
   } else {
-    keys.forEach((key) => delete newObj[key]);
+    keys?.forEach((key) => delete newObj[key]);
   }
 
   return newObj;

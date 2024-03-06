@@ -13,18 +13,18 @@ export function isEqual(a, b) {
 
   // If either a or b is a function, compare them as functions
   if (typeof a === 'function' || typeof b === 'function') {
-    return a.toString() === b.toString();
+    return a?.toString() === b?.toString();
   }
 
   // If a and b are Date objects, compare their time values
   if (a instanceof Date && b instanceof Date) {
-    return a.getTime() === b.getTime();
+    return a?.getTime() === b?.getTime();
   }
 
   // If a and b are arrays, compare their elements
   if (Array.isArray(a) && Array.isArray(b)) {
-    if (a.length !== b.length) return false;
-    for (let i = 0; i < a.length; i++) {
+    if (a?.length !== b?.length) return false;
+    for (let i = 0; i < a?.length; i++) {
       if (!isEqual(a[i], b[i])) return false;
     }
     return true;

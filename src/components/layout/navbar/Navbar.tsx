@@ -144,7 +144,7 @@ export function Navbar(props: NavbarProps) {
                   }
                 }}
                 onKeyDown={(e) => {
-                  if (!dropdownItem.disabled && e.key === 'Enter') {
+                  if (!dropdownItem.disabled && e?.key === 'Enter') {
                     setActiveKey(dropdownItem.key);
                     dropdownItem.onClick?.();
                     setShowDropdown(false);
@@ -312,7 +312,7 @@ export function Navbar(props: NavbarProps) {
                             }
                           }}
                           onKeyDown={(e) => {
-                            if (!item.disabled && e.key === 'Enter') {
+                            if (!item.disabled && e?.key === 'Enter') {
                               setActiveKey(item.key);
                               item.onClick?.();
                             }

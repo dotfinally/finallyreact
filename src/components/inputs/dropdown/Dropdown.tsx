@@ -116,7 +116,7 @@ export function Dropdown(props: DropdownProps) {
       return;
     }
 
-    const value = e.target.value;
+    const value = e?.target.value;
 
     if (!isOpen) {
       setIsOpen(true);
@@ -139,10 +139,10 @@ export function Dropdown(props: DropdownProps) {
 
   function onkeydown(e) {
     if (!props.disabled) {
-      const key = e.key;
+      const key = e?.key;
 
       if (key === 'ArrowDown') {
-        e.preventDefault();
+        e?.preventDefault();
 
         if (!isOpen) {
           setIsOpen(true);
@@ -155,7 +155,7 @@ export function Dropdown(props: DropdownProps) {
           scrollToOption(nextOption || options[0]);
         }
       } else if (key === 'ArrowUp') {
-        e.preventDefault();
+        e?.preventDefault();
 
         if (!isOpen) {
           setIsOpen(true);
@@ -168,7 +168,7 @@ export function Dropdown(props: DropdownProps) {
           scrollToOption(nextOption || options[options.length - 1]);
         }
       } else if (key === 'Enter') {
-        e.preventDefault();
+        e?.preventDefault();
 
         if (isOpen) {
           onChange(e, currentOption);

@@ -423,7 +423,7 @@ export function Datepicker(props: DatepickerProps) {
     // If Enter, Tab, or Escape key is pressed, close datepicker
     if (e.key === 'Escape' && isOpen) {
       setIsOpen(false);
-    } else if (!isOpen && e.key !== 'Tab') {
+    } else if (!isOpen && e?.key !== 'Tab') {
       setIsOpen(true);
     }
   }
@@ -497,7 +497,7 @@ export function Datepicker(props: DatepickerProps) {
               autoFilterOnSearch={props.monthPickerProps?.autoFilterOnSearch ?? true}
               initialValue={props.monthPickerProps?.initialValue ?? displayMonth != null ? displayMonth : details.month}
               onChange={(e: any) => {
-                console.log('month on change', e.target.value);
+                console.log('month on change', e?.target.value);
                 setDisplayMonth(e.target.value);
                 setEditMonth(false);
                 props.monthPickerProps?.onChange?.(e);
@@ -786,7 +786,7 @@ export function Datepicker(props: DatepickerProps) {
         onKeyDown={(e) => {
           if (!props.disabled) {
             // if shift tab, close the datepicker
-            if (e.key === 'Tab' && e.shiftKey) {
+            if (e.key === 'Tab' && e?.shiftKey) {
               setIsOpen(false);
             }
             props.inputProps?.onKeyDown?.(e);

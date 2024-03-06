@@ -108,10 +108,10 @@ export const Notification = forwardRef((props: NotificationProps, ref) => {
     // sort by key timestamp and only keep notifications older than current time
     const sortedNotifications = filteredNotifications
       .sort((a, b) => {
-        return Number(a.getAttribute('time-key')) - Number(b.getAttribute('time-key'));
+        return Number(a?.getAttribute('time-key')) - Number(b?.getAttribute('time-key'));
       })
       .filter((el) => {
-        return Number(el.getAttribute('time-key')) < compareTime;
+        return Number(el?.getAttribute('time-key')) < compareTime;
       });
 
     // get last notification element
