@@ -169,46 +169,38 @@ export function Table(props: TableProps) {
             }
           }}
         >
-          <div
-            className={getClassName({
-              name: 'finallyreact-table__header-row_cell-content',
-              props,
-              simple
-            })}
-          >
-            {render}
+          {render}
 
-            {props.customSortIconAsc && columnSortOrder === 'asc' && props.customSortIconAsc}
-            {props.customSortIconDesc && columnSortOrder === 'desc' && props.customSortIconDesc}
+          {props.customSortIconAsc && columnSortOrder === 'asc' && props.customSortIconAsc}
+          {props.customSortIconDesc && columnSortOrder === 'desc' && props.customSortIconDesc}
 
-            {!props.customSortIconAsc && columnSortOrder === 'asc' && (
-              <UpArrowIcon
-                {...(props.sortIconProps || {})}
-                className={getClassName({
-                  name: 'finallyreact-table__header-row_cell-sort-asc',
-                  props,
-                  simple,
-                  custom: props.sortIconProps?.className
-                })}
-                tabIndex={props.sortIconProps?.tabIndex || 0}
-                aria-label="Sort Ascending"
-              />
-            )}
+          {!props.customSortIconAsc && columnSortOrder === 'asc' && (
+            <UpArrowIcon
+              {...(props.sortIconProps || {})}
+              className={getClassName({
+                name: 'finallyreact-table__header-row_cell-sort-asc',
+                props,
+                simple,
+                custom: props.sortIconProps?.className
+              })}
+              tabIndex={props.sortIconProps?.tabIndex || 0}
+              aria-label="Sort Ascending"
+            />
+          )}
 
-            {!props.customSortIconDesc && columnSortOrder === 'desc' && (
-              <DownArrowIcon
-                {...(props.sortIconProps || {})}
-                className={getClassName({
-                  name: 'finallyreact-table__header-row_cell-sort-desc',
-                  props,
-                  simple,
-                  custom: props.sortIconProps?.className
-                })}
-                tabIndex={props.sortIconProps?.tabIndex || 0}
-                aria-label="Sort Descending"
-              />
-            )}
-          </div>
+          {!props.customSortIconDesc && columnSortOrder === 'desc' && (
+            <DownArrowIcon
+              {...(props.sortIconProps || {})}
+              className={getClassName({
+                name: 'finallyreact-table__header-row_cell-sort-desc',
+                props,
+                simple,
+                custom: props.sortIconProps?.className
+              })}
+              tabIndex={props.sortIconProps?.tabIndex || 0}
+              aria-label="Sort Descending"
+            />
+          )}
         </th>
       );
     });
@@ -299,6 +291,7 @@ export function Table(props: TableProps) {
   function getMobileTableRow(row: TableRowProps, index: number) {
     return (
       <div
+        {...(row || {})}
         className={getClassName({
           name: 'finallyreact-table__row',
           props,
@@ -306,7 +299,7 @@ export function Table(props: TableProps) {
           custom: `${row?.className} ${props.rowProps?.className}`
         })}
         key={`finallyreact-table__mobile-row-${index}`}
-        aria-label={props.rowProps?.['aria-label'] || `Table Mobile Row ${index + 1}`}
+        aria-label={row['aria-label'] || props.rowProps?.['aria-label'] || `Table Mobile Row ${index + 1}`}
       >
         {row?.cells?.map((cell, index) => {
           const cellValue = cell?.label || cell?.render(cell?.index, cell?.label);
@@ -316,6 +309,7 @@ export function Table(props: TableProps) {
 
           return (
             <div
+              {...(cell || {})}
               className={getClassName({
                 name: 'finallyreact-table__row_cell',
                 props,

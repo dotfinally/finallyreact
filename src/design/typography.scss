@@ -64,8 +64,19 @@ h6 {
 /* ------------------- */
 /* ---- TEXT --------- */
 /* ------------------- */
-.text-xxl,
-.text-extra-extra-large {
+.text-5xl {
+  font-size: 5rem; // 80px at 16px browser font size
+}
+
+.text-4xl {
+  font-size: 4rem; // 64px at 16px browser font size
+}
+
+.text-3xl {
+  font-size: 3rem; // 48px at 16px browser font size
+}
+
+.text-2xl {
   font-size: 2.25rem; // 36px at 16px browser font size
 }
 

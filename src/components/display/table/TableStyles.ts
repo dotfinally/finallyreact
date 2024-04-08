@@ -25,7 +25,7 @@ export function getClassName({
     }
 
     if (name === 'finallyreact-table__header-row_cell') {
-      value += ' table-cell border-b-gray-3 padding-1/2';
+      value += ' table-cell border-b-gray-3';
     }
 
     if (name === 'finallyreact-table__row') {
@@ -40,7 +40,7 @@ export function getClassName({
       if (props.isMobile) {
         value += ' flex';
       } else {
-        value += ' table-cell border-b-gray-3 padding-1/2';
+        value += ' table-cell border-b-gray-3';
       }
       
     }
@@ -56,10 +56,6 @@ export function getClassName({
 
   if (name === 'finallyreact-table__header-row_cell-sort-asc' || name === 'finallyreact-table__header-row_cell-sort-desc') {
     value += ' w-2 h-2'
-  }
-
-  if (name === 'finallyreact-table__header-row_cell-content') {
-    value += ' flex align-center';
   }
 
   return filterClassName(value, custom);

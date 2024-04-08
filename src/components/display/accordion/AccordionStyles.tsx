@@ -45,7 +45,7 @@ export function getClassName({
         value += ' cursor-not-allowed';
       }
 
-      value += ' cursor-pointer flex justify-content-between border-1 border-black p-1';
+      value += ' cursor-pointer flex justify-content-between p-1';
     }
   }
 
@@ -61,8 +61,6 @@ export function getClassName({
         value += ' none';
       }
     } else {
-      value += ' border-1 border-black';
-
       if (open) {
         value += ' block';
       } else {

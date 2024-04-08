@@ -34,8 +34,16 @@ body {
   min-height: 100vh;
 }
 
+.min-h-fit {
+  min-height: fit-content;
+}
+
 .min-w-screen {
   min-width: 100vw;
+}
+
+.min-w-fit {
+  min-width: fit-content;
 }
 
 .max-h-screen {
@@ -60,6 +68,12 @@ body {
 
 .w-min-content {
   width: min-content;
+}
+
+.w-fill {
+  width: -webkit-fill-available; /* For Chrome, Safari, and other WebKit browsers */
+  width: -moz-available; /* For Firefox */
+  width: stretch;
 }
 
 .h-max-content {
@@ -1593,6 +1607,61 @@ body {
 
       .gap-#{$i - 1}-#{'1\\/'}#{$j} {
         gap: #{($i - 1) + math.div(1, $j)}rem;
+      }
+    }
+  }
+}
+
+/* --------------------- */
+/* ---- LINE HEIGHT ---- */
+/* --------------------- */
+@for $i from 1 through 12 {
+  .lh-#{$i},
+  .line-height-#{$i} {
+    line-height: #{$i};
+  }
+
+  @for $j from 2 to 11 {
+    // if $i - 1 is zero
+    @if $i == 1 {
+      .lh-#{'1\\/'}#{$j},
+      .line-height-#{'1\\/'}#{$j} {
+        line-height: #{math.div(1, $j)};
+      }
+
+      .lh-#{'2\\/'}#{$j},
+      .line-height-#{'2\\/'}#{$j} {
+        line-height: #{math.div(2, $j)};
+      }
+
+      .lh-#{'3\\/'}#{$j},
+      .line-height-#{'3\\/'}#{$j} {
+        line-height: #{math.div(3, $j)};
+      }
+
+      .lh-#{'4\\/'}#{$j},
+      .line-height-#{'4\\/'}#{$j} {
+        line-height: #{math.div(4, $j)};
+      }
+    } @else {
+      .lh-#{$i - 1}-#{'1\\/'}#{$j},
+      .line-height-#{$i - 1}-#{'1\\/'}#{$j} {
+        line-height: #{($i - 1) + math.div(1, $j)};
+      }
+
+      .lh-#{$i - 1}-#{'2\\/'}#{$j},
+      .line-height-#{$i - 1}-#{'2\\/'}#{$j} {
+        line-height: #{($i - 1) + math.div(2, $j)};
+      }
+
+      .lh-#{$i - 1}-#{'3\\/'}#{$j},
+      .line-height-#{$i - 1}-#{'3\\/'}#{$j} {
+        line-height: #{($i - 1) + math.div(3, $j)};
+      }
+
+      .lh-#{$i - 1}-#{'4\\/'}#{$j},
+      .line-height-#{$i - 1}-#{'4\\/'}#{$j} {
+        line-height: #{($i - 1) + math.div(4, $j)};
       }
     }
   }

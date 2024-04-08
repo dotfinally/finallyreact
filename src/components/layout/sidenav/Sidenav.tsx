@@ -17,6 +17,9 @@ export interface SidenavProps extends HTMLAttributes<any> {
   withNavbar?: boolean;
   showSearch?: boolean;
   sidenavSearchProps?: TextInputProps;
+  mobileToggleProps?: HTMLAttributes<any>;
+  mobileToggleIconOpenColor?: string;
+  mobileToggleIconCloseColor?: string;
 }
 
 export interface SidenavItemProps extends HTMLAttributes<any> {
@@ -43,7 +46,10 @@ const omitValues = [
   'sticky',
   'withNavbar',
   'showSearch',
-  'sidenavSearchProps'
+  'sidenavSearchProps',
+  'mobileToggleProps',
+  'mobileToggleIconOpenColor',
+  'mobileToggleIconCloseColor'
 ];
 const omitItemValues = ['icon', 'id', 'label', 'link', 'type', 'items', 'disabled', 'render', 'alts'];
 
@@ -76,7 +82,7 @@ export function Sidenav(props: SidenavProps) {
   }, [isMobile]);
 
   const items = useMemo(() => {
-    if (!props.items) {
+    if (!props.items?.length) {
       return null;
     }
 
@@ -312,7 +318,11 @@ export function Sidenav(props: SidenavProps) {
     </div>
   );
 
-  if (isMobile && !props.hideMobileMenu && !props.simple && !props.customContent) {
+  if (
+    isMobile &&
+    !simple &&
+    (props.hideMobileMenu === false || (props.hideMobileMenu == null && !props.customContent))
+  ) {
     return (
       <div
         className={getClassName({
@@ -327,7 +337,8 @@ export function Sidenav(props: SidenavProps) {
         <button
           className={getClassName({
             name: 'finallyreact_sidenav__toggle',
-            props
+            props,
+            custom: props.mobileToggleProps?.className
           })}
           onClick={() => setOpen(!open)}
           aria-label="toggle side navigation"
@@ -336,21 +347,42 @@ export function Sidenav(props: SidenavProps) {
             className={getClassName({
               name: 'finallyreact_sidenav__top',
               props,
-              open
+              open,
+              custom: open
+                ? props.mobileToggleIconOpenColor
+                  ? `${props.mobileToggleIconOpenColor}-bg`
+                  : ''
+                : props.mobileToggleIconCloseColor
+                ? `${props.mobileToggleIconCloseColor}-bg`
+                : ''
             })}
           ></span>
           <span
             className={getClassName({
               name: 'finallyreact_sidenav__mid',
               props,
-              open
+              open,
+              custom: open
+                ? props.mobileToggleIconOpenColor
+                  ? `${props.mobileToggleIconOpenColor}-bg`
+                  : ''
+                : props.mobileToggleIconCloseColor
+                ? `${props.mobileToggleIconCloseColor}-bg`
+                : ''
             })}
           ></span>
           <span
             className={getClassName({
               name: 'finallyreact_sidenav__bot',
               props,
-              open
+              open,
+              custom: open
+                ? props.mobileToggleIconOpenColor
+                  ? `${props.mobileToggleIconOpenColor}-bg`
+                  : ''
+                : props.mobileToggleIconCloseColor
+                ? `${props.mobileToggleIconCloseColor}-bg`
+                : ''
             })}
           ></span>
         </button>
