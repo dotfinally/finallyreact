@@ -302,7 +302,7 @@ export function Table(props: TableProps) {
         aria-label={row['aria-label'] || props.rowProps?.['aria-label'] || `Table Mobile Row ${index + 1}`}
       >
         {row?.cells?.map((cell, index) => {
-          const cellValue = cell?.label || cell?.render(cell?.index, cell?.label);
+          const cellValue = cell?.label || cell?.render?.(cell?.index, cell?.label);
           const cellHeader =
             props.columns[index]?.label ||
             props.columns[index]?.headerCell?.(props.columns[index]?.index, props.columns[index]?.label);
