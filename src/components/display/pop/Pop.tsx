@@ -49,6 +49,9 @@ export function Pop(props: PopWrapperProps) {
       onMouseLeave={() => setShowHover(false)}
       onClick={() => {
         setShowClick(!showClick);
+        if (showHover) {
+          setShowHover(false);
+        }
       }}
       onFocus={() => {
         setShowHover(true);
