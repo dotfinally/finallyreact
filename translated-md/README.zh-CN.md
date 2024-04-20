@@ -52,34 +52,8 @@ export default {
 
 ### PurgeCSS（可选）
 
-为了减小CSS包的大小，您可以使用PostCSS和PurgeCSS。以下是添加到PostCSS的示例配置：
-
-```js
-if (process.env.NODE_ENV === 'production') {
-  plugins['@fullhuman/postcss-purgecss'] = {
-    content: [
-      './**/*.ts',
-      './**/*.tsx',
-      './**/*.html',
-      '../../node_modules/finallyreact/index.js',
-      '../../libs/ui/src/**/*.ts',
-      '../../libs/ui/src/**/*.tsx',
-    ],
-    safelist: [
-      /lava/,
-      /apple/,
-      /ruby/,
-      /red/,
-      /flamingo/,
-      ...(any other colors you use)
-    ],
-    defaultExtractor: (content) => {
-      const matches = content.match(/[\w-/:]+(?<!:)/g) || [];
-      return matches.concat(matches.map((match) => match.replace(/\//g, '\\/')));
-    }
-  };
-}
-```
+为了减小CSS包的大小，您可以使用PostCSS和PurgeCSS。
+您可以在 `examples` 文件夹中找到一个 `postcss.config.js` 文件的示例。
 
 注意：确保您的purgecss内容包括`node_modules/finallyreact/index.js`。如果您的应用位于monorepo中，请使用指向node_modules的路径，例如：`../../node_modules/finallyreact/index.js`
 

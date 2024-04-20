@@ -52,34 +52,8 @@ export default {
 
 ### PurgeCSS (opcional)
 
-Para reducir el tamaño del paquete de CSS, puedes usar PostCSS y PurgeCSS. A continuación se muestra un ejemplo de configuración para añadir a PostCSS:
-
-```js
-if (process.env.NODE_ENV === 'production') {
-  plugins['@fullhuman/postcss-purgecss'] = {
-    content: [
-      './**/*.ts',
-      './**/*.tsx',
-      './**/*.html',
-      '../../node_modules/finallyreact/index.js',
-      '../../libs/ui/src/**/*.ts',
-      '../../libs/ui/src/**/*.tsx',
-    ],
-    safelist: [
-      /lava/,
-      /apple/,
-      /ruby/,
-      /red/,
-      /flamingo/,
-      ...(any other colors you use)
-    ],
-    defaultExtractor: (content) => {
-      const matches = content.match(/[\w-/:]+(?<!:)/g) || [];
-      return matches.concat(matches.map((match) => match.replace(/\//g, '\\/')));
-    }
-  };
-}
-```
+Para reducir el tamaño del paquete de CSS, puedes usar PostCSS y PurgeCSS.
+Puedes encontrar un ejemplo de archivo `postcss.config.js` en la carpeta `examples`.
 
 Nota: Asegúrate de que tu contenido de purgecss incluya `node_modules/finallyreact/index.js`. Si tu aplicación está en un monorepo, utiliza tu ruta a node_module, por ejemplo: `../../node_modules/finallyreact/index.js`
 

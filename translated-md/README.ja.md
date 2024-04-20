@@ -52,34 +52,8 @@ export default {
 
 ### PurgeCSS（オプション）
 
-CSSバンドルのサイズを減らすために、PostCSSとPurgeCSSを使用することができます。以下はPostCSSに追加する例の設定です：
-
-```js
-if (process.env.NODE_ENV === 'production') {
-  plugins['@fullhuman/postcss-purgecss'] = {
-    content: [
-      './**/*.ts',
-      './**/*.tsx',
-      './**/*.html',
-      '../../node_modules/finallyreact/index.js',
-      '../../libs/ui/src/**/*.ts',
-      '../../libs/ui/src/**/*.tsx',
-    ],
-    safelist: [
-      /lava/,
-      /apple/,
-      /ruby/,
-      /red/,
-      /flamingo/,
-      ...(any other colors you use)
-    ],
-    defaultExtractor: (content) => {
-      const matches = content.match(/[\w-/:]+(?<!:)/g) || [];
-      return matches.concat(matches.map((match) => match.replace(/\//g, '\\/')));
-    }
-  };
-}
-```
+CSSバンドルのサイズを減らすために、PostCSSとPurgeCSSを使用することができます。
+`examples` フォルダーにある `postcss.config.js` ファイルの例を見つけることができます。
 
 注：PurgeCSSの内容には`node_modules/finallyreact/index.js`を含めてください。あなたのアプリがモノレポ内にある場合は、node_modulesへのパスを使用してください。例えば：`../../node_modules/finallyreact/index.js`
 

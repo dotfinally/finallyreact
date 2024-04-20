@@ -52,34 +52,8 @@ export default {
 
 ### PurgeCSS (선택 사항)
 
-CSS 번들 크기를 줄이기 위해 PostCSS와 PurgeCSS를 사용할 수 있습니다. 아래는 PostCSS에 추가할 예제 설정입니다:
-
-```js
-if (process.env.NODE_ENV === 'production') {
-  plugins['@fullhuman/postcss-purgecss'] = {
-    content: [
-      './**/*.ts',
-      './**/*.tsx',
-      './**/*.html',
-      '../../node_modules/finallyreact/index.js',
-      '../../libs/ui/src/**/*.ts',
-      '../../libs/ui/src/**/*.tsx',
-    ],
-    safelist: [
-      /lava/,
-      /apple/,
-      /ruby/,
-      /red/,
-      /flamingo/,
-      ...(any other colors you use)
-    ],
-    defaultExtractor: (content) => {
-      const matches = content.match(/[\w-/:]+(?<!:)/g) || [];
-      return matches.concat(matches.map((match) => match.replace(/\//g, '\\/')));
-    }
-  };
-}
-```
+CSS 번들 크기를 줄이기 위해 PostCSS와 PurgeCSS를 사용할 수 있습니다.
+`examples` 폴더에서 `postcss.config.js` 파일의 예제를 찾을 수 있습니다.
 
 참고: PurgeCSS 내용에 `node_modules/finallyreact/index.js`가 포함되어 있는지 확인하세요. 앱이 모노레포에 있는 경우, 예를 들어 `../../node_modules/finallyreact/index.js`와 같이 node_module 경로를 사용하세요.
 
