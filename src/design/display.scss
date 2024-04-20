@@ -213,6 +213,26 @@
   }
 }
 
+.grid {
+  display: grid;
+}
+
+.hover\:grid {
+  &:hover {
+    display: grid;
+  }
+}
+
+.inline-grid {
+  display: inline-grid;
+}
+
+.hover\:inline-grid {
+  &:hover {
+    display: inline-grid;
+  }
+}
+
 /* ----------------- */
 /* --- SHADOWS ----- */
 /* ----------------- */
