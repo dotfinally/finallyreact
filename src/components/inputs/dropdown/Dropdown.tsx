@@ -254,6 +254,7 @@ export function Dropdown(props: DropdownProps) {
           setSelectedOption(null);
           props.textInputProps?.onClear?.();
           props.onChange?.({ target: { value: null } } as any);
+          setIsOpen(false);
         }}
         className={getClassName({
           name: 'finallyreact-dropdown__input',
