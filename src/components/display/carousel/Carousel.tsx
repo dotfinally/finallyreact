@@ -73,11 +73,27 @@ export function Carousel(props: CarouselProps) {
       })}
     >
       {props.customLeftArrow ? (
-        <div onClick={handleLeftArrowClick}>{props.customLeftArrow}</div>
+        <div
+          tabIndex={0}
+          onClick={handleLeftArrowClick}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleLeftArrowClick(e);
+            }
+          }}
+        >
+          {props.customLeftArrow}
+        </div>
       ) : (
         <LeftIcon
           {...(props.leftArrowProps || {})}
+          aria-label={props.leftArrowProps?.['aria-label'] || isLeftArrowDisabled ? 'Left Arrow Disabled' : 'Left Arrow'}
           onClick={handleLeftArrowClick}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleLeftArrowClick(e);
+            }
+          }}
           className={getClassName({
             name: 'finallyreact-carousel_arrow-left',
             props,
@@ -90,6 +106,7 @@ export function Carousel(props: CarouselProps) {
 
       <div
         {...(props.contentProps || {})}
+        tabIndex={props.contentProps?.tabIndex || 0}
         className={getClassName({
           name: 'finallyreact-carousel_content-container',
           props,
@@ -103,11 +120,27 @@ export function Carousel(props: CarouselProps) {
       </div>
 
       {props.customRightArrow ? (
-        <div onClick={handleRightArrowClick}>{props.customRightArrow}</div>
+        <div
+          tabIndex={0}
+          onClick={handleRightArrowClick}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleRightArrowClick(e);
+            }
+          }}
+        >
+          {props.customRightArrow}
+        </div>
       ) : (
         <RightIcon
           {...(props.rightArrowProps || {})}
+          aria-label={props.rightArrowProps?.['aria-label'] || isRightArrowDisabled ? 'Right Arrow Disabled' : 'Right Arrow'}
           onClick={handleRightArrowClick}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleRightArrowClick(e);
+            }
+          }}
           className={getClassName({
             name: 'finallyreact-carousel_arrow-right',
             props,
