@@ -20,6 +20,10 @@ FinallyReact es una biblioteca de diseño para React creada con flexibilidad y u
 
 Puedes encontrar ejemplos de todos los componentes, diseños y elementos de utilidad en el [sitio web de FinallyReact](https://finallyreact.com) (construido enteramente con FinallyReact).
 
+### Sitios que usan FinallyReact
+- [FinallyPlanning](https://finallyplanning.com)
+- [dotfinally](https://dotfinally.com)
+
 ## Para usar en tu proyecto
 
 - `npm install finallyreact`

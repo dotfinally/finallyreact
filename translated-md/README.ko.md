@@ -20,6 +20,10 @@ FinallyReact는 유연성과 사용성을 염두에 두고 만들어진 React �
 
 [FinallyReact 웹사이트](https://finallyreact.com)에서 모든 컴포넌트, 디자인 및 유틸리티 요소의 예시를 찾을 수 있습니다 (전적으로 FinallyReact로 구축됨).
 
+### FinallyReact를 사용하는 사이트
+- [FinallyPlanning](https://finallyplanning.com)
+- [dotfinally](https://dotfinally.com)
+
 ## 프로젝트에서 사용하기
 
 - `npm install finallyreact`
