@@ -233,6 +233,46 @@
       border-bottom-left-radius: #{$i}rem;
     }
   }
+
+  .rounded-tr-#{$i} {
+    border-top-right-radius: #{$i}rem;
+  }
+
+  .hover\:rounded-tr-#{$i} {
+    &:hover {
+      border-top-right-radius: #{$i}rem;
+    }
+  }
+
+  .rounded-br-#{$i} {
+    border-bottom-right-radius: #{$i}rem;
+  }
+
+  .hover\:rounded-br-#{$i} {
+    &:hover {
+      border-bottom-right-radius: #{$i}rem;
+    }
+  }
+
+  .rounded-bl-#{$i} {
+    border-bottom-left-radius: #{$i}rem;
+  }
+
+  .hover\:rounded-bl-#{$i} {
+    &:hover {
+      border-bottom-left-radius: #{$i}rem;
+    }
+  }
+
+  .rounded-tl-#{$i} {
+    border-top-left-radius: #{$i}rem;
+  }
+
+  .hover\:rounded-tl-#{$i} {
+    &:hover {
+      border-top-left-radius: #{$i}rem;
+    }
+  }
 }
 
 // border radius 50%
