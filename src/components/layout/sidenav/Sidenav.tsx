@@ -1,5 +1,5 @@
-import React, { HTMLAttributes, useEffect, useMemo, useState } from 'react';
-import { classnames, getFinallyConfig, omit, useWindowSize } from '@util/index';
+import React, { HTMLAttributes, useEffect, useMemo, useRef, useState } from 'react';
+import { classnames, getFinallyConfig, omit, useWindowSize, useOutsideClick } from '@util/index';
 import { TextInput, TextInputProps } from '@components/inputs/input/TextInput';
 
 import { getClassName } from './SidenavStyles';
@@ -62,6 +62,9 @@ export function Sidenav(props: SidenavProps) {
     return getFinallyConfig().simple;
   }, []);
   const simple = finallySimple || props.simple;
+
+  const outsideClickRef = useRef(null);
+  useOutsideClick(outsideClickRef, () => setOpen(false));
 
   const [activeKey, setActiveKey] = useState(props.activeKey || '');
   const { isMobile } = useWindowSize();
@@ -333,6 +336,7 @@ export function Sidenav(props: SidenavProps) {
           isMobile,
           open
         })}
+        ref={outsideClickRef}
       >
         <button
           className={getClassName({

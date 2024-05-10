@@ -20,6 +20,7 @@ export * from './helpers/unformatLocaleNumber';
 export * from './hooks/useDocumentEvent';
 export * from './hooks/usePopover';
 export * from './hooks/useWindowSize';
+export * from './hooks/useOutsideClick';
 
 export * from './helpers/getBreakpoint';
 export * from './colors';
