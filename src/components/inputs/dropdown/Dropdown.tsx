@@ -13,6 +13,7 @@ export interface DropdownProps extends HTMLAttributes<any> {
   name?: string;
   onSearch?: (value: string) => void;
   optionContainerProps?: HTMLAttributes<any>;
+  optionProps?: HTMLAttributes<any>;
   options?: IDropdownOption[];
   simple?: boolean;
   size?: 'sm' | 'md' | 'lg';
@@ -35,6 +36,7 @@ const omitValues = [
   'textInputProps',
   'onSearch',
   'optionContainerProps',
+  'optionProps',
   'options',
   'simple',
   'size',
@@ -285,6 +287,7 @@ export function Dropdown(props: DropdownProps) {
           ) : options?.length ? (
             options?.map((option) => (
               <div
+                {...(props.optionProps ?? {})}
                 {...option}
                 id={`${props.id || props.name}-dropdown-option-${option.value}`}
                 key={`${props.id || props.name}-dropdown-option-${option.value}`}
@@ -294,7 +297,7 @@ export function Dropdown(props: DropdownProps) {
                   simple,
                   disabled: option.disabled,
                   active: currentOption?.value === option.value,
-                  custom: option.className
+                  custom: option.className ?? props.optionProps?.className
                 })}
                 onClick={(e) => {
                   if (!option.disabled) {

@@ -9,7 +9,7 @@ export interface DatepickerProps extends HTMLAttributes<any> {
   dayProps?: HTMLAttributes<any>;
   disabled?: boolean;
   displayProps?: HTMLAttributes<any>;
-  inputProps?: TextInputProps;
+  textInputProps?: TextInputProps;
   name?: string;
   selectedProps?: HTMLAttributes<any>;
   showTodayLink?: boolean;
@@ -19,10 +19,10 @@ export interface DatepickerProps extends HTMLAttributes<any> {
   value?: string;
   initialValue?: string;
   monthLabelProps?: HTMLAttributes<any>;
-  monthPickerProps?: DropdownProps;
+  monthDropdownProps?: DropdownProps;
   customMonthPicker?: any;
   yearLabelProps?: HTMLAttributes<any>;
-  yearPickerProps?: NumberInputProps;
+  yearTextInputProps?: NumberInputProps;
   customYearPicker?: any;
   placeholder?: string;
 }
@@ -32,7 +32,7 @@ const omitValues = [
   'dayProps',
   'disabled',
   'displayProps',
-  'inputProps',
+  'textInputProps',
   'name',
   'selectedProps',
   'showTodayLink',
@@ -42,10 +42,10 @@ const omitValues = [
   'value',
   'initialValue',
   'monthLabelProps',
-  'monthPickerProps',
+  'monthDropdownProps',
   'customMonthPicker',
   'yearLabelProps',
-  'yearPickerProps',
+  'yearTextInputProps',
   'customYearPicker',
   'placeholder'
 ];
@@ -75,7 +75,7 @@ export function Datepicker(props: DatepickerProps) {
   const [editYear, setEditYear] = React.useState<boolean>(false);
 
   // mask must use yyyy, mm, and dd in order to work
-  const dateMask = props.inputProps?.mask?.toLowerCase()?.trim() || DEFAULT_DATE_MASK;
+  const dateMask = props.textInputProps?.mask?.toLowerCase()?.trim() || DEFAULT_DATE_MASK;
   // convert date to mask with 1s instead of characters
   const dateMaskWith1s = dateMask.replace(/y/g, '1').replace(/m/g, '1').replace(/d/g, '1');
 
@@ -113,7 +113,7 @@ export function Datepicker(props: DatepickerProps) {
 
   // Emit change event when date is selected (for Form)
   useEffect(() => {
-    if (!props.disabled && !props.inputProps?.disabled && (props.name || props.id)) {
+    if (!props.disabled && !props.textInputProps?.disabled && (props.name || props.id)) {
       if (selectedYear && selectedMonth && selectedDay) {
         const value = convertDateWithMask(selectedYear, selectedMonth, selectedDay);
 
@@ -416,7 +416,7 @@ export function Datepicker(props: DatepickerProps) {
     }
 
     props.onChange?.(event);
-    props.inputProps?.onChange?.(event);
+    props.textInputProps?.onChange?.(event);
   }
 
   function onDateKeyDown(e) {
@@ -492,21 +492,21 @@ export function Datepicker(props: DatepickerProps) {
             props.customMonthPicker
           ) : (
             <Dropdown
-              {...(props.monthPickerProps || {})}
-              options={props.monthPickerProps?.options ?? months}
-              autoFilterOnSearch={props.monthPickerProps?.autoFilterOnSearch ?? true}
-              initialValue={props.monthPickerProps?.initialValue ?? displayMonth != null ? displayMonth : details.month}
+              {...(props.monthDropdownProps || {})}
+              options={props.monthDropdownProps?.options ?? months}
+              autoFilterOnSearch={props.monthDropdownProps?.autoFilterOnSearch ?? true}
+              initialValue={props.monthDropdownProps?.initialValue ?? displayMonth != null ? displayMonth : details.month}
               onChange={(e: any) => {
                 console.log('month on change', e?.target.value);
                 setDisplayMonth(e.target.value);
                 setEditMonth(false);
-                props.monthPickerProps?.onChange?.(e);
+                props.monthDropdownProps?.onChange?.(e);
               }}
               className={getClassName({
                 name: 'finallyreact-datepicker__month-picker',
                 props,
                 simple,
-                custom: props.monthPickerProps?.className
+                custom: props.monthDropdownProps?.className
               })}
               simple={simple}
             />
@@ -541,28 +541,28 @@ export function Datepicker(props: DatepickerProps) {
             props.customYearPicker
           ) : (
             <NumberInput
-              {...(props.yearPickerProps || {})}
+              {...(props.yearTextInputProps || {})}
               simple={simple}
-              initialValue={props.yearPickerProps?.initialValue ?? displayYear != null ? displayYear : details.year}
+              initialValue={props.yearTextInputProps?.initialValue ?? displayYear != null ? displayYear : details.year}
               onBlur={(e: any) => {
                 setDisplayYear(e.target.value);
                 setEditYear(false);
-                props.yearPickerProps?.onChange?.(e);
+                props.yearTextInputProps?.onChange?.(e);
               }}
               onKeyDown={(e: any) => {
                 if (e.key === 'Enter') {
                   setDisplayYear(e.target.value);
                   setEditYear(false);
                 }
-                props.yearPickerProps?.onKeyDown?.(e);
+                props.yearTextInputProps?.onKeyDown?.(e);
               }}
               className={getClassName({
                 name: 'finallyreact-datepicker__year-picker',
                 props,
                 simple,
-                custom: props.yearPickerProps?.className
+                custom: props.yearTextInputProps?.className
               })}
-              disableFormat={props.yearPickerProps?.disableFormat ?? true}
+              disableFormat={props.yearTextInputProps?.disableFormat ?? true}
             />
           )
         ) : (
@@ -732,7 +732,7 @@ export function Datepicker(props: DatepickerProps) {
         if (!props.disabled) {
           onDateKeyDown(e);
           props.onKeyDown?.(e);
-          props.inputProps?.onKeyDown?.(e);
+          props.textInputProps?.onKeyDown?.(e);
         }
       }}
       role={props.role ?? 'application'}
@@ -741,46 +741,46 @@ export function Datepicker(props: DatepickerProps) {
       name={props.name}
     >
       <TextInput
-        {...props.inputProps}
+        {...props.textInputProps}
         className={getClassName({
           name: 'finallyreact-datepicker__input',
           props,
           simple,
-          custom: props.inputProps?.className
+          custom: props.textInputProps?.className
         })}
-        disabled={props.disabled ?? props.inputProps?.disabled}
-        color={props.inputProps?.color || props.color}
+        disabled={props.disabled ?? props.textInputProps?.disabled}
+        color={props.textInputProps?.color || props.color}
         mask={dateMaskWith1s}
-        outline={props.inputProps?.outline == null ? true : props.inputProps?.outline}
+        outline={props.textInputProps?.outline == null ? true : props.textInputProps?.outline}
         simple={props.simple}
-        placeholder={props.placeholder ?? props.inputProps?.placeholder}
+        placeholder={props.placeholder ?? props.textInputProps?.placeholder}
         onFocus={(e) => {
           if (!props.disabled) {
             setIsOpen(true);
-            props.inputProps?.onFocus?.(e);
+            props.textInputProps?.onFocus?.(e);
           }
         }}
         onChange={(e) => {
           if (!props.disabled) {
             onChangeDate(e);
-            props.inputProps?.onChange?.(e);
+            props.textInputProps?.onChange?.(e);
           }
         }}
         onClear={() => {
           if (!props.disabled) {
             onChangeDate(null);
-            props.inputProps?.onClear?.();
+            props.textInputProps?.onClear?.();
           }
         }}
         onBlur={(e) => {
           if (!props.disabled) {
-            props.inputProps?.onBlur?.(e);
+            props.textInputProps?.onBlur?.(e);
           }
         }}
         onClick={(e) => {
           if (!props.disabled) {
             setIsOpen(true);
-            props.inputProps?.onClick?.(e);
+            props.textInputProps?.onClick?.(e);
           }
         }}
         onKeyDown={(e) => {
@@ -789,12 +789,12 @@ export function Datepicker(props: DatepickerProps) {
             if (e.key === 'Tab' && e?.shiftKey) {
               setIsOpen(false);
             }
-            props.inputProps?.onKeyDown?.(e);
+            props.textInputProps?.onKeyDown?.(e);
           }
         }}
         value={props.value || convertDateWithMask(selectedYear, selectedMonth, selectedDay)}
         aria-label={
-          props.inputProps?.['aria-label'] ??
+          props.textInputProps?.['aria-label'] ??
           `Datepicker, year: ${selectedYear}, month: ${selectedMonth}, day: ${selectedDay}, click escape to close or tab to select a different date`
         }
       />
