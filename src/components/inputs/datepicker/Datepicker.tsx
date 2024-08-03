@@ -81,24 +81,32 @@ export function Datepicker(props: DatepickerProps) {
 
   useEffect(() => {
     if (props.value == null && props.initialValue != null) {
-      const date = new Date(props.initialValue);
-      setSelectedYear(date.getFullYear());
-      setSelectedMonth(date.getMonth());
-      setSelectedDay(date.getDate());
-      setDisplayYear(date.getFullYear());
-      setDisplayMonth(date.getMonth());
+      // get year, month, day from value based on dateMask (yyyy-mm-dd)
+      const year = parseInt(props.initialValue.substring(dateMask.indexOf('yyyy'), dateMask.indexOf('yyyy') + 4));
+      const month = parseInt(props.initialValue.substring(dateMask.indexOf('mm'), dateMask.indexOf('mm') + 2));
+      const day = parseInt(props.initialValue.substring(dateMask.indexOf('dd'), dateMask.indexOf('dd') + 2));
+
+      setSelectedYear(year);
+      setSelectedMonth(month);
+      setSelectedDay(day);
+      setDisplayYear(year);
+      setDisplayMonth(month);
     }
   }, []);
 
   useEffect(() => {
     if (!(props.initialValue != null && props.value == null)) {
       if (props.value && props.value?.length === dateMask.length) {
-        const date = new Date(props.value);
-        setSelectedYear(date.getFullYear());
-        setSelectedMonth(date.getMonth());
-        setSelectedDay(date.getDate());
-        setDisplayYear(date.getFullYear());
-        setDisplayMonth(date.getMonth());
+      // get year, month, day from value based on dateMask (yyyy-mm-dd)
+        const year = parseInt(props.value.substring(dateMask.indexOf('yyyy'), dateMask.indexOf('yyyy') + 4));
+        const month = parseInt(props.value.substring(dateMask.indexOf('mm'), dateMask.indexOf('mm') + 2));
+        const day = parseInt(props.value.substring(dateMask.indexOf('dd'), dateMask.indexOf('dd') + 2));
+
+        setSelectedYear(year);
+        setSelectedMonth(month);
+        setSelectedDay(day);
+        setDisplayYear(year);
+        setDisplayMonth(month);
       } else {
         setSelectedYear(undefined);
         setSelectedMonth(undefined);
