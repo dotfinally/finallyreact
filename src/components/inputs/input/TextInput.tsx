@@ -191,6 +191,10 @@ export function TextInput(props: TextInputProps) {
   const ariaLabelledBy = props['aria-labelledby'] ?? props.leftLabelProps?.id ?? props.rightLabelProps?.id ?? undefined;
   const ariaLabel = ariaLabelledBy ? undefined : props['aria-label'] ?? 'Text Input';
 
+  if (props.hidden) {
+    return null;
+  }
+
   return (
     <>
       {props.leftIcon && props.leftIcon}

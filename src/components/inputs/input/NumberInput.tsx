@@ -245,6 +245,10 @@ export function NumberInput(props: NumberInputProps) {
     }
   }
 
+  if (props.hidden) {
+    return null;
+  }
+
   return (
     <>
       {props.leftIcon && props.leftIcon}
