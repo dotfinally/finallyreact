@@ -1,6 +1,6 @@
 {
   "name": "finallyreact",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "A simple and customizable design library for React, including a full set of component, style, and utility elements.",
   "main": "index.js",
   "repository": {
