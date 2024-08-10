@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect, useMemo, useState } from 'react';
-import { classnames, dispatchChangeValue, getFinallyConfig, omit } from '@util/index';
+import { classnames, dispatchChangeEvent, getFinallyConfig, omit } from '@util/index';
 
 import { getClassName } from './RadioStyles';
 
@@ -65,7 +65,7 @@ export function Radio(props: RadioProps) {
 
   useEffect(() => {
     if (!props.disabled) {
-      dispatchChangeValue(selectedValue, props.name, props.id);
+      dispatchChangeEvent(selectedValue, props.name, props.id);
     }
   }, [selectedValue]);
 

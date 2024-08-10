@@ -1,5 +1,5 @@
 import React, { useState, useEffect, HTMLAttributes, useMemo, useRef } from 'react';
-import { dispatchChangeValue, formatMask, getFinallyConfig, omit, unformatMask } from '@util/index';
+import { dispatchChangeEvent, dispatchCompositionEvent, formatMask, getFinallyConfig, omit, unformatMask } from '@util/index';
 
 import { Pop } from '../../display/pop/Pop';
 import { getClassName } from './InputStyles';
@@ -82,7 +82,6 @@ export function TextInput(props: TextInputProps) {
     return getFinallyConfig().simple;
   }, []);
   const simple = finallySimple || props.simple;
-  const inputRef = useRef(null);
 
   const [value, setValue] = useState<string>(props.value ?? '');
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -90,18 +89,6 @@ export function TextInput(props: TextInputProps) {
   useEffect(() => {
     if (props.value == null && props.initialValue != null) {
       setValue(props.initialValue ?? '');
-    }
-
-    function updateValue(event: any) {
-      if (event?.target?.value) {
-        setValue(event.target.value);
-      }
-    }
-
-    inputRef.current?.addEventListener('compositionend', updateValue);
-
-    return () => {
-      inputRef.current?.removeEventListener('compositionend', updateValue);
     }
   }, []);
 
@@ -113,7 +100,7 @@ export function TextInput(props: TextInputProps) {
 
   useEffect(() => {
     if (!props.disabled) {
-      dispatchChangeValue(value, props.name, props.id);
+      dispatchChangeEvent(value, props.name, props.id);
     }
   }, [value]);
 
@@ -270,7 +257,7 @@ export function TextInput(props: TextInputProps) {
             value={value}
             aria-labelledby={ariaLabelledBy}
             aria-label={ariaLabel}
-            ref={inputRef}
+            onCompositionEnd={(e: any) => dispatchCompositionEvent(e?.target?.value, props.name, props.id)}
           />
         ) : (
           <input
@@ -291,7 +278,7 @@ export function TextInput(props: TextInputProps) {
             value={value}
             aria-labelledby={ariaLabelledBy}
             aria-label={ariaLabel}
-            ref={inputRef}
+            onCompositionEnd={(e: any) => dispatchCompositionEvent(e?.target?.value, props.name, props.id)}
           />
         )}
 

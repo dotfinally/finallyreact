@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect, useMemo } from 'react';
-import { dispatchChangeValue, getFinallyConfig, omit, usePopover } from '@util/index';
+import { dispatchChangeEvent, getFinallyConfig, omit, usePopover } from '@util/index';
 import { TextInput, TextInputProps } from '../input/TextInput';
 import { getClassName } from './DatepickerStyles';
 import { Dropdown, DropdownProps, NumberInput, NumberInputProps } from '@components/index';
@@ -125,9 +125,9 @@ export function Datepicker(props: DatepickerProps) {
       if (selectedYear && selectedMonth && selectedDay) {
         const value = convertDateWithMask(selectedYear, selectedMonth, selectedDay);
 
-        dispatchChangeValue(value, props.name, props.id);
+        dispatchChangeEvent(value, props.name, props.id);
       } else {
-        dispatchChangeValue(undefined, props.name, props.id);
+        dispatchChangeEvent(undefined, props.name, props.id);
       }
     }
   }, [selectedYear, selectedMonth, selectedDay]);

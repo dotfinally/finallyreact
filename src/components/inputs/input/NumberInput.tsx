@@ -1,6 +1,6 @@
 import React, { useState, useEffect, HTMLAttributes, useMemo } from 'react';
 import {
-  dispatchChangeValue,
+  dispatchChangeEvent,
   formatNumber,
   getFinallyConfig,
   isNumber,
@@ -145,7 +145,7 @@ export function NumberInput(props: NumberInputProps) {
   // Emit change event when numberValue changes (for Form)
   useEffect(() => {
     if (!props.disabled) {
-      dispatchChangeValue(numberValue, props.name, props.id);
+      dispatchChangeEvent(numberValue, props.name, props.id);
     }
   }, [numberValue]);
 

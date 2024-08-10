@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect, useMemo, useState } from 'react';
-import { omit, dispatchChangeValue, getFinallyConfig, checkHex } from '@util/index';
+import { omit, dispatchChangeEvent, getFinallyConfig, checkHex } from '@util/index';
 import { getClassName } from './CheckStyles';
 import { XIcon } from '@icons/XIcon';
 
@@ -57,7 +57,7 @@ export function Check(props: CheckProps) {
   // Emit change event (mainly for form)
   useEffect(() => {
     if (!props.disabled) {
-      dispatchChangeValue(checked, props.name, props.id);
+      dispatchChangeEvent(checked, props.name, props.id);
     }
   }, [checked]);
 

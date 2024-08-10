@@ -5,6 +5,7 @@ export interface FormProps extends HTMLAttributes<any> {
   id: string; // required for forms
   onSubmit?: (e: object) => void;
   onChange?: (e: object) => void;
+  onComposition?: (e: object) => void;
   initialValues?: object;
   values?: { [key: string]: any };
   validations?: {
@@ -51,10 +52,13 @@ export const Form = forwardRef((props: FormProps, ref) => {
     document.addEventListener('change', customChange);
     // listen for custom submit events from components in the form
     document.addEventListener('submit', customSubmit);
+    // listen for custom composition end events from components in the form
+    document.addEventListener('compositionend', customComposition);
 
     return () => {
       document.removeEventListener('change', customChange);
       document.removeEventListener('submit', customSubmit);
+      document.removeEventListener('compositionend', customComposition);
     };
   }, [values]);
 
@@ -102,6 +106,27 @@ export const Form = forwardRef((props: FormProps, ref) => {
         values,
         validations
       });
+    }
+  };
+
+  const customComposition = (e) => {
+    const name = e?.detail?.name;
+    const id = e?.detail?.id;
+    const isChild = isChildOfForm(id, name);
+
+    if (isChild) {
+      const valueKey = name || id;
+
+      if (valueKey) {
+        const newValues = { ...values, [valueKey]: e?.detail?.value };
+        const validations = validateForm(props.validations, newValues);
+
+        setValues(newValues);
+        props.onComposition?.({
+          values: newValues,
+          validations
+        });
+      }
     }
   };
 

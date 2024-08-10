@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect, useMemo, useState } from 'react';
-import { dispatchChangeValue, getFinallyConfig, omit, usePopover, isEqual } from '@util/index';
+import { dispatchChangeEvent, getFinallyConfig, omit, usePopover, isEqual } from '@util/index';
 
 import TextInput, { TextInputProps } from '../input/TextInput';
 import { getClassName } from './DropdownStyles';
@@ -77,7 +77,7 @@ export function Dropdown(props: DropdownProps) {
   // Emit change event when option is selected (for Form)
   useEffect(() => {
     if (!props.disabled) {
-      dispatchChangeValue(selectedOption?.value, props.name, props.id);
+      dispatchChangeEvent(selectedOption?.value, props.name, props.id);
     }
   }, [selectedOption]);
 

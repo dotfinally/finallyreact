@@ -1,5 +1,5 @@
 // Emit a custom change event (mainly for the Form component)
-export function dispatchChangeValue(value: any, name?: string, id?: string) {
+export function dispatchChangeEvent(value: any, name?: string, id?: string) {
   const customEvent = new CustomEvent('change', {
     detail: {
       name,
@@ -15,6 +15,17 @@ export function dispatchSubmitEvent(name?: string, id?: string) {
     detail: {
       name,
       id
+    }
+  });
+  document.dispatchEvent(customEvent);
+}
+
+export function dispatchCompositionEvent(value: any, name?: string, id?: string) {
+  const customEvent = new CustomEvent('compositionend', {
+    detail: {
+      name,
+      id,
+      value
     }
   });
   document.dispatchEvent(customEvent);
