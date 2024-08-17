@@ -1,5 +1,5 @@
-import React, { HTMLAttributes, useMemo, useState } from 'react';
-import { classnames, getFinallyConfig, omit } from '@util/index';
+import React, { HTMLAttributes, useMemo, useRef, useState } from 'react';
+import { classnames, getFinallyConfig, omit, useOutsideClick } from '@util/index';
 import { getClassName } from './PopStyles';
 
 export interface PopWrapperProps extends HTMLAttributes<any> {
@@ -30,6 +30,12 @@ export function Pop(props: PopWrapperProps) {
 
   const location = props.location || 'bottom';
   const triggerType = props.triggerType || 'hover';
+
+  const outsideClickRef = useRef(null);
+  useOutsideClick(outsideClickRef, () => {
+    setShowHover(false);
+    setShowClick(false);
+  });
 
   return (
     <div
@@ -62,6 +68,7 @@ export function Pop(props: PopWrapperProps) {
       role={props.role ?? 'tooltip'}
       aria-label={props['aria-label'] ?? props.text ?? 'Tooltip for more information'}
       aria-describedby={props['aria-describedby'] ?? props.tooltipProps?.id ?? undefined}
+      ref={outsideClickRef}
     >
       <>
         {((triggerType === 'hover' && showHover) ||
