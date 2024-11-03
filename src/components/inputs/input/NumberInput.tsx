@@ -359,8 +359,7 @@ export function NumberInput(props: NumberInputProps) {
               props,
               simple,
               custom: props.labelProps?.className,
-              active: !!formattedValue,
-              focused
+              active: !!formattedValue
             })}
           >
             {props.placeholder}
