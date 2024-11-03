@@ -320,7 +320,7 @@ export function NumberInput(props: NumberInputProps) {
                 : focused
                 ? numberValue ?? ''
                 : props.disableFormat
-                ? numberValue
+                ? numberValue ?? ''
                 : formattedValue
             }
           />
