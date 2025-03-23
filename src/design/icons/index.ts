@@ -37,6 +37,7 @@ export * from './SearchIcon';
 export * from './SparkleIcon';
 export * from './StarCircleIcon';
 export * from './StarIcon';
+export * from './StarFilledIcon';
 export * from './UndoIcon';
 export * from './UnlockIcon';
 export * from './UpArrowCircleIcon';
