@@ -284,7 +284,7 @@ export function TextInput(props: TextInputProps) {
 
         {props.showClear &&
           !props.disabled &&
-          value &&
+          value != null &&
           (props.customClear ? (
             props.customClear
           ) : (
