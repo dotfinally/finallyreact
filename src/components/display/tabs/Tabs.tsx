@@ -150,7 +150,7 @@ export function Tabs(props: TabsProps) {
       >
         {props.tabs.map((tab, index) => (
           <div
-            {...tab}
+            {...omit(tab, omitTabValues)}
             className={getClassName({
               name: 'finallyreact-tabs__tab-content',
               props,
