@@ -28,7 +28,7 @@ export function getClassName({
   if (name === 'finallyreact-input') {
     value += ' relative flex';
 
-    if (!simple && props.disabled) {
+    if (!simple && (props.disabled || props.readOnly)) {
       value += ' cursor-not-allowed';
     }
   }
@@ -41,7 +41,7 @@ export function getClassName({
     if (name === 'finallyreact-input__box') {
       value += ' border-solid text outline-none';
 
-      if (props.readOnly) {
+      if (props.disabled || props.readOnly) {
         value += ' pt-2/5';
       }
 
@@ -55,7 +55,7 @@ export function getClassName({
         value += ' rounded-1';
       }
 
-      if (props.disabled) {
+      if (props.disabled || props.readOnly) {
         value += ' cursor-not-allowed';
       }
 
@@ -149,7 +149,7 @@ export function getClassName({
       }
 
       if (name === 'finallyreact-input__dropdown') {
-        if (props.readOnly) {
+        if (props.disabled || props.readOnly) {
           value += ' text-sm pt-1/5 pr-3/10 pb-0 pl-3/10';
         } else {
           value += ' text-sm pt-2/5 pr-3/10 pb-0 pl-3/10';
@@ -165,7 +165,7 @@ export function getClassName({
       if (name === 'finallyreact-input__box') {
         value += ' text pt-1/2 pr-3/10 pl-3/10 w-7';
 
-        if (!props.disabled) {
+        if (!props.disabled || props.readOnly) {
           value += ' pb-2/5';
         }
 
@@ -231,7 +231,7 @@ export function getClassName({
       if (name === 'finallyreact-input__dropdown') {
         value += ' text-lg pr-2/5 pb-1 pl-2/5';
 
-        if (props.readOnly) {
+        if (props.disabled || props.readOnly) {
           value += ' pt-1/10';
         }
       }

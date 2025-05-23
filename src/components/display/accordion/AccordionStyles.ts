@@ -24,7 +24,7 @@ export function getClassName({
     if (open) {
       value += ' open';
     }
-    if (props.disabled) {
+    if (props.disabled || props.readOnly) {
       value += ' disabled';
     }
   }
@@ -41,7 +41,7 @@ export function getClassName({
     }
 
     if (!simple) {
-      if (props.disabled) {
+      if (props.disabled || props.readOnly) {
         value += ' cursor-not-allowed';
       }
 

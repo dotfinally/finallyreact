@@ -22,7 +22,7 @@ export function getClassName({
     if (name === 'finallyreact-button') {
       value += ' border-1 text';
 
-      if (props.disabled) {
+      if (props.disabled || props.readOnly) {
         value += ' not-allowed opacity-50';
       } else {
         value += ' cursor-pointer';

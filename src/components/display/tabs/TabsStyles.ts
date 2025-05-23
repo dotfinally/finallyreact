@@ -22,7 +22,7 @@ export function getClassName({
 
   if (!simple) {
     if (name === 'finallyreact-tabs__tab') {
-      if (props.disabled) {
+      if (props.disabled || props.readOnly) {
         value += ' not-allowed';
       }
     }

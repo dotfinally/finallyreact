@@ -16,6 +16,7 @@ export interface TableProps extends HTMLAttributes<any> {
   showPagination?: boolean;
   simple?: boolean;
   disabled?: boolean;
+  readOnly?: boolean;
   isMobile?: boolean;
   mobileCellKeyProps?: HTMLAttributes<any>;
   mobileCellValueProps?: HTMLAttributes<any>;
@@ -68,6 +69,7 @@ const omitValues = [
   'showPagination',
   'simple',
   'disabled',
+  'readOnly',
   'isMobile',
   'mobileCellKeyProps',
   'mobileCellValueProps',
@@ -356,7 +358,7 @@ export function Table(props: TableProps) {
       })}
       tabIndex={props.tabIndex || 0}
       aria-label={props['aria-label'] || 'Table Mobile View'}
-      aria-disabled={props.disabled}
+      aria-disabled={props.disabled || props.readOnly}
     >
       {props.rows.map((row, index) => getMobileTableRow(row, index))}
     </div>
@@ -373,7 +375,7 @@ export function Table(props: TableProps) {
         role={props.role || 'table'}
         tabIndex={props.tabIndex || 0}
         aria-label={props['aria-label'] || 'Table'}
-        aria-disabled={props.disabled}
+        aria-disabled={props.disabled || props.readOnly}
       >
         <thead>{headerRow}</thead>
         <tbody role="rowgroup">{rows}</tbody>
@@ -382,7 +384,7 @@ export function Table(props: TableProps) {
       {props.showPagination && (
         <Pagination
           {...props.paginationProps}
-          disabled={props.disabled ?? props.paginationProps?.disabled}
+          disabled={(props.disabled || props.readOnly) ?? props.paginationProps?.disabled}
           className={getClassName({
             name: 'finallyreact-table__pagination',
             props,

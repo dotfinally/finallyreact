@@ -21,14 +21,14 @@ export function getClassName({
   if (name === 'finallyreact-check') {
     value += ' flex';
 
-    if (props.disabled) {
+    if (props.disabled || props.readOnly) {
       value += ' cursor-not-allowed';
     } else {
       value += ' cursor-pointer';
     }
   }
 
-  if (props.disabled) {
+  if (props.disabled || props.readOnly) {
     if (name === 'finallyreact-check__input' && !props.toggle) {
       value += ' cursor-not-allowed border-stone-4 stone-2-bg';
     }
@@ -129,7 +129,7 @@ export function getClassName({
       value += ` ${props.color || 'black'}-bg`;
     }
 
-    if (props.disabled) {
+    if (props.disabled || props.readOnly) {
       value += ' cursor-not-allowed opacity-50';
     }
 
@@ -150,7 +150,7 @@ export function getClassName({
     value += ' transition-transform-1-ease-in-out inline-block relative rotate-40';
 
     let checkColor = props.checkColor || props.color;
-    if (props.disabled && !checkColor) {
+    if (props.disabled || props.readOnly && !checkColor) {
       checkColor = 'white';
     }
     value += ` border-${checkColor || 'black'}`;
