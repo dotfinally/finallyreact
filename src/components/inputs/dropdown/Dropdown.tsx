@@ -61,7 +61,7 @@ export function Dropdown(props: DropdownProps) {
   const [currentOption, setCurrentOption] = useState<IDropdownOption | null>(getInitialOption());
 
   useEffect(() => {
-    if (props.value !== undefined && props.value !== selectedOption?.value) {
+    if (props.value !== selectedOption?.value) {
       const valueOption = props.options?.find((option) => option.value === props.value)
       setSelectedOption(valueOption);
     }

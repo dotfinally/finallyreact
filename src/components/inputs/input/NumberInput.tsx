@@ -110,6 +110,7 @@ export function NumberInput(props: NumberInputProps) {
   useEffect(() => {
     setFormattedValue(format(props.value) ?? '');
     setNumberValue(toNumber(props.value));
+    setLastValidValue(props.value);
   }, [props.value]);
 
   useEffect(() => {
@@ -359,7 +360,7 @@ export function NumberInput(props: NumberInputProps) {
               props,
               simple,
               custom: props.labelProps?.className,
-              active: !!formattedValue
+              active: numberValue != null
             })}
           >
             {props.placeholder}

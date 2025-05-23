@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useEffect, useState, useRef, useMemo, forwardRef, useImperativeHandle } from 'react';
+import React, { HTMLAttributes, useEffect, useState } from 'react';
 import { classnames, omit } from '@util/index';
 
 export interface FormProps extends HTMLAttributes<any> {
@@ -26,26 +26,8 @@ const omitValues = ['onSubmit', 'onChange', 'initialValues', 'values', 'validati
  * Note: every input in the form must have a unique id or name attribute.
  * @param props FormProps
  */
-export const Form = forwardRef((props: FormProps, ref) => {
+export const Form = (props: FormProps) => {
   const [values, setValues] = useState(props.initialValues || props.values || {});
-
-  useImperativeHandle(ref, () => {
-    return {
-      reset() {
-        // Set the form values to initial values or empty object
-        setValues(props.initialValues || {});
-        // find every input or textarea in the form and reset it
-        const inputs = document.querySelectorAll(`#${props.id} input, #${props.id} textarea`);
-        inputs?.forEach((input: any) => {
-          input.value = '';
-        });
-      },
-      resetEmpty() {
-        // Set the form values to empty object
-        setValues({});
-      }
-    }
-  }, [props.initialValues]);
 
   useEffect(() => {
     // listen for custom change events from components in the form
@@ -231,6 +213,6 @@ export const Form = forwardRef((props: FormProps, ref) => {
       {props.children}
     </form>
   );
-});
+};
 
 export default Form;
