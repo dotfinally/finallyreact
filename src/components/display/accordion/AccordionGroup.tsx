@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, useEffect, useState } from 'react';
-import { omit } from '@util/index';
+import { isEqual, omit } from '@util/index';
 import { getClassName } from './AccordionGroupStyles';
 
 import Accordion, { AccordionProps } from './Accordion';
@@ -21,11 +21,14 @@ const omitValues = ['items', 'onOpen', 'selectedProps', 'type'];
  */
 export function AccordionGroup(props: AccordionGroupProps) {
   const [accordions, setAccordions] = useState<AccordionProps[]>(buildItems());
+  const [initialItems, setInitialItems] = useState(props.items);
 
   const type = props.type || 'single';
 
   useEffect(() => {
-    setAccordions(buildItems());
+    if (!isEqual(initialItems, props.items)) {
+      setAccordions(buildItems());
+    }
   }, [props.items]);
 
   function buildItems() {
