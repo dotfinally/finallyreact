@@ -7,6 +7,7 @@ export interface RadioProps extends HTMLAttributes<any> {
   color?: string;
   initialValue?: string;
   disabled?: boolean;
+  readOnly?: boolean;
   inputProps?: HTMLAttributes<any>;
   labelProps?: HTMLAttributes<any>;
   name?: string;
@@ -20,12 +21,14 @@ export interface RadioOptionProps extends HTMLAttributes<any> {
   label: string;
   value: any;
   disabled?: boolean;
+  readOnly?: boolean;
 }
 
 const omitValues = [
   'color',
   'initialValue',
   'disabled',
+  'readOnly',
   'inputProps',
   'labelProps',
   'name',
@@ -35,7 +38,7 @@ const omitValues = [
   'value'
 ];
 
-const omitRadioOptionValues = ['label', 'value', 'disabled'];
+const omitRadioOptionValues = ['label', 'value', 'disabled', 'readOnly'];
 
 /**
  * Radio component for selecting one option from a list.
@@ -46,6 +49,8 @@ export function Radio(props: RadioProps) {
     return getFinallyConfig().simple;
   }, []);
   const simple = finallySimple || props.simple;
+
+  const disabled = props.disabled || props.readOnly;
 
   const [selectedValue, setSelectedValue] = useState(
     props.value == null ? props.initialValue : props.value == null ? undefined : props.value
@@ -64,13 +69,13 @@ export function Radio(props: RadioProps) {
   }, [props.value]);
 
   useEffect(() => {
-    if (!props.disabled) {
+    if (!disabled) {
       dispatchChangeEvent(selectedValue, props.name, props.id);
     }
   }, [selectedValue]);
 
   function onChange(e, value: any) {
-    if (selectedValue !== value && !props.disabled) {
+    if (selectedValue !== value && !disabled) {
       setSelectedValue(value);
 
       props.onChange?.({
@@ -86,7 +91,7 @@ export function Radio(props: RadioProps) {
     return props.options?.map((option, index) => {
       const { label, value } = option;
       const checked = value === selectedValue;
-      const disabled = props.disabled || option.disabled;
+      const dis = disabled || option.disabled || option.readOnly;
 
       return (
         <div
@@ -96,16 +101,16 @@ export function Radio(props: RadioProps) {
             name: 'finallyreact-radio__option',
             props,
             simple,
-            disabled,
+            disabled: dis,
             size
           })}
-          onClick={(e) => !disabled && onChange(e, value)}
+          onClick={(e) => !dis && onChange(e, value)}
           aria-checked={props['aria-checked'] ?? checked}
           aria-label={props['aria-label'] ?? label}
           tabIndex={option.tabIndex ?? 0}
           onKeyDown={(e) => {
             option.onKeyDown?.(e);
-            if (e.key === 'Enter' && !disabled) {
+            if (e.key === 'Enter' && !dis) {
               onChange(e, value);
             }
           }}
@@ -118,14 +123,13 @@ export function Radio(props: RadioProps) {
                 name: 'finallyreact-radio__input',
                 props,
                 simple,
-                disabled,
+                disabled: dis,
                 size,
                 custom: props.inputProps?.className
               })}
               checked={checked}
-              disabled={disabled}
+              disabled={dis}
               value={value}
-              readOnly={true}
             />
           ) : (
             <div
@@ -134,7 +138,7 @@ export function Radio(props: RadioProps) {
                 name: 'finallyreact-radio__input',
                 props,
                 simple,
-                disabled,
+                disabled: dis,
                 size,
                 checked,
                 custom: props.inputProps?.className
@@ -149,7 +153,7 @@ export function Radio(props: RadioProps) {
               name: 'finallyreact-radio__label',
               props,
               simple,
-              disabled,
+              disabled: dis,
               size,
               checked,
               custom: props.labelProps?.className
@@ -173,7 +177,7 @@ export function Radio(props: RadioProps) {
       name={props.name}
       className={classnames(
         'finallyreact-radio',
-        props.disabled && 'disabled',
+        disabled && 'disabled',
         props.simple && 'simple',
         props.className
       )}

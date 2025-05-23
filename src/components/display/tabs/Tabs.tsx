@@ -8,6 +8,7 @@ export interface TabsProps extends Omit<HTMLAttributes<any>, 'onChange'> {
   contentProps?: HTMLAttributes<any>;
   defaultActiveTabValue?: any;
   disabled?: boolean;
+  readOnly?: boolean;
   headerProps?: HTMLAttributes<any>;
   onChange?: (tab: TabProps) => void;
   simple?: boolean;
@@ -30,6 +31,7 @@ const omitValues = [
   'contentProps',
   'defaultActiveTabValue',
   'disabled',
+  'readOnly',
   'headerProps',
   'onChange',
   'simple',
@@ -48,6 +50,8 @@ export function Tabs(props: TabsProps) {
     return getFinallyConfig().simple;
   }, []);
   const simple = finallySimple || props.simple;
+
+  const disabled = props.disabled || props.readOnly;
 
   const [activeTabValue, setActiveTabValue] = useState(props.defaultActiveTabValue || props.tabs[0].value);
 
@@ -79,7 +83,7 @@ export function Tabs(props: TabsProps) {
       role={props.role || 'tablist'}
       tabIndex={props.tabIndex ?? 0}
       aria-label={props['aria-label'] ?? 'Tabs'}
-      aria-disabled={props.disabled ?? false}
+      aria-disabled={disabled ?? false}
     >
       <div
         {...props.headerProps}
@@ -109,14 +113,14 @@ export function Tabs(props: TabsProps) {
               })}
               key={index}
               onClick={() => {
-                if (props.disabled || tab.disabled) {
+                if (disabled || tab.disabled) {
                   return;
                 }
 
                 onClickTab(tab);
               }}
               onKeyDown={(e) => {
-                if (props.disabled || tab.disabled) {
+                if (disabled || tab.disabled) {
                   return;
                 }
 

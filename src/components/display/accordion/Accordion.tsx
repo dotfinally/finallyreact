@@ -8,6 +8,7 @@ export interface AccordionProps extends Omit<HTMLAttributes<any>, 'title'> {
   customHeader?: React.ReactNode;
   initialOpen?: boolean;
   disabled?: boolean;
+  readOnly?: boolean;
   headerProps?: HTMLAttributes<any>;
   open?: boolean;
   preventAutoOpen?: boolean;
@@ -25,6 +26,7 @@ const omitValues = [
   'customHeader',
   'initialOpen',
   'disabled',
+  'readOnly',
   'headerProps',
   'open',
   'preventAutoOpen',
@@ -58,6 +60,8 @@ export function Accordion(props: AccordionProps) {
     return props.children;
   }, [props.children]);
 
+  const disabled = props.disabled || props.readOnly;
+
   return (
     <div
       {...omit(props, omitValues)}
@@ -70,14 +74,14 @@ export function Accordion(props: AccordionProps) {
       })}
       role={props.role ?? 'region'}
       aria-label={props['aria-label'] ?? `${props.title} accordion`}
-      aria-disabled={props.disabled}
+      aria-disabled={disabled}
       aria-expanded={open}
       tabIndex={props.tabIndex ?? -1}
     >
       {props.customHeader ? (
         <div
           onClick={(e) => {
-            if (!props.disabled) {
+            if (!disabled) {
               if (!props.preventAutoOpen) {
                 setOpen(!open);
               }
@@ -85,7 +89,7 @@ export function Accordion(props: AccordionProps) {
             }
           }}
           onKeyDown={(e) => {
-            if (!props.disabled) {
+            if (!disabled) {
               if (e.key === 'Enter' && !props.preventAutoOpen) {
                 setOpen(!open);
               }
@@ -106,7 +110,7 @@ export function Accordion(props: AccordionProps) {
             custom: props.headerProps?.className
           })}
           onClick={(e) => {
-            if (!props.disabled) {
+            if (!disabled) {
               if (!props.preventAutoOpen) {
                 setOpen(!open);
               }
@@ -115,7 +119,7 @@ export function Accordion(props: AccordionProps) {
             }
           }}
           onKeyDown={(e) => {
-            if (!props.disabled) {
+            if (!disabled) {
               if (e.key === 'Enter' && !props.preventAutoOpen) {
                 setOpen(!open);
               }

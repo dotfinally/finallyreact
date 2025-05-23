@@ -9,6 +9,7 @@ export interface CheckProps extends HTMLAttributes<any> {
   color?: string;
   defaultChecked?: boolean;
   disabled?: boolean;
+  readOnly?: boolean;
   fill?: boolean;
   inputProps?: HTMLAttributes<any>;
   label?: string;
@@ -32,7 +33,8 @@ const omitValues = [
   'toggleProps',
   'simple',
   'size',
-  'toggle'
+  'toggle',
+  'readOnly'
 ];
 
 /**
@@ -46,6 +48,8 @@ export function Check(props: CheckProps) {
   const simple = finallySimple || props.simple;
   const size = props.size || 'md';
 
+  const disabled = props.disabled || props.readOnly;
+
   const [checked, setChecked] = useState(props.defaultChecked ?? false);
 
   useEffect(() => {
@@ -56,13 +60,13 @@ export function Check(props: CheckProps) {
 
   // Emit change event (mainly for form)
   useEffect(() => {
-    if (!props.disabled) {
+    if (!disabled) {
       dispatchChangeEvent(checked, props.name, props.id);
     }
   }, [checked]);
 
   function onChange(e) {
-    if (!props.disabled) {
+    if (!disabled) {
       const newValue = !checked;
       const newEvent = {
         ...e,
@@ -169,7 +173,7 @@ export function Check(props: CheckProps) {
       role={props.toggle ? 'toggle' : 'checkbox'}
       aria-checked={checked}
       aria-label={props['aria-label'] ?? props.label ?? 'Loading'}
-      aria-disabled={props.disabled}
+      aria-disabled={disabled}
       tabIndex={props.tabIndex ?? 0}
       onKeyDown={onKeyDown}
     >

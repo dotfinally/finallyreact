@@ -83,6 +83,8 @@ export function TextInput(props: TextInputProps) {
   }, []);
   const simple = finallySimple || props.simple;
 
+  const disabled = props.disabled || props.readOnly;
+
   const [value, setValue] = useState<string>(props.value ?? '');
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -99,13 +101,13 @@ export function TextInput(props: TextInputProps) {
   }, [props.value]);
 
   useEffect(() => {
-    if (!props.disabled) {
+    if (!disabled) {
       dispatchChangeEvent(value, props.name, props.id);
     }
   }, [value]);
 
   function onChange(e: any) {
-    if (props.readOnly) {
+    if (disabled) {
       return;
     }
 
@@ -123,7 +125,7 @@ export function TextInput(props: TextInputProps) {
 
     setValue(changeValue ?? '');
 
-    if (!props.disabled) {
+    if (!disabled) {
       props.onChange?.({
         ...e,
         target: {
@@ -139,7 +141,7 @@ export function TextInput(props: TextInputProps) {
   }
 
   function onKeyDown(e) {
-    if (props.readOnly) {
+    if (disabled) {
       return;
     }
 
@@ -159,11 +161,11 @@ export function TextInput(props: TextInputProps) {
 
   // emit the state value on blur
   function onBlur(e) {
-    if (props.readOnly) {
+    if (disabled) {
       return;
     }
 
-    if (!props.disabled) {
+    if (!disabled) {
       props.onBlur?.({
         ...e,
         target: {
@@ -175,7 +177,7 @@ export function TextInput(props: TextInputProps) {
   }
 
   function onClear(e) {
-    if (!props.disabled) {
+    if (!disabled) {
       onChange({
         ...e,
         target: {
@@ -223,10 +225,10 @@ export function TextInput(props: TextInputProps) {
           custom: props.className,
           active: !!value
         })}
-        aria-disabled={props['aria-disabled'] ?? props.disabled ?? props.readOnly}
-        tabIndex={props.tabIndex ?? (props.disabled || props.readOnly) ? 0 : undefined}
+        aria-disabled={props['aria-disabled'] ?? disabled}
+        tabIndex={props.tabIndex ?? (disabled) ? 0 : undefined}
       >
-        {props.readOnly ? (
+        {disabled ? (
           <div
             {...props.inputProps}
             className={getClassName({
@@ -249,7 +251,7 @@ export function TextInput(props: TextInputProps) {
               custom: props.inputProps?.className,
               active: !!value
             })}
-            disabled={props.disabled ?? false}
+            disabled={disabled ?? false}
             onBlur={onBlur}
             onChange={onChange}
             onKeyDown={onKeyDown}
@@ -269,7 +271,7 @@ export function TextInput(props: TextInputProps) {
               custom: props.inputProps?.className,
               active: !!value
             })}
-            disabled={props.disabled ?? false}
+            disabled={disabled ?? false}
             onBlur={onBlur}
             onChange={onChange}
             onKeyDown={onKeyDown}
@@ -283,7 +285,7 @@ export function TextInput(props: TextInputProps) {
         )}
 
         {props.showClear &&
-          !props.disabled &&
+          !disabled &&
           value != null &&
           value !== '' &&
           (props.customClear ? (
@@ -309,7 +311,7 @@ export function TextInput(props: TextInputProps) {
             />
           ))}
 
-        {props.showDropdown && !(props.showClear && !props.disabled && value) && (
+        {props.showDropdown && !(props.showClear && !disabled && value) && (
           <div
             {...(props.dropdownProps || {})}
             className={getClassName({

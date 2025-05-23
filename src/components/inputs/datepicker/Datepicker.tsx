@@ -8,6 +8,7 @@ export interface DatepickerProps extends HTMLAttributes<any> {
   color?: string;
   dayProps?: HTMLAttributes<any>;
   disabled?: boolean;
+  readOnly?: boolean;
   displayProps?: HTMLAttributes<any>;
   textInputProps?: TextInputProps;
   name?: string;
@@ -31,6 +32,7 @@ const omitValues = [
   'color',
   'dayProps',
   'disabled',
+  'readOnly',
   'displayProps',
   'textInputProps',
   'name',
@@ -61,6 +63,8 @@ export function Datepicker(props: DatepickerProps) {
     return getFinallyConfig().simple;
   }, []);
   const simple = finallySimple || props.simple;
+
+  const disabled = props.disabled || props.readOnly;
 
   const [popoverRef, isOpen, setIsOpen] = usePopover(false, null);
 
@@ -121,7 +125,7 @@ export function Datepicker(props: DatepickerProps) {
 
   // Emit change event when date is selected (for Form)
   useEffect(() => {
-    if (!props.disabled && !props.textInputProps?.disabled && (props.name || props.id)) {
+    if (!disabled && !props.textInputProps?.disabled && !props.textInputProps?.readOnly && (props.name || props.id)) {
       if (selectedYear && selectedMonth && selectedDay) {
         const value = convertDateWithMask(selectedYear, selectedMonth, selectedDay);
 
@@ -737,7 +741,7 @@ export function Datepicker(props: DatepickerProps) {
       })}
       style={props.style}
       onKeyDown={(e) => {
-        if (!props.disabled) {
+        if (!disabled) {
           onDateKeyDown(e);
           props.onKeyDown?.(e);
           props.textInputProps?.onKeyDown?.(e);
@@ -745,7 +749,7 @@ export function Datepicker(props: DatepickerProps) {
       }}
       role={props.role ?? 'application'}
       aria-expanded={isOpen}
-      aria-disabled={props.disabled}
+      aria-disabled={disabled}
       name={props.name}
     >
       <TextInput
@@ -756,43 +760,43 @@ export function Datepicker(props: DatepickerProps) {
           simple,
           custom: props.textInputProps?.className
         })}
-        disabled={props.disabled ?? props.textInputProps?.disabled}
+        disabled={disabled ?? (props.textInputProps?.disabled || props.textInputProps?.readOnly)}
         color={props.textInputProps?.color || props.color}
         mask={dateMaskWith1s}
         outline={props.textInputProps?.outline == null ? true : props.textInputProps?.outline}
         simple={props.simple}
         placeholder={props.placeholder ?? props.textInputProps?.placeholder}
         onFocus={(e) => {
-          if (!props.disabled) {
+          if (!disabled) {
             setIsOpen(true);
             props.textInputProps?.onFocus?.(e);
           }
         }}
         onChange={(e) => {
-          if (!props.disabled) {
+          if (!disabled) {
             onChangeDate(e);
             props.textInputProps?.onChange?.(e);
           }
         }}
         onClear={() => {
-          if (!props.disabled) {
+          if (!disabled) {
             onChangeDate(null);
             props.textInputProps?.onClear?.();
           }
         }}
         onBlur={(e) => {
-          if (!props.disabled) {
+          if (!disabled) {
             props.textInputProps?.onBlur?.(e);
           }
         }}
         onClick={(e) => {
-          if (!props.disabled) {
+          if (!disabled) {
             setIsOpen(true);
             props.textInputProps?.onClick?.(e);
           }
         }}
         onKeyDown={(e) => {
-          if (!props.disabled) {
+          if (!disabled) {
             // if shift tab, close the datepicker
             if (e.key === 'Tab' && e?.shiftKey) {
               setIsOpen(false);

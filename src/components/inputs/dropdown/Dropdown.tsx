@@ -9,6 +9,7 @@ export interface DropdownProps extends HTMLAttributes<any> {
   color?: string;
   initialValue?: any;
   disabled?: boolean;
+  readOnly?: boolean;
   textInputProps?: TextInputProps;
   name?: string;
   onSearch?: (value: string) => void;
@@ -26,6 +27,7 @@ export interface IDropdownOption extends HTMLAttributes<any> {
   value: any;
   label: any;
   disabled?: boolean;
+  readOnly?: boolean;
 }
 
 const omitValues = [
@@ -42,7 +44,8 @@ const omitValues = [
   'size',
   'value',
   'select',
-  'placeholder'
+  'placeholder',
+  'readOnly'
 ];
 
 /**
@@ -54,6 +57,8 @@ export function Dropdown(props: DropdownProps) {
     return getFinallyConfig().simple;
   }, []);
   const simple = finallySimple || props.simple;
+
+  const disabled = props.disabled || props.readOnly;
 
   const [popoverRef, isOpen, setIsOpen] = usePopover(false, null);
   const [selectedOption, setSelectedOption] = useState<IDropdownOption | null>(getInitialOption());
@@ -76,7 +81,7 @@ export function Dropdown(props: DropdownProps) {
 
   // Emit change event when option is selected (for Form)
   useEffect(() => {
-    if (!props.disabled) {
+    if (!disabled) {
       dispatchChangeEvent(selectedOption?.value, props.name, props.id);
     }
   }, [selectedOption]);
@@ -92,7 +97,7 @@ export function Dropdown(props: DropdownProps) {
   }
 
   function onChange(e: any, option) {
-    if (!props.disabled) {
+    if (!disabled) {
       const newEvent = {
         ...e,
         target: {
@@ -114,7 +119,7 @@ export function Dropdown(props: DropdownProps) {
   }
 
   function onSearch(e) {
-    if (props.disabled) {
+    if (disabled) {
       return;
     }
 
@@ -140,7 +145,7 @@ export function Dropdown(props: DropdownProps) {
   }
 
   function onkeydown(e) {
-    if (!props.disabled) {
+    if (!disabled) {
       const key = e?.key;
 
       if (key === 'ArrowDown') {
@@ -198,7 +203,7 @@ export function Dropdown(props: DropdownProps) {
         name: 'finallyreact-dropdown',
         props,
         simple,
-        disabled: props.disabled,
+        disabled: disabled,
         custom: props.className
       })}
       onKeyDown={onkeydown}
@@ -206,7 +211,7 @@ export function Dropdown(props: DropdownProps) {
       role={props.role ?? 'combobox'}
       aria-label={props['aria-label'] ?? props.textInputProps?.placeholder ?? 'Dropdown'}
       aria-expanded={isOpen}
-      aria-disabled={props.disabled}
+      aria-disabled={disabled}
       aria-haspopup="listbox"
       tabIndex={props.tabIndex ?? props.select ? 0 : -1}
     >
@@ -219,7 +224,7 @@ export function Dropdown(props: DropdownProps) {
         inputProps={{
           ...props.textInputProps?.inputProps,
           onClick: (e) => {
-            if (!props.disabled) {
+            if (!disabled) {
               if (!props.select) {
                 setIsOpen(true);
               } else {
@@ -234,7 +239,7 @@ export function Dropdown(props: DropdownProps) {
             props.textInputProps?.onClick?.(e);
           },
           onFocus: (e) => {
-            if (!props.disabled) {
+            if (!disabled) {
               if (!props.select) {
                 setIsOpen(true);
               } else {
@@ -249,7 +254,7 @@ export function Dropdown(props: DropdownProps) {
             props.textInputProps?.onFocus?.(e);
           }
         }}
-        disabled={props.disabled ?? props.textInputProps?.disabled}
+        disabled={disabled ?? (props.textInputProps?.disabled || props.textInputProps?.readOnly)}
         simple={props.simple ?? props.textInputProps?.simple}
         color={props.color ?? props.textInputProps?.color}
         onClear={() => {
@@ -295,12 +300,12 @@ export function Dropdown(props: DropdownProps) {
                   name: 'finallyreact-dropdown__option',
                   props,
                   simple,
-                  disabled: option.disabled,
+                  disabled: (option.disabled || option.readOnly),
                   active: currentOption?.value === option.value,
                   custom: option.className ?? props.optionProps?.className
                 })}
                 onClick={(e) => {
-                  if (!option.disabled) {
+                  if (!option.disabled && !option.readOnly) {
                     e?.preventDefault?.();
                     onChange(e, option);
                     e?.stopPropagation?.();

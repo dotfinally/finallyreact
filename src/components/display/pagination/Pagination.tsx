@@ -7,6 +7,7 @@ import { Dropdown, DropdownProps } from '../../inputs/dropdown/Dropdown';
 export interface PaginationProps extends HTMLAttributes<any> {
   arrowProps?: HTMLAttributes<any>;
   disabled?: boolean;
+  readOnly?: boolean;
   leftArrowProps?: HTMLAttributes<any>;
   maxDisplayPages?: number;
   onChangePage?: (page: number, size: number) => void;
@@ -24,6 +25,7 @@ export interface PaginationProps extends HTMLAttributes<any> {
 const omitValues = [
   'arrowProps',
   'disabled',
+  'readOnly',
   'leftArrowProps',
   'maxDisplayPages',
   'onChangePage',
@@ -55,6 +57,8 @@ export function Pagination(props: PaginationProps) {
   }, []);
   const simple = finallySimple || props.simple;
 
+  const disabled = props.disabled || props.readOnly;
+
   const [currentPage, setCurrentPage] = useState(props.page || DEFAULT_PAGE);
   const [currentSize, setCurrentSize] = useState(props.size || DEFAULT_SIZE);
 
@@ -72,7 +76,7 @@ export function Pagination(props: PaginationProps) {
   }, [props.total, props.size]);
 
   function handlePageChange(page: number) {
-    if (props.disabled) {
+    if (disabled) {
       return;
     }
 
@@ -85,7 +89,7 @@ export function Pagination(props: PaginationProps) {
   }
 
   function handleSizeChange(size: number) {
-    if (props.disabled) {
+    if (disabled) {
       return;
     }
 
@@ -123,18 +127,18 @@ export function Pagination(props: PaginationProps) {
               custom: props.pageProps?.className
             })}
             onClick={() => {
-              if (props.disabled) {
+              if (disabled) {
                 return;
               }
               handlePageChange(i);
             }}
             aria-current={i === currentPage ? 'page' : undefined}
             aria-controls="search-results"
-            aria-disabled={props.disabled || currentPage === start || currentPage === end ? true : undefined}
+            aria-disabled={disabled || currentPage === start || currentPage === end ? true : undefined}
             tabIndex={0}
             aria-label={`Pagination, press for page ${i}`}
             onKeyDown={(e) => {
-              if (props.disabled) {
+              if (disabled) {
                 return;
               }
 
@@ -173,7 +177,7 @@ export function Pagination(props: PaginationProps) {
           })}
           onClick={() => handlePageChange(1)}
           onKeyDown={(e) => {
-            if (props.disabled) {
+            if (disabled) {
               return;
             }
 
@@ -198,17 +202,17 @@ export function Pagination(props: PaginationProps) {
             custom: props.arrowProps?.className
           })}
           onClick={() => {
-            if (props.disabled) {
+            if (disabled) {
               return;
             }
 
             handlePageChange(currentPage - 1);
           }}
           tabIndex={0}
-          aria-disabled={props.disabled || currentPage === 1 ? true : undefined}
+          aria-disabled={disabled || currentPage === 1 ? true : undefined}
           aria-label={`Pagination previous arrow, press for page ${currentPage - 1}`}
           onKeyDown={(e) => {
-            if (props.disabled) {
+            if (disabled) {
               return;
             }
 
@@ -242,10 +246,10 @@ export function Pagination(props: PaginationProps) {
           })}
           onClick={() => handlePageChange(currentPage + 1)}
           tabIndex={0}
-          aria-disabled={props.disabled || currentPage === totalPages ? true : undefined}
+          aria-disabled={disabled || currentPage === totalPages ? true : undefined}
           aria-label={`Pagination next arrow, press for page ${currentPage + 1}`}
           onKeyDown={(e) => {
-            if (props.disabled) {
+            if (disabled) {
               return;
             }
 
@@ -276,7 +280,7 @@ export function Pagination(props: PaginationProps) {
           })}
           onClick={() => handlePageChange(totalPages)}
           onKeyDown={(e) => {
-            if (props.disabled) {
+            if (disabled) {
               return;
             }
 
@@ -306,12 +310,12 @@ export function Pagination(props: PaginationProps) {
               size: props.sizeDropdownProps?.size || 'sm',
               placeholder: props.sizeDropdownProps?.textInputProps?.placeholder || 'Rows'
             }}
-            disabled={props.disabled ?? false}
+            disabled={disabled ?? false}
             simple={props.simple}
             select={props.simple ? false : true}
             options={sizes.map((size) => ({ value: size, label: size }))}
             onChange={(e: any) => {
-              if (props.disabled) {
+              if (disabled) {
                 return;
               }
 

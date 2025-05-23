@@ -94,6 +94,8 @@ export function NumberInput(props: NumberInputProps) {
   }, []);
   const simple = finallySimple || props.simple;
 
+  const disabled = props.disabled || props.readOnly;
+
   const [formattedValue, setFormattedValue] = useState<string>(format(props.value) ?? '');
   const [numberValue, setNumberValue] = useState<number>(toNumber(props.value));
   const [focused, setFocused] = useState<boolean>(false);
@@ -145,7 +147,7 @@ export function NumberInput(props: NumberInputProps) {
 
   // Emit change event when numberValue changes (for Form)
   useEffect(() => {
-    if (!props.disabled) {
+    if (!disabled) {
       dispatchChangeEvent(numberValue, props.name, props.id);
     }
   }, [numberValue]);
@@ -179,7 +181,7 @@ export function NumberInput(props: NumberInputProps) {
       setLastValidValue(unformattedChangeValue);
     }
 
-    if (props.onChange && !props.disabled) {
+    if (props.onChange && !disabled) {
       const changeNumberValue = toNumber(unformattedChangeValue);
 
       props.onChange({
@@ -198,7 +200,7 @@ export function NumberInput(props: NumberInputProps) {
 
   // emit the raw number value on blur
   function onBlur(e) {
-    if (props.disabled) {
+    if (disabled) {
       return;
     }
 
@@ -209,7 +211,7 @@ export function NumberInput(props: NumberInputProps) {
     setNumberValue(unformattedBlurValue);
     setFormattedValue(formatted ?? '');
 
-    if (!props.disabled) {
+    if (!disabled) {
       props.onBlur?.({
         ...e,
         target: {
@@ -225,7 +227,7 @@ export function NumberInput(props: NumberInputProps) {
   }
 
   function onClear(e) {
-    if (props.disabled) {
+    if (disabled) {
       return;
     }
 
@@ -233,7 +235,7 @@ export function NumberInput(props: NumberInputProps) {
     setFormattedValue('');
     setLastValidValue(undefined);
 
-    if (!props.disabled) {
+    if (!disabled) {
       onChange?.({
         ...e,
         target: {
@@ -280,13 +282,13 @@ export function NumberInput(props: NumberInputProps) {
         })}
         role={props.role ?? 'input'}
         aria-labelledby={props['aria-labelledby'] ?? props.leftLabelProps?.id ?? props.rightLabelProps?.id ?? undefined}
-        aria-disabled={props['aria-disabled'] ?? props.disabled ?? props.readOnly}
+        aria-disabled={props['aria-disabled'] ?? disabled}
         aria-valuemin={props['aria-valuemin'] ?? props.min}
         aria-valuemax={props['aria-valuemax'] ?? props.max}
         aria-valuenow={props['aria-valuenow'] ?? numberValue}
-        tabIndex={props.tabIndex ?? (props.disabled || props.readOnly) ? 0 : undefined}
+        tabIndex={props.tabIndex ?? (disabled) ? 0 : undefined}
       >
-        {props.readOnly ? (
+        {disabled ? (
           <div
             {...props.inputProps}
             className={getClassName({
@@ -309,14 +311,14 @@ export function NumberInput(props: NumberInputProps) {
               simple,
               custom: props.inputProps?.className
             })}
-            disabled={props.disabled ?? false}
+            disabled={disabled ?? false}
             onBlur={onBlur}
             onChange={onChange}
             onFocus={onFocus}
             placeholder={props.simple ? props.placeholder : undefined}
             type="text"
             value={
-              props.disabled
+              disabled
                 ? formattedValue
                 : focused
                 ? numberValue ?? ''
@@ -328,7 +330,7 @@ export function NumberInput(props: NumberInputProps) {
         )}
 
         {props.showClear &&
-          !props.disabled &&
+          !disabled &&
           numberValue != null &&
           (props.customClear ? (
             props.customClear

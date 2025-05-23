@@ -6,6 +6,7 @@ export interface ButtonProps extends HTMLAttributes<any> {
   borderColor?: string;
   color?: string;
   disabled?: boolean;
+  readOnly?: boolean;
   name?: string;
   noColorChange?: boolean;
   rounded?: boolean;
@@ -16,7 +17,18 @@ export interface ButtonProps extends HTMLAttributes<any> {
   type?: 'button' | 'submit' | 'reset';
 }
 
-const omitValues = ['borderColor', 'color', 'noColorChange', 'onClick', 'rounded', 'simple', 'size', 'submit', 'text'];
+const omitValues = [
+  'borderColor',
+  'color',
+  'noColorChange',
+  'onClick',
+  'rounded',
+  'simple',
+  'size',
+  'submit',
+  'text',
+  'readOnly'
+];
 
 /**
  * Button component for displaying a button.
@@ -27,6 +39,8 @@ export function Button(props: ButtonProps) {
     return getFinallyConfig().simple;
   }, []);
   const simple = finallySimple || props.simple;
+
+  const disabled = props.disabled || props.readOnly;
 
   const size = props.simple ? props.size : props.size || 'md';
   const borderColor = props.borderColor ? props.borderColor : props.simple ? props.color : props.color || 'black';
@@ -56,11 +70,11 @@ export function Button(props: ButtonProps) {
   const isSubmitButton = props.submit != null ? props.submit : props.type != null ? props.type === 'submit' : false;
 
   function onClick(e) {
-    if (props.onClick && !props.disabled) {
+    if (props.onClick && !disabled) {
       props.onClick(e);
     }
 
-    if (isSubmitButton && !props.disabled) {
+    if (isSubmitButton && !disabled) {
       dispatchSubmitEvent(props.name, props.id);
     }
   }
@@ -69,10 +83,10 @@ export function Button(props: ButtonProps) {
     'border-1',
     borderColor && `border-${borderColor}`,
     backgroundColor && `${backgroundColor}-bg`,
-    !props.disabled && darkColor && !props.noColorChange && `hover:${darkColor}-bg`,
-    !props.disabled && darkColor && !props.noColorChange && `hover:border-${darkBorderColor}`,
-    !props.disabled && darkerColor && !props.noColorChange && `active:${darkerColor}-bg`,
-    !props.disabled && darkerColor && !props.noColorChange && `active:border-${darkerBorderColor}`,
+    !disabled && darkColor && !props.noColorChange && `hover:${darkColor}-bg`,
+    !disabled && darkColor && !props.noColorChange && `hover:border-${darkBorderColor}`,
+    !disabled && darkerColor && !props.noColorChange && `active:${darkerColor}-bg`,
+    !disabled && darkerColor && !props.noColorChange && `active:border-${darkerBorderColor}`,
     props.className
   );
 
@@ -94,8 +108,8 @@ export function Button(props: ButtonProps) {
       onClick={onClick}
       role={props.role ?? 'button'}
       aria-label={props['aria-label'] ?? props.text ?? 'Button'}
-      aria-disabled={props['aria-disabled'] ?? props.disabled}
-      disabled={props.simple ? props.disabled : undefined}
+      aria-disabled={props['aria-disabled'] ?? disabled}
+      disabled={props.simple ? disabled : undefined}
     >
       {props.text}
     </button>
