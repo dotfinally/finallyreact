@@ -54,7 +54,7 @@ export function getClassName({
     value += ' align-center pointer inline-flex h-full py-0 px-1';
 
     if (disabled) {
-      value += ' cursor-not-allowed gray-5';
+      value += ' cursor-default gray-5';
     } else {
       value += ' h-80 hover:border-b-5 hover:border-b-blue-4';
     }
@@ -80,7 +80,7 @@ export function getClassName({
     value += ' p-1 pointer';
 
     if (disabled) {
-      value += ' cursor-not-allowed gray-5';
+      value += ' cursor-default gray-5';
     } else {
       value += ' hover:border-l-5 hover:border-l-blue-4';
     }

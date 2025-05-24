@@ -53,7 +53,7 @@ export function getClassName({
       value += ' flex py-3/10 pl-1 text-center text-none transition-2-all w-auto pointer';
 
       if (disabled) {
-        value += ' cursor-not-allowed gray-7';
+        value += ' cursor-default gray-7';
       } else {
         value += ' hover:blue-2-bg';
       }

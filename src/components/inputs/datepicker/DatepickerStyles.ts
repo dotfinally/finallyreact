@@ -40,7 +40,7 @@ export function getClassName({
 
   if (!simple) {
     if (props.disabled || props.readOnly) {
-      value += ' cursor-not-allowed';
+      value += ' cursor-default';
     }
 
     if (name === 'finallyreact-datepicker__display') {

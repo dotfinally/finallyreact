@@ -22,7 +22,7 @@ export function getClassName({
     value += ' flex';
 
     if (props.disabled || props.readOnly) {
-      value += ' cursor-not-allowed';
+      value += ' cursor-default';
     } else {
       value += ' cursor-pointer';
     }
@@ -30,19 +30,19 @@ export function getClassName({
 
   if (props.disabled || props.readOnly) {
     if (name === 'finallyreact-check__input' && !props.toggle) {
-      value += ' cursor-not-allowed border-stone-4 stone-2-bg';
+      value += ' cursor-default border-stone-4 stone-2-bg';
     }
 
     if (name === 'finallyreact-check__label') {
-      value += ' cursor-not-allowed opacity-50';
+      value += ' cursor-default opacity-50';
     }
 
     if (name === 'finallyreact-toggle') {
-      value += ' cursor-not-allowed opacity-50';
+      value += ' cursor-default opacity-50';
     }
 
     if (name === 'finallyreact-check__input' && props.toggle && size === 'md') {
-      value += ' cursor-not-allowed';
+      value += ' cursor-default';
 
       if (props.checked) {
         value += ' left-1-1/2';
@@ -122,7 +122,12 @@ export function getClassName({
   }
 
   if (name === 'finallyreact-check__input') {
-    value += ' pointer border-2 inline-block transition-transform-1-ease-in-out';
+    if (props.disabled || props.readOnly) {
+      value += ' cursor-default';
+    } else {
+      value += ' cursor-pointer';
+    }
+    value += ' border-2 inline-block transition-transform-1-ease-in-out';
     value += ` border-${props.color || 'black'}`;
 
     if ((props.fill || props.toggle) && checked) {
@@ -130,7 +135,7 @@ export function getClassName({
     }
 
     if (props.disabled || props.readOnly) {
-      value += ' cursor-not-allowed opacity-50';
+      value += ' cursor-default opacity-50';
     }
 
     if (size === 'sm') {
@@ -175,7 +180,12 @@ export function getClassName({
   }
 
   if (name === 'finallyreact-check__label') {
-    value += ' pointer ml-1/5';
+    if (props.disabled || props.readOnly) {
+      value += ' cursor-default';
+    } else {
+      value += ' cursor-pointer';
+    }
+    value += ' ml-1/5';
 
     if (size === 'sm') {
       value += ' pt-1/10 text-sm';

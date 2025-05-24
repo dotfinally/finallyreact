@@ -22,7 +22,11 @@ export function getClassName({
     value += ' w-fit';
 
     if (props.select) {
-      value += ' pointer';
+      if (props.disabled || props.readOnly) {
+        value += ' cursor-default';
+      } else {
+        value += ' cursor-pointer';
+      }
     }
   }
 
@@ -33,13 +37,12 @@ export function getClassName({
     }
 
     if (name === 'finallyreact-dropdown__option') {
-      value += ' pointer p-1/2 border-b-1';
-
-      if (disabled) {
-        value += ' cursor-not-allowed';
+      if (props.disabled || props.readOnly) {
+        value += ' cursor-default';
       } else {
-        value += ' hover:gray-2-bg';
+        value += ' cursor-pointer hover:gray-2-bg';
       }
+      value += ' p-1/2 border-b-1';
 
       if (active) {
         value += ' gray-2-bg';

@@ -29,7 +29,7 @@ export function getClassName({
     value += ' relative flex';
 
     if (!simple && (props.disabled || props.readOnly)) {
-      value += ' cursor-not-allowed';
+      value += ' cursor-default';
     }
   }
 
@@ -56,7 +56,7 @@ export function getClassName({
       }
 
       if (props.disabled || props.readOnly) {
-        value += ' cursor-not-allowed';
+        value += ' cursor-default';
       }
 
       if (!simple) {
@@ -65,7 +65,12 @@ export function getClassName({
     }
 
     if (name === 'finallyreact-input__dropdown') {
-      value += ' border-l-0 border-solid cursor-pointer';
+      if (props.disabled || props.readOnly) {
+        value += ' cursor-default';
+      } else {
+        value += ' cursor-pointer';
+      }
+      value += ' border-l-0 border-solid';
 
       if (props.outline) {
         value += ' border-r-1 border-t-1';
@@ -92,7 +97,12 @@ export function getClassName({
     }
 
     if (name === 'finallyreact-input__clear') {
-      value += ' border-l-0 border-b-1 border-solid cursor-pointer after-clear';
+      if (props.disabled || props.readOnly) {
+        value += ' cursor-default';
+      } else {
+        value += ' cursor-pointer';
+      }
+      value += ' border-l-0 border-b-1 border-solid after-clear';
 
       if (props.color) {
         value += ` border-${props.color} ${props.color}`;
@@ -257,7 +267,12 @@ export function getClassName({
   }
 
   if (name === 'finallyreact-input__password-toggle') {
-    value += ' align-center flex mr-1/5 pointer';
+    if (props.disabled || props.readOnly) {
+      value += ' cursor-default';
+    } else {
+      value += ' cursor-pointer';
+    }
+    value += ' align-center flex mr-1/5';
 
     if (showToggle) {
       value += ' password-toggle-show';

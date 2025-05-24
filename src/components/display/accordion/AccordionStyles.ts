@@ -42,7 +42,7 @@ export function getClassName({
 
     if (!simple) {
       if (props.disabled || props.readOnly) {
-        value += ' cursor-not-allowed';
+        value += ' cursor-default';
       }
 
       value += ' cursor-pointer flex justify-content-between p-1';

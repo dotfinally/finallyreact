@@ -21,13 +21,13 @@ export function getClassName({
   if (!simple) {
     if (name === 'finallyreact-pagination__arrow-container') {
       if (props.disabled || props.readOnly) {
-        value += ' cursor-not-allowed';
+        value += ' cursor-default';
       }
     }
 
     if (name === 'finallyreact-pagination__page') {
       if (props.disabled || props.readOnly) {
-        value += ' cursor-not-allowed';
+        value += ' cursor-default';
       }
     }
 

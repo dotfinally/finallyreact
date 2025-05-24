@@ -23,7 +23,7 @@ export function getClassName({
       value += ' border-1 text';
 
       if (props.disabled || props.readOnly) {
-        value += ' not-allowed opacity-50';
+        value += ' cursor-default opacity-50';
       } else {
         value += ' cursor-pointer';
       }

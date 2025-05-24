@@ -23,19 +23,27 @@ export function getClassName({
   if (!simple) {
     if (!disabled) {
       if (name === 'finallyreact-radio__option') {
-        value += ' pointer';
+        if (props.disabled || props.readOnly) {
+          value += ' cursor-default';
+        } else {
+          value += ' cursor-pointer';
+        }
       }
 
       if (name === 'finallyreact-radio__input') {
-        value += ' pointer';
+        if (props.disabled || props.readOnly) {
+          value += ' cursor-default';
+        } else {
+          value += ' cursor-pointer';
+        }
       }
     } else {
       if (name === 'finallyreact-radio__option') {
-        value += 'cursor-not-allowed';
+        value += 'cursor-default';
       }
 
       if (name === 'finallyreact-radio__input') {
-        value += 'cursor-not-allowed';
+        value += 'cursor-default';
       }
 
       if (name === 'finallyreact-radio__label') {
@@ -47,7 +55,7 @@ export function getClassName({
       value += ' mb-1/2 flex';
 
       if (disabled) {
-        value += ' cursor-not-allowed';
+        value += ' cursor-default';
       }
     }
 
