@@ -63,7 +63,7 @@ Nota: Asegúrate de que tu contenido de purgecss incluya `node_modules/finallyre
 
 ## Licencia
 
-Derechos de autor © 2023-2024 `dotfinally, LLC`
+Derechos de autor © 2023-current `dotfinally, LLC`
 
 Disponible bajo la licencia MIT, lo que significa que cualquiera puede usar FinallyReact de forma gratuita, para cualquier propósito. Lee el texto completo de la licencia en el archivo LICENSE.txt en el repositorio.
 

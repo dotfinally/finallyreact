@@ -63,7 +63,7 @@ Note: Ensure your purgecss content includes `node_modules/finallyreact/index.js`
 
 ## License
 
-Copyright © 2023-2024 `dotfinally, LLC`
+Copyright © 2023-current `dotfinally, LLC`
 
 Available under the MIT license, which means anyone can use FinallyReact for free, for any purpose. Read the full license text in the LICENSE.txt file in the repo.
 

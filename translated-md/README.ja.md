@@ -63,7 +63,7 @@ CSSバンドルのサイズを減らすために、PostCSSとPurgeCSSを使用�
 
 ## ライセンス
 
-著作権 © 2023-2024 `dotfinally, LLC`
+著作権 © 2023-current `dotfinally, LLC`
 
 MITライセンスの下で利用可能で、これは誰でも任意の目的で無料でFinallyReactを使用できることを意味します。リポジトリのLICENSE.txtファイルで完全なライセンステキストを読んでください。
 

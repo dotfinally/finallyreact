@@ -63,7 +63,7 @@ export default {
 
 ## 许可证
 
-版权所有 © 2023-2024 `dotfinally, LLC`
+版权所有 © 2023-current `dotfinally, LLC`
 
 根据MIT许可证提供，这意味着任何人都可以免费使用FinallyReact，用于任何目的。在仓库中的LICENSE.txt文件中阅读完整的许可证文本。
 

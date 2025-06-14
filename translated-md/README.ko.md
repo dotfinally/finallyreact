@@ -63,7 +63,7 @@ CSS 번들 크기를 줄이기 위해 PostCSS와 PurgeCSS를 사용할 수 있�
 
 ## 라이선스
 
-저작권 © 2023-2024 `dotfinally, LLC`
+저작권 © 2023-current `dotfinally, LLC`
 
 MIT 라이선스 하에 사용 가능하며, 이는 누구나 무료로 어떤 목적으로든 FinallyReact를 사용할 수 있음을 의미합니다. 라이선스의 전문은 저장소의 LICENSE.txt 파일에서 읽을 수 있습니다.
 
