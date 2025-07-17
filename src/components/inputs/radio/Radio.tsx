@@ -5,7 +5,7 @@ import { getClassName } from './RadioStyles';
 
 export interface RadioProps extends HTMLAttributes<any> {
   color?: string;
-  initialValue?: string;
+  initialValue?: string | any[];
   disabled?: boolean;
   readOnly?: boolean;
   inputProps?: HTMLAttributes<any>;
@@ -14,7 +14,9 @@ export interface RadioProps extends HTMLAttributes<any> {
   options: RadioOptionProps[];
   simple?: boolean;
   size?: 'sm' | 'md' | 'lg';
-  value?: any;
+  value?: any | any[];
+  multiSelect?: boolean;
+  onChange?: (e: any) => void;
 }
 
 export interface RadioOptionProps extends HTMLAttributes<any> {
@@ -35,62 +37,91 @@ const omitValues = [
   'options',
   'simple',
   'size',
-  'value'
+  'value',
+  'multiSelect'
 ];
 
 const omitRadioOptionValues = ['label', 'value', 'disabled', 'readOnly'];
 
-/**
- * Radio component for selecting one option from a list.
- * @param props RadioProps
- */
 export function Radio(props: RadioProps) {
   const finallySimple = useMemo(() => {
     return getFinallyConfig().simple;
   }, []);
   const simple = finallySimple || props.simple;
-
   const disabled = props.disabled || props.readOnly;
-
-  const [selectedValue, setSelectedValue] = useState(
-    props.value == null ? props.initialValue : props.value == null ? undefined : props.value
-  );
-
+  const multi = props.multiSelect || false;
   const size = props.size || 'md';
 
+  // internal state: either a single value or an array
+  const [selected, setSelected] = useState<any>(() => {
+    if (multi) {
+      // if initialValue is array, use it, else empty array
+      return Array.isArray(props.value) ? props.value : Array.isArray(props.initialValue) ? props.initialValue : [];
+    }
+    // single-select
+    return props.value ?? props.initialValue ?? undefined;
+  });
+
+  // Sync props.value -> internal state
   useEffect(() => {
-    if (props.value !== selectedValue) {
-      if (props.value == null && props.initialValue != null) {
-        setSelectedValue(props.initialValue);
-      } else {
-        setSelectedValue(props.value);
+    if (multi) {
+      const incoming = Array.isArray(props.value) ? props.value : [];
+      if (JSON.stringify(incoming) !== JSON.stringify(selected)) {
+        setSelected(incoming);
+      }
+    } else {
+      if (props.value !== selected) {
+        setSelected(props.value ?? props.initialValue ?? undefined);
       }
     }
   }, [props.value]);
 
+  // dispatch change event on every selection change
   useEffect(() => {
     if (!disabled) {
-      dispatchChangeEvent(selectedValue, props.name, props.id);
+      dispatchChangeEvent(selected, props.name, props.id);
     }
-  }, [selectedValue]);
+  }, [selected]);
 
-  function onChange(e, value: any) {
-    if (selectedValue !== value && !disabled) {
-      setSelectedValue(value);
+  function onChange(e: any, optionValue: any) {
+    if (disabled) return;
 
+    if (multi) {
+      // Toggle membership
+      const currentArray = Array.isArray(selected) ? selected : [];
+      const idx = currentArray.indexOf(optionValue);
+      let next: any[];
+      if (idx >= 0) {
+        next = [...currentArray.slice(0, idx), ...currentArray.slice(idx + 1)];
+      } else {
+        next = [...currentArray, optionValue];
+      }
+      setSelected(next);
       props.onChange?.({
         ...e,
-        target: {
-          value
-        }
+        target: { value: next }
       });
+    } else {
+      if (selected === optionValue) {
+        setSelected(null);
+        props.onChange?.({
+          ...e,
+          target: { value: null }
+        });
+      } else {
+        setSelected(optionValue);
+        props.onChange?.({
+          ...e,
+          target: { value: optionValue }
+        });
+      }
     }
   }
 
   function getOptions() {
-    return props.options?.map((option, index) => {
+    return props.options.map((option, index) => {
       const { label, value } = option;
-      const checked = value === selectedValue;
+      const isChecked = multi ? Array.isArray(selected) && selected.includes(value) : value === selected;
       const dis = disabled || option.disabled || option.readOnly;
 
       return (
@@ -102,11 +133,12 @@ export function Radio(props: RadioProps) {
             props,
             simple,
             disabled: dis,
-            size
+            size,
+            checked: isChecked
           })}
           onClick={(e) => !dis && onChange(e, value)}
-          aria-checked={props['aria-checked'] ?? checked}
-          aria-label={props['aria-label'] ?? label}
+          aria-checked={isChecked}
+          aria-label={label}
           tabIndex={option.tabIndex ?? 0}
           onKeyDown={(e) => {
             option.onKeyDown?.(e);
@@ -115,10 +147,10 @@ export function Radio(props: RadioProps) {
             }
           }}
         >
-          {props.simple ? (
+          {simple ? (
             <input
               {...(props.inputProps || {})}
-              type="radio"
+              type={multi ? 'checkbox' : 'radio'}
               className={getClassName({
                 name: 'finallyreact-radio__input',
                 props,
@@ -127,7 +159,7 @@ export function Radio(props: RadioProps) {
                 size,
                 custom: props.inputProps?.className
               })}
-              checked={checked}
+              checked={isChecked}
               disabled={dis}
               value={value}
             />
@@ -140,10 +172,10 @@ export function Radio(props: RadioProps) {
                 simple,
                 disabled: dis,
                 size,
-                checked,
+                checked: isChecked,
                 custom: props.inputProps?.className
               })}
-              aria-checked={props['aria-checked'] ?? checked}
+              aria-checked={isChecked}
             />
           )}
 
@@ -155,7 +187,7 @@ export function Radio(props: RadioProps) {
               simple,
               disabled: dis,
               size,
-              checked,
+              checked: isChecked,
               custom: props.labelProps?.className
             })}
           >
@@ -178,10 +210,11 @@ export function Radio(props: RadioProps) {
       className={classnames(
         'finallyreact-radio',
         disabled && 'disabled',
-        props.simple && 'simple',
+        simple && 'simple',
+        multi && 'multi-select',
         props.className
       )}
-      role={props.role ?? 'radio'}
+      role={multi ? 'group' : props.role ?? 'radio'}
     >
       {getOptions()}
     </div>
