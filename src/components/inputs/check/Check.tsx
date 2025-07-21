@@ -1,12 +1,4 @@
-import React, {
-  HTMLAttributes,
-  useEffect,
-  useMemo,
-  useState,
-  ChangeEvent,
-  KeyboardEvent,
-  MouseEvent
-} from 'react';
+import React, { HTMLAttributes, useEffect, useMemo, useState, ChangeEvent, KeyboardEvent, MouseEvent } from 'react';
 import { omit, dispatchChangeEvent, getFinallyConfig, checkHex } from '@util/index';
 import { getClassName } from './CheckStyles';
 import { XIcon } from '@icons/XIcon';
@@ -63,11 +55,10 @@ export function Check(originalProps: CheckProps) {
   const disabled = originalProps.disabled || originalProps.readOnly;
 
   // single‐checkbox state
-  const [checked, setChecked] = useState<boolean>(
-    originalProps.defaultChecked ?? originalProps.checked ?? false
-  );
+  const [checked, setChecked] = useState<boolean>(originalProps.defaultChecked ?? originalProps.checked ?? false);
   useEffect(() => {
     if (
+      !isGroup &&
       originalProps.checked !== undefined &&
       originalProps.checked !== checked &&
       !(originalProps.defaultChecked != null && originalProps.checked == null)
@@ -78,10 +69,37 @@ export function Check(originalProps: CheckProps) {
 
   // dispatch global change event
   useEffect(() => {
-    if (!disabled) {
+    if (!disabled && !isGroup) {
       dispatchChangeEvent(checked, originalProps.name, originalProps.id);
     }
   }, [checked]);
+
+  const handleKeyDown = (e: KeyboardEvent<any>) => {
+    if (e.key === 'Enter') {
+      handleChange(e);
+    }
+    originalProps.onKeyDown?.(e);
+  };
+
+  // group state: array of CheckOption with their own checked flags
+  const [groupOpts, setGroupOpts] = useState<CheckOption[]>(
+    () =>
+      originalProps.options?.map((o) => ({
+        ...o,
+        checked: o.checked != null ? !!o.checked : o.defaultChecked ?? undefined
+      })) ?? []
+  );
+
+  useEffect(() => {
+    if (isGroup) {
+      setGroupOpts(
+        originalProps.options!.map((o) => ({
+          ...o,
+          checked: o.checked != null ? !!o.checked : o.defaultChecked ?? undefined
+        }))
+      );
+    }
+  }, [originalProps.options]);
 
   const handleChange = (e: ChangeEvent<any> | MouseEvent<any>, forced?: boolean) => {
     if (disabled) return;
@@ -97,52 +115,33 @@ export function Check(originalProps: CheckProps) {
     setChecked(newVal);
   };
 
-  const handleKeyDown = (e: KeyboardEvent<any>) => {
-    if (e.key === 'Enter') handleChange(e);
-    originalProps.onKeyDown?.(e);
-  };
-
-  // group state: array of CheckOption with their own checked flags
-  const [groupOpts, setGroupOpts] = useState<CheckOption[]>(
-    () =>
-      originalProps.options?.map((o) => ({
-        ...o,
-        checked: !!o.checked
-      })) ?? []
-  );
-  useEffect(() => {
-    if (isGroup) {
-      setGroupOpts(
-        originalProps.options!.map((o) => ({
-          ...o,
-          checked: !!o.checked
-        }))
-      );
-    }
-  }, [originalProps.options]);
-
   const handleOneChange = (e: ChangeEvent<any> | MouseEvent<any>, idx: number) => {
     const currentDisabled = groupOpts[idx].readOnly || groupOpts[idx].disabled;
     if (currentDisabled) return;
 
-    const curr = groupOpts[idx].checked ?? false;
+    const curr = groupOpts[idx].checked ?? undefined;
+
     // if it's a real <input type="checkbox" />, read e.target.checked
     const newVal =
       'target' in e && (e.target as HTMLInputElement).checked !== undefined
         ? (e.target as HTMLInputElement).checked
-        : !curr;
+        : curr != null
+        ? !curr
+        : undefined;
 
-    const nextArr = groupOpts.map((opt, i) =>
-      i === idx ? { ...opt, checked: newVal } : opt
-    );
+    const nextArr = groupOpts.map((opt, i) => (i === idx ? { ...opt, checked: newVal } : opt));
     setGroupOpts(nextArr);
 
-    // synthetic event: value = the new array of options
-    const synthetic: any = {
+    const synthetic = {
       ...e,
-      target: { ...(e as any).target, value: nextArr }
+      target: {
+        ...(('target' in e && e.target) || {}),
+        value: nextArr
+      }
     };
-    originalProps.onChange?.(synthetic);
+
+    originalProps.onChange?.(synthetic as any);
+    dispatchChangeEvent(nextArr, originalProps.name, originalProps.id);
   };
 
   /**
@@ -304,18 +303,20 @@ export function Check(originalProps: CheckProps) {
 
     return (
       <div {...containerProps}>
-        {groupOpts.map((opt, idx) => (
-          <div key={opt.key}>
-            {renderOne(
-              !!opt.checked,
-              (e) => handleOneChange(e, idx),
-              handleKeyDown,
-              opt.label,
-              // pass *all* opt fields as overrides, except key & label
-              omit(opt, ['key', 'label', 'checked']) as CheckProps
-            )}
-          </div>
-        ))}
+        {groupOpts.map((opt, idx) => {
+          return (
+            <div key={opt.key}>
+              {renderOne(
+                opt.checked != null ? !!opt.checked : opt.defaultChecked ?? undefined,
+                (e) => handleOneChange(e, idx),
+                handleKeyDown,
+                opt.label,
+                // pass *all* opt fields as overrides, except key & label
+                omit(opt, ['key', 'label', 'checked']) as CheckProps
+              )}
+            </div>
+          );
+        })}
       </div>
     );
   }
