@@ -50,8 +50,6 @@ export function Check(originalProps: CheckProps) {
 
   // these derive from the *global* props
   const finallySimple = useMemo(() => getFinallyConfig().simple, []);
-  const simple = finallySimple || originalProps.simple;
-  const size = originalProps.size || 'md';
   const disabled = originalProps.disabled || originalProps.readOnly;
 
   // single‐checkbox state
@@ -102,7 +100,10 @@ export function Check(originalProps: CheckProps) {
   }, [originalProps.options]);
 
   const handleChange = (e: ChangeEvent<any> | MouseEvent<any>, forced?: boolean) => {
-    if (disabled) return;
+    if (disabled) {
+      return;
+    }
+
     const newVal = forced ?? !checked;
     const newEvent = {
       ...e,
@@ -111,6 +112,7 @@ export function Check(originalProps: CheckProps) {
         value: newVal
       }
     };
+
     originalProps.onChange?.(newEvent as any);
     setChecked(newVal);
   };
@@ -119,7 +121,7 @@ export function Check(originalProps: CheckProps) {
     const currentDisabled = groupOpts[idx].readOnly || groupOpts[idx].disabled;
     if (currentDisabled) return;
 
-    const curr = groupOpts[idx].checked ?? undefined;
+    const curr = groupOpts[idx].checked ?? false;
 
     // if it's a real <input type="checkbox" />, read e.target.checked
     const newVal =
@@ -127,7 +129,7 @@ export function Check(originalProps: CheckProps) {
         ? (e.target as HTMLInputElement).checked
         : curr != null
         ? !curr
-        : undefined;
+        : true;
 
     const nextArr = groupOpts.map((opt, i) => (i === idx ? { ...opt, checked: newVal } : opt));
     setGroupOpts(nextArr);
