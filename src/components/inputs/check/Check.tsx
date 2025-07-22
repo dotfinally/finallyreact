@@ -72,10 +72,11 @@ export function Check(originalProps: CheckProps) {
     }
   }, [checked]);
 
-  const handleKeyDown = (e: KeyboardEvent<any>) => {
+  const handleKeyDown = (e: KeyboardEvent<any>, index?: number) => {
     if (e.key === 'Enter') {
-      handleChange(e);
+      index != null ? handleOneChange(e, index) : handleChange(e);
     }
+
     originalProps.onKeyDown?.(e);
   };
 
@@ -311,7 +312,7 @@ export function Check(originalProps: CheckProps) {
               {renderOne(
                 opt.checked != null ? !!opt.checked : opt.defaultChecked ?? undefined,
                 (e) => handleOneChange(e, idx),
-                handleKeyDown,
+                (e) => handleKeyDown(e, idx),
                 opt.label,
                 // pass *all* opt fields as overrides, except key & label
                 omit(opt, ['key', 'label', 'checked']) as CheckProps
