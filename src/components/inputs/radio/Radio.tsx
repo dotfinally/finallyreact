@@ -17,6 +17,8 @@ export interface RadioProps extends HTMLAttributes<any> {
   value?: any | any[];
   multiSelect?: boolean;
   onChange?: (e: any) => void;
+  /** If false, clicking a selected single option won't unselect it. Default true */
+  allowUnselect?: boolean;
 }
 
 export interface RadioOptionProps extends HTMLAttributes<any> {
@@ -24,6 +26,8 @@ export interface RadioOptionProps extends HTMLAttributes<any> {
   value: any;
   disabled?: boolean;
   readOnly?: boolean;
+  /** If false, this specific option cannot be unselected in multi mode. Default inherits global */
+  allowUnselect?: boolean;
 }
 
 const omitValues = [
@@ -38,10 +42,11 @@ const omitValues = [
   'simple',
   'size',
   'value',
-  'multiSelect'
+  'multiSelect',
+  'allowUnselect'
 ];
 
-const omitRadioOptionValues = ['label', 'value', 'disabled', 'readOnly'];
+const omitRadioOptionValues = ['label', 'value', 'disabled', 'readOnly', 'allowUnselect'];
 
 export function Radio(props: RadioProps) {
   const finallySimple = useMemo(() => {
@@ -51,14 +56,14 @@ export function Radio(props: RadioProps) {
   const disabled = props.disabled || props.readOnly;
   const multi = props.multiSelect || false;
   const size = props.size || 'md';
+  // default allowUnselect to true
+  const allowUnselectGlobal = props.allowUnselect !== false;
 
   // internal state: either a single value or an array
   const [selected, setSelected] = useState<any>(() => {
     if (multi) {
-      // if initialValue is array, use it, else empty array
       return Array.isArray(props.value) ? props.value : Array.isArray(props.initialValue) ? props.initialValue : [];
     }
-    // single-select
     return props.value ?? props.initialValue ?? undefined;
   });
 
@@ -83,26 +88,43 @@ export function Radio(props: RadioProps) {
     }
   }, [selected]);
 
-  function onChange(e: any, optionValue: any) {
+  function onChange(e: any, optionValue: any, option?: RadioOptionProps) {
     if (disabled) return;
 
+    // Determine per-option allowUnselect, falling back to global
+    const allowUnselectOption = option?.allowUnselect !== undefined ? option.allowUnselect : allowUnselectGlobal;
+
     if (multi) {
-      // Toggle membership
       const currentArray = Array.isArray(selected) ? selected : [];
       const idx = currentArray.indexOf(optionValue);
-      let next: any[];
+
+      // removal
       if (idx >= 0) {
-        next = [...currentArray.slice(0, idx), ...currentArray.slice(idx + 1)];
-      } else {
-        next = [...currentArray, optionValue];
+        if (!allowUnselectOption) {
+          return;
+        }
+        const next = [...currentArray.slice(0, idx), ...currentArray.slice(idx + 1)];
+        setSelected(next);
+        props.onChange?.({
+          ...e,
+          target: { value: next }
+        });
       }
-      setSelected(next);
-      props.onChange?.({
-        ...e,
-        target: { value: next }
-      });
+      // addition
+      else {
+        const next = [...currentArray, optionValue];
+        setSelected(next);
+        props.onChange?.({
+          ...e,
+          target: { value: next }
+        });
+      }
     } else {
+      // single-select
       if (selected === optionValue) {
+        if (!allowUnselectOption) {
+          return;
+        }
         setSelected(null);
         props.onChange?.({
           ...e,
@@ -136,14 +158,14 @@ export function Radio(props: RadioProps) {
             size,
             checked: isChecked
           })}
-          onClick={(e) => !dis && onChange(e, value)}
+          onClick={(e) => !dis && onChange(e, value, option)}
           aria-checked={isChecked}
           aria-label={label}
           tabIndex={option.tabIndex ?? 0}
           onKeyDown={(e) => {
             option.onKeyDown?.(e);
             if (e.key === 'Enter' && !dis) {
-              onChange(e, value);
+              onChange(e, value, option);
             }
           }}
         >
