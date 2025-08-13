@@ -393,7 +393,13 @@ export function Check(originalProps: CheckProps) {
     const containerProps = omit(originalProps, omitValues) as HTMLAttributes<any>;
 
     return (
-      <div {...containerProps}>
+      <div
+        {...(containerProps || {})}
+        onMouseLeave={(e: any) => {
+          setHoverKey(null);
+          containerProps?.onMouseLeave?.(e);
+        }}
+      >
         {groupOpts.map((opt, idx) => {
           return (
             <div key={opt.key} onMouseEnter={() => setHoverKey(opt.key)}>
