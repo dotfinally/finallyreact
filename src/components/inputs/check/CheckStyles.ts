@@ -1,5 +1,5 @@
 import { filterClassName } from '@util/helpers/classFilter';
-import { CheckProps } from './Check';
+import { CheckProps, CheckOption } from './Check';
 
 export function getClassName({
   name,
@@ -7,29 +7,31 @@ export function getClassName({
   simple,
   custom,
   size,
-  checked
+  checked,
+  isHover
 }: {
   name: string;
-  props: CheckProps;
-  simple: boolean;
+  props: CheckProps | CheckOption;
+  simple?: boolean;
   custom?: string;
   size?: string;
   checked?: boolean;
+  isHover?: boolean;
 }) {
   let value = name;
 
   if (name === 'finallyreact-check') {
     value += ' flex';
 
-    if (props.disabled || props.readOnly) {
+    if (props?.disabled || props?.readOnly) {
       value += ' cursor-default';
     } else {
       value += ' cursor-pointer';
     }
   }
 
-  if (props.disabled || props.readOnly) {
-    if (name === 'finallyreact-check__input' && !props.toggle) {
+  if (props?.disabled || props?.readOnly) {
+    if (name === 'finallyreact-check__input' && !props?.toggle) {
       value += ' cursor-default border-stone-4 stone-2-bg';
     }
 
@@ -41,23 +43,23 @@ export function getClassName({
       value += ' cursor-default opacity-50';
     }
 
-    if (name === 'finallyreact-check__input' && props.toggle && size === 'md') {
+    if (name === 'finallyreact-check__input' && props?.toggle && size === 'md') {
       value += ' cursor-default';
 
-      if (props.checked) {
+      if (props?.checked) {
         value += ' left-1-1/2';
       }
     }
 
-    if (name === 'finallyreact-check__checkmark' && props.toggle) {
+    if (name === 'finallyreact-check__checkmark' && props?.toggle) {
       value += ' opacity-1';
     }
   }
 
-  if (props.toggle) {
+  if (props?.toggle) {
     if (name === 'finallyreact-toggle__input') {
       value += ' border-2 m-r-1/10';
-      value += ` border-${props.color || 'black'} ${props.color || 'black'}`;
+      value += ` border-${props?.color || 'black'} ${props?.color || 'black'}`;
 
       if (size === 'sm') {
         value += ' w-2-1/5 h-1';
@@ -122,19 +124,19 @@ export function getClassName({
   }
 
   if (name === 'finallyreact-check__input') {
-    if (props.disabled || props.readOnly) {
+    if (props?.disabled || props?.readOnly) {
       value += ' cursor-default';
     } else {
       value += ' cursor-pointer';
     }
     value += ' border-2 inline-block transition-transform-1-ease-in-out';
-    value += ` border-${props.color || 'black'}`;
+    value += ` border-${props?.color || 'black'}`;
 
-    if ((props.fill || props.toggle) && checked) {
-      value += ` ${props.color || 'black'}-bg`;
+    if ((props?.fill || props?.toggle) && checked) {
+      value += ` ${props?.color || 'black'}-bg`;
     }
 
-    if (props.disabled || props.readOnly) {
+    if (props?.disabled || props?.readOnly) {
       value += ' cursor-default opacity-50';
     }
 
@@ -154,8 +156,8 @@ export function getClassName({
   if (name === 'finallyreact-check__checkmark') {
     value += ' transition-transform-1-ease-in-out inline-block relative rotate-40';
 
-    let checkColor = props.checkColor || props.color;
-    if (props.disabled || props.readOnly && !checkColor) {
+    let checkColor = props?.checkColor || props?.color;
+    if (props?.disabled || (props?.readOnly && !checkColor)) {
       checkColor = 'white';
     }
     value += ` border-${checkColor || 'black'}`;
@@ -180,7 +182,7 @@ export function getClassName({
   }
 
   if (name === 'finallyreact-check__label') {
-    if (props.disabled || props.readOnly) {
+    if (props?.disabled || props?.readOnly) {
       value += ' cursor-default';
     } else {
       value += ' cursor-pointer';
@@ -197,6 +199,18 @@ export function getClassName({
 
     if (size === 'lg') {
       value += ' text-md';
+    }
+  }
+
+  if (name === 'finallyreact-check__label-with-only') {
+    value += ' flex justify-between w-full align-center';
+  }
+
+  if (name === 'finallyreact-check__only-select') {
+    if (isHover) {
+      value += ' text-sm hover:underline';
+    } else {
+      value += ' none';
     }
   }
 

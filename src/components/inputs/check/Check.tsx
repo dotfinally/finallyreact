@@ -7,6 +7,9 @@ export interface CheckOption extends Partial<CheckProps> {
   key: string;
   label: string;
   checked?: boolean;
+  showOnlySelect?: boolean;
+  onlySelectText?: string;
+  onlySelectProps?: HTMLAttributes<any>;
 }
 
 export interface CheckProps extends HTMLAttributes<any> {
@@ -46,6 +49,8 @@ const omitValues = [
 ];
 
 export function Check(originalProps: CheckProps) {
+  const [hoverKey, setHoverKey] = useState<string | null>(null);
+
   const isGroup = Array.isArray(originalProps.options) && originalProps.options.length > 0;
 
   // these derive from the *global* props
@@ -84,8 +89,8 @@ export function Check(originalProps: CheckProps) {
   const [groupOpts, setGroupOpts] = useState<CheckOption[]>(
     () =>
       originalProps.options?.map((o) => ({
-        ...o,
-        checked: o.checked != null ? !!o.checked : o.defaultChecked ?? undefined
+        ...(o || ({} as any)),
+        checked: o?.checked != null ? !!o.checked : o?.defaultChecked ?? undefined
       })) ?? []
   );
 
@@ -94,7 +99,7 @@ export function Check(originalProps: CheckProps) {
       setGroupOpts(
         originalProps.options!.map((o) => ({
           ...o,
-          checked: o.checked != null ? !!o.checked : o.defaultChecked ?? undefined
+          checked: o?.checked != null ? !!o.checked : o?.defaultChecked ?? undefined
         }))
       );
     }
@@ -147,6 +152,35 @@ export function Check(originalProps: CheckProps) {
     dispatchChangeEvent(nextArr, originalProps.name, originalProps.id);
   };
 
+  // NEW: handle "only" logic
+  const handleOnlySelect = (e: MouseEvent<any> | KeyboardEvent<any>, idx: number) => {
+    e.stopPropagation();
+    if (e.type === 'keydown' && (e as KeyboardEvent).key !== 'Enter') {
+      return;
+    }
+
+    const currentDisabled = groupOpts[idx].readOnly || groupOpts[idx].disabled;
+    if (currentDisabled) return;
+
+    // set only the selected one to true, others to false
+    const nextArr = groupOpts.map((opt, i) => ({
+      ...opt,
+      checked: i === idx
+    }));
+    setGroupOpts(nextArr);
+
+    const synthetic = {
+      ...e,
+      target: {
+        ...('target' in e && e.target ? e.target : {}),
+        value: nextArr
+      }
+    };
+
+    originalProps.onChange?.(synthetic as any);
+    dispatchChangeEvent(nextArr, originalProps.name, originalProps.id);
+  };
+
   /**
    * Renders one checkbox (or toggle) instance.  We merge:
    *   – the global props (originalProps)
@@ -157,12 +191,15 @@ export function Check(originalProps: CheckProps) {
     onChange: (e: ChangeEvent<any> | MouseEvent<any>) => void,
     onKeyDown: (e: KeyboardEvent<any>) => void,
     labelText?: string,
-    optProps: CheckProps = {}
+    optProps?: CheckProps,
+    checkOption?: CheckOption,
+    isHover?: boolean,
+    idx?: number
   ) => {
     // merged view props
     const p: CheckProps = {
-      ...originalProps,
-      ...optProps,
+      ...(originalProps || {}),
+      ...(optProps || {}),
       options: undefined
     };
 
@@ -190,7 +227,18 @@ export function Check(originalProps: CheckProps) {
             onKeyDown={onKeyDown}
             disabled={pDisabled}
           />
-          {labelText && <label {...p.labelProps}>{labelText}</label>}
+          {labelText && <label {...(p.labelProps || {})}>{labelText}</label>}
+          {checkOption?.showOnlySelect && (
+            <div
+              {...(checkOption.onlySelectProps || {})}
+              onClick={(e) => handleOnlySelect(e, idx!)}
+              onKeyDown={(e) => handleOnlySelect(e, idx!)}
+              role="button"
+              tabIndex={0}
+            >
+              {checkOption.onlySelectText || 'only'}
+            </div>
+          )}
         </div>
       );
     }
@@ -281,7 +329,47 @@ export function Check(originalProps: CheckProps) {
         ) : (
           checkInput
         )}
-        {labelText && (
+        {checkOption?.showOnlySelect ? (
+          <div
+            className={getClassName({
+              name: 'finallyreact-check__label-with-only',
+              props: p,
+              simple: pSimple,
+              size: pSize,
+              checked: isChecked,
+              custom: p.labelProps?.className
+            })}
+          >
+            <label
+              {...p.labelProps}
+              className={getClassName({
+                name: 'finallyreact-check__label',
+                props: p,
+                simple: pSimple,
+                size: pSize,
+                checked: isChecked,
+                custom: p.labelProps?.className
+              })}
+            >
+              {labelText}
+            </label>
+            <div
+              {...(checkOption.onlySelectProps || {})}
+              className={getClassName({
+                name: 'finallyreact-check__only-select',
+                props: checkOption.onlySelectProps,
+                custom: checkOption.onlySelectProps?.className,
+                isHover
+              })}
+              onClick={(e) => handleOnlySelect(e, idx!)}
+              onKeyDown={(e) => handleOnlySelect(e, idx!)}
+              role="button"
+              tabIndex={0}
+            >
+              {checkOption.onlySelectText || 'only'}
+            </div>
+          </div>
+        ) : labelText ? (
           <label
             {...p.labelProps}
             className={getClassName({
@@ -295,7 +383,7 @@ export function Check(originalProps: CheckProps) {
           >
             {labelText}
           </label>
-        )}
+        ) : null}
       </div>
     );
   };
@@ -308,14 +396,16 @@ export function Check(originalProps: CheckProps) {
       <div {...containerProps}>
         {groupOpts.map((opt, idx) => {
           return (
-            <div key={opt.key}>
+            <div key={opt.key} onMouseEnter={() => setHoverKey(opt.key)}>
               {renderOne(
                 opt.checked != null ? !!opt.checked : opt.defaultChecked ?? undefined,
                 (e) => handleOneChange(e, idx),
                 (e) => handleKeyDown(e, idx),
                 opt.label,
-                // pass *all* opt fields as overrides, except key & label
-                omit(opt, ['key', 'label', 'checked']) as CheckProps
+                omit(opt, ['key', 'label', 'checked', 'showOnlySelect']) as CheckProps,
+                opt,
+                hoverKey === opt.key,
+                idx
               )}
             </div>
           );
@@ -325,7 +415,7 @@ export function Check(originalProps: CheckProps) {
   }
 
   // single checkbox
-  return renderOne(checked, handleChange, handleKeyDown, originalProps.label);
+  return renderOne(checked, handleChange, handleKeyDown, originalProps.label, null, null, false, undefined);
 }
 
 export default Check;
