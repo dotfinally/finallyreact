@@ -1,3 +1,4 @@
+import { filterClassName } from '@util/helpers/classFilter';
 import { AccordionProps } from './Accordion';
 
 export function getClassName({
@@ -87,5 +88,5 @@ export function getClassName({
     }
   }
 
-  return custom ? `${value} ${custom}` : value;
+  return filterClassName(value, custom);
 }
