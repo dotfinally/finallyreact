@@ -36,7 +36,8 @@ export function AccordionGroup(props: AccordionGroupProps) {
       props.items?.map((item) => {
         return {
           ...item,
-          preventAutoOpen: true
+          preventAutoOpen: true,
+          ...(item.initialOpen ? props.selectedProps : {})
         };
       }) || []
     );
