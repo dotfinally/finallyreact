@@ -152,9 +152,13 @@ export function Check(originalProps: CheckProps) {
     dispatchChangeEvent(nextArr, originalProps.name, originalProps.id);
   };
 
-  // NEW: handle "only" logic
   const handleOnlySelect = (e: MouseEvent<any> | KeyboardEvent<any>, idx: number) => {
     e.stopPropagation();
+
+    if (disabled) {
+      return;
+    }
+
     if (e.type === 'keydown' && (e as KeyboardEvent).key !== 'Enter') {
       return;
     }
@@ -228,7 +232,7 @@ export function Check(originalProps: CheckProps) {
             disabled={pDisabled}
           />
           {labelText && <label {...(p.labelProps || {})}>{labelText}</label>}
-          {checkOption?.showOnlySelect && (
+          {checkOption?.showOnlySelect && !disabled && (
             <div
               {...(checkOption.onlySelectProps || {})}
               onClick={(e) => handleOnlySelect(e, idx!)}
@@ -353,21 +357,23 @@ export function Check(originalProps: CheckProps) {
             >
               {labelText}
             </label>
-            <div
-              {...(checkOption.onlySelectProps || {})}
-              className={getClassName({
-                name: 'finallyreact-check__only-select',
-                props: checkOption.onlySelectProps,
-                custom: checkOption.onlySelectProps?.className,
-                isHover
-              })}
-              onClick={(e) => handleOnlySelect(e, idx!)}
-              onKeyDown={(e) => handleOnlySelect(e, idx!)}
-              role="button"
-              tabIndex={0}
-            >
-              {checkOption.onlySelectText || 'only'}
-            </div>
+            {!disabled && (
+              <div
+                {...(checkOption.onlySelectProps || {})}
+                className={getClassName({
+                  name: 'finallyreact-check__only-select',
+                  props: checkOption.onlySelectProps,
+                  custom: checkOption.onlySelectProps?.className,
+                  isHover
+                })}
+                onClick={(e) => handleOnlySelect(e, idx!)}
+                onKeyDown={(e) => handleOnlySelect(e, idx!)}
+                role="button"
+                tabIndex={0}
+              >
+                {checkOption.onlySelectText || 'only'}
+              </div>
+            )}
           </div>
         ) : labelText ? (
           <label

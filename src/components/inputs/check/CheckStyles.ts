@@ -19,18 +19,19 @@ export function getClassName({
   isHover?: boolean;
 }) {
   let value = name;
+  const disabled = props?.disabled || props?.readOnly;
 
   if (name === 'finallyreact-check') {
     value += ' flex';
 
-    if (props?.disabled || props?.readOnly) {
+    if (disabled) {
       value += ' cursor-default';
     } else {
       value += ' cursor-pointer';
     }
   }
 
-  if (props?.disabled || props?.readOnly) {
+  if (disabled) {
     if (name === 'finallyreact-check__input' && !props?.toggle) {
       value += ' cursor-default border-stone-4 stone-2-bg';
     }
@@ -124,7 +125,7 @@ export function getClassName({
   }
 
   if (name === 'finallyreact-check__input') {
-    if (props?.disabled || props?.readOnly) {
+    if (disabled) {
       value += ' cursor-default';
     } else {
       value += ' cursor-pointer';
@@ -136,7 +137,7 @@ export function getClassName({
       value += ` ${props?.color || 'black'}-bg`;
     }
 
-    if (props?.disabled || props?.readOnly) {
+    if (disabled) {
       value += ' cursor-default opacity-50';
     }
 
@@ -182,7 +183,7 @@ export function getClassName({
   }
 
   if (name === 'finallyreact-check__label') {
-    if (props?.disabled || props?.readOnly) {
+    if (disabled) {
       value += ' cursor-default';
     } else {
       value += ' cursor-pointer';
@@ -207,10 +208,14 @@ export function getClassName({
   }
 
   if (name === 'finallyreact-check__only-select') {
-    if (isHover) {
-      value += ' text-sm hover:underline';
-    } else {
+    if (disabled) {
       value += ' none';
+    } else {
+      if (isHover) {
+        value += ' text-sm hover:underline';
+      } else {
+        value += ' none';
+      }
     }
   }
 
