@@ -12,6 +12,7 @@ export * from './display/slideout/Slideout';
 export * from './display/table/Table';
 export * from './display/tabs/Tabs';
 export * from './display/toc/TOC';
+export * from './display/scroll-top/ScrollTop';
 
 export * from './inputs/button/Button';
 export * from './inputs/check/Check';
