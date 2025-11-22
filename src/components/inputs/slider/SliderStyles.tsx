@@ -17,7 +17,7 @@ export function getClassName({
   if (name === 'finallyreact-slider') {
     if (!simple) {
       if (props.disabled || props.readOnly) {
-        value += ' cursor-not-allowed';
+        value += ' cursor-default';
       } else {
         value += ' cursor-pointer';
       }
