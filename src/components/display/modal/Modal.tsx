@@ -1,6 +1,7 @@
 import React, { HTMLAttributes, useEffect, useMemo } from 'react';
 import { getFinallyConfig, omit, useWindowSize } from '@util/index';
 import { getClassName } from './ModalStyles';
+import { XIcon } from '@icons/XIcon';
 
 export interface ModalProps extends HTMLAttributes<any> {
   cardProps?: HTMLAttributes<any>;
@@ -128,7 +129,7 @@ export function Modal(props: ModalProps) {
                 {props.title}
               </div>
             )}
-            <div
+            <XIcon
               {...(props.closeProps || {})}
               className={getClassName({
                 name: 'finallyreact-modal__card_close',

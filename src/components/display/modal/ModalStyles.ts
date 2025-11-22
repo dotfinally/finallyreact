@@ -18,7 +18,8 @@ export function getClassName({
 
   if (name === 'finallyreact-modal') {
     if (props.show) {
-      value += ' z-300 h-screen w-screen scroll-x-hidden scroll-y-hidden fixed top-0 left-0 flex justify-center align-center'
+      value +=
+        ' z-300 h-screen w-screen scroll-x-hidden scroll-y-hidden fixed top-0 left-0 flex justify-center align-center';
     } else {
       value += ' none';
     }
@@ -34,10 +35,6 @@ export function getClassName({
     if (isMobile) {
       value += ' scroll-y';
     }
-  }
-
-  if (name === 'finallyreact-modal__card_close') {
-    value += ' after-close';
   }
 
   if (!simple) {
@@ -60,7 +57,7 @@ export function getClassName({
     }
 
     if (name === 'finallyreact-modal__card_close') {
-      value += ' cursor-pointer normal absolute right-1 top-1';
+      value += ' cursor-pointer normal absolute right-1 top-1 w-1-1/2 h-1-1/2';
     }
 
     if (name === 'finallyreact-modal__card_text') {
