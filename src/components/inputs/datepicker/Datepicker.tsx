@@ -101,7 +101,7 @@ export function Datepicker(props: DatepickerProps) {
   useEffect(() => {
     if (!(props.initialValue != null && props.value == null)) {
       if (props.value && props.value?.length === dateMask.length) {
-      // get year, month, day from value based on dateMask (yyyy-mm-dd)
+        // get year, month, day from value based on dateMask (yyyy-mm-dd)
         const year = parseInt(props.value.substring(dateMask.indexOf('yyyy'), dateMask.indexOf('yyyy') + 4));
         const month = parseInt(props.value.substring(dateMask.indexOf('mm'), dateMask.indexOf('mm') + 2));
         const day = parseInt(props.value.substring(dateMask.indexOf('dd'), dateMask.indexOf('dd') + 2));
@@ -507,9 +507,10 @@ export function Datepicker(props: DatepickerProps) {
               {...(props.monthDropdownProps || {})}
               options={props.monthDropdownProps?.options ?? months}
               autoFilterOnSearch={props.monthDropdownProps?.autoFilterOnSearch ?? true}
-              initialValue={props.monthDropdownProps?.initialValue ?? displayMonth != null ? displayMonth : details.month}
+              initialValue={
+                props.monthDropdownProps?.initialValue ?? displayMonth != null ? displayMonth : details.month
+              }
               onChange={(e: any) => {
-                console.log('month on change', e?.target.value);
                 setDisplayMonth(e.target.value);
                 setEditMonth(false);
                 props.monthDropdownProps?.onChange?.(e);

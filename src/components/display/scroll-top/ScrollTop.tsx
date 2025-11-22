@@ -43,18 +43,14 @@ export function ScrollTop(props: ScrollTopProps) {
   const [targetEl, setTargetEl] = useState<HTMLElement | null>(null);
   const [isHover, setIsHover] = useState<boolean>(false);
 
-  console.log({ visible, targetEl, isHover });
-
   useEffect(() => {
     const el = targetId
       ? document.getElementById(targetId)
       : (document.scrollingElement as HTMLElement) || document.documentElement;
-    console.log({ el });
     setTargetEl(el || null);
 
     const onScroll = () => {
       const scrollTop = el ? el.scrollTop : window.pageYOffset || document.documentElement.scrollTop || 0;
-      console.log('onScroll', { scrollTop, thresholdPixels });
       setVisible(scrollTop > thresholdPixels);
     };
 

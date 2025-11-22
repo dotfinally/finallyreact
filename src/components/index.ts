@@ -22,6 +22,7 @@ export * from './inputs/form/Form';
 export * from './inputs/input/NumberInput';
 export * from './inputs/input/TextInput';
 export * from './inputs/radio/Radio';
+export * from './inputs/slider/Slider';
 
 export * from './layout/column/Column';
 export * from './layout/layout/Layout';
