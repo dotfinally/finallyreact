@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export function useAutoResizeTextarea() {
+export function useAutoResizeTextarea(value) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -8,21 +8,22 @@ export function useAutoResizeTextarea() {
     if (!el) return;
 
     const resize = () => {
-      el.style.height = 'auto'; // allow shrink
-      el.style.height = `${el.scrollHeight}px`; // expand to fit
+      el.style.height = 'auto';
+      el.style.height = `${el.scrollHeight}px`;
     };
 
-    // initialize for prefilled value
     resize();
-
-    // handle input events
     el.addEventListener('input', resize, { passive: true });
-
-    // cleanup
-    return () => {
-      el.removeEventListener('input', resize);
-    };
+    return () => el.removeEventListener('input', resize);
   }, []);
+
+  // run when initial/updated value changes
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = `${el.scrollHeight}px`;
+  }, [value]);
 
   return ref;
 }

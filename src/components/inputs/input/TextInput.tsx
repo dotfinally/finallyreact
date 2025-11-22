@@ -98,7 +98,7 @@ export function TextInput(props: TextInputProps) {
   const [value, setValue] = useState<string>(props.value ?? '');
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const textAreaRef = useAutoResizeTextarea();
+  const textAreaRef = useAutoResizeTextarea(value);
 
   useEffect(() => {
     if (props.value == null && props.initialValue != null) {
