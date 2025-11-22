@@ -24,12 +24,17 @@ export function getClassName({
   let value = name;
   const floatingPlaceholder = props.floatingPlaceholder == null ? true : props.floatingPlaceholder;
   const size = props.size || 'md';
+  const autoTextArea = props.type === 'textarea' && props.textAreaAutoHeight;
 
   if (name === 'finallyreact-input') {
     value += ' relative flex';
 
     if (!simple && (props.disabled || props.readOnly)) {
       value += ' cursor-default';
+    }
+
+    if (autoTextArea) {
+      value += ` h-auto`;
     }
   }
 
@@ -122,7 +127,7 @@ export function getClassName({
     }
 
     if (size === 'sm') {
-      if (name === 'finallyreact-input') {
+      if (name === 'finallyreact-input' && !autoTextArea) {
         value += ' h-2';
       }
 
@@ -168,7 +173,7 @@ export function getClassName({
     }
 
     if (size === 'md') {
-      if (name === 'finallyreact-input') {
+      if (name === 'finallyreact-input' && !autoTextArea) {
         value += ' h-2-1/5';
       }
 
@@ -206,7 +211,7 @@ export function getClassName({
     }
 
     if (size === 'lg') {
-      if (name === 'finallyreact-input') {
+      if (name === 'finallyreact-input' && !autoTextArea) {
         value += ' h-2-1/5';
       }
 

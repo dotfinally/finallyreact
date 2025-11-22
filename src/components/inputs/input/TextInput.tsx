@@ -1,5 +1,13 @@
-import React, { useState, useEffect, HTMLAttributes, useMemo, useRef } from 'react';
-import { dispatchChangeEvent, dispatchCompositionEvent, formatMask, getFinallyConfig, omit, unformatMask } from '@util/index';
+import React, { useState, useEffect, HTMLAttributes, useMemo } from 'react';
+import {
+  dispatchChangeEvent,
+  dispatchCompositionEvent,
+  formatMask,
+  getFinallyConfig,
+  omit,
+  unformatMask,
+  useAutoResizeTextarea
+} from '@util/index';
 
 import { Pop } from '../../display/pop/Pop';
 import { getClassName } from './InputStyles';
@@ -38,6 +46,7 @@ export interface TextInputProps extends HTMLAttributes<any> {
   size?: 'sm' | 'md' | 'lg';
   type?: 'text' | 'password' | 'textarea';
   value?: string;
+  textAreaAutoHeight?: boolean;
 }
 
 const omitValues = [
@@ -70,7 +79,8 @@ const omitValues = [
   'simple',
   'size',
   'type',
-  'value'
+  'value',
+  'textAreaAutoHeight'
 ];
 
 /**
@@ -87,6 +97,8 @@ export function TextInput(props: TextInputProps) {
 
   const [value, setValue] = useState<string>(props.value ?? '');
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const textAreaRef = useAutoResizeTextarea();
 
   useEffect(() => {
     if (props.value == null && props.initialValue != null) {
@@ -226,7 +238,7 @@ export function TextInput(props: TextInputProps) {
           active: !!value
         })}
         aria-disabled={props['aria-disabled'] ?? disabled}
-        tabIndex={props.tabIndex ?? (disabled) ? 0 : undefined}
+        tabIndex={props.tabIndex ?? disabled ? 0 : undefined}
       >
         {disabled ? (
           <div
@@ -244,6 +256,7 @@ export function TextInput(props: TextInputProps) {
         ) : props.type === 'textarea' ? (
           <textarea
             {...props.inputProps}
+            ref={props.textAreaAutoHeight ? textAreaRef : null}
             className={getClassName({
               name: 'finallyreact-input__box',
               props,

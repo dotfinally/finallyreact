@@ -21,6 +21,7 @@ export * from './hooks/useDocumentEvent';
 export * from './hooks/usePopover';
 export * from './hooks/useWindowSize';
 export * from './hooks/useOutsideClick';
+export * from './hooks/useAutoResizeTextarea';
 
 export * from './helpers/getBreakpoint';
 export * from './colors';
