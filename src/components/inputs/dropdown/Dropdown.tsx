@@ -66,8 +66,8 @@ export function Dropdown(props: DropdownProps) {
   const [currentOption, setCurrentOption] = useState<IDropdownOption | null>(getInitialOption());
 
   useEffect(() => {
-    if (props.value !== selectedOption?.value) {
-      const valueOption = props.options?.find((option) => option.value === props.value)
+    if (props.value !== undefined && props.value !== selectedOption?.value) {
+      const valueOption = props.options?.find((option) => option.value === props.value);
       setSelectedOption(valueOption);
     }
   }, [props.value]);
@@ -300,7 +300,7 @@ export function Dropdown(props: DropdownProps) {
                   name: 'finallyreact-dropdown__option',
                   props,
                   simple,
-                  disabled: (option.disabled || option.readOnly),
+                  disabled: option.disabled || option.readOnly,
                   active: currentOption?.value === option.value,
                   custom: option.className ?? props.optionProps?.className
                 })}
